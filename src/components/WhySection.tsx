@@ -28,7 +28,7 @@ const cards = [
 const WhySection = () => (
   <section id="why" className="bg-section-light py-24">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 02 — Why" />
+      <SectionBadge label="Section 03 — Why" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageSquare, Zap, Bot, Clock, Lock } from "lucide-react";
+import { MessageSquare, Zap, Bot, GitMerge, Clock, Lock } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 
 const modes = [
@@ -27,19 +27,27 @@ const modes = [
     cta: "Enter AI Workspace",
     active: false,
   },
+  {
+    icon: GitMerge,
+    title: "Hybrid Mode",
+    audience: "CROSS-FUNCTIONAL TEAMS",
+    desc: "Structured co-ownership where humans and AI share accountability within governed workflows.",
+    cta: "Launch Hybrid Mode",
+    active: false,
+  },
 ];
 
 const ModesSection = () => (
   <section id="modes" className="bg-section-light py-24">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 06 — How" />
+      <SectionBadge label="Section 07 — Modes" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
       >
-        Enterprise Interaction Patterns
+        Enterprise Interaction Patterns for DCO‑Grade AI
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 15 }}
@@ -48,11 +56,11 @@ const ModesSection = () => (
         transition={{ delay: 0.1 }}
         className="mx-auto mt-4 max-w-2xl text-muted-foreground"
       >
-        AI-native interaction modes embedded with governance, monitoring, and
-        value controls — each designed for distinct operational needs.
+        Four operating modes embedded with governance, monitoring, and
+        value controls.
       </motion.p>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {modes.map((m, i) => (
           <motion.div
             key={m.title}

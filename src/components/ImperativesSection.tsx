@@ -14,14 +14,14 @@ const items = [
 const ImperativesSection = () => (
   <section id="imperatives" className="bg-section-muted py-24">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 03 — Structure" />
+      <SectionBadge label="Section 04 — Structure" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
       >
-        The Six DCO Imperatives for AIOps
+        The Six DCO Imperatives (AIOps)
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 15 }}
@@ -30,8 +30,8 @@ const ImperativesSection = () => (
         transition={{ delay: 0.1 }}
         className="mx-auto mt-4 max-w-2xl text-muted-foreground"
       >
-        Structural principles that transform AI from experimentation into governed,
-        scalable cognitive infrastructure.
+        Six structural imperatives that convert AI from experimentation into
+        governed, scalable, value-generating capability.
       </motion.p>
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

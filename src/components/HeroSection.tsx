@@ -42,8 +42,8 @@ const HeroSection = () => (
         transition={{ duration: 0.6, delay: 0.15 }}
         className="mt-8 text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl"
       >
-        Enterprise AI fails when collaboration is{" "}
-        <span className="text-white/70">ungoverned.</span>
+        The Enterprise AI Hub for DCO‑Grade{" "}
+        <span className="text-white/70">Man + Machine Collaboration</span>
       </motion.h1>
 
       <motion.p
@@ -52,9 +52,8 @@ const HeroSection = () => (
         transition={{ duration: 0.6, delay: 0.3 }}
         className="mx-auto mt-6 max-w-2xl text-lg text-white/60"
       >
-        A governed AI engine for the enterprise—copilots and agents that augment
-        human judgement and accelerate measurable outcomes across the Digital
-        Cognitive Organisation.
+        Governed copilots and agents that augment human judgement and accelerate
+        measurable outcomes across the Digital Cognitive Organisation.
       </motion.p>
 
       <motion.div
