@@ -60,7 +60,7 @@ const MarketplaceSection = () => {
     <section id="marketplace" className="bg-section-light py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <SectionBadge label="Section 04 — Architecture" />
+          <SectionBadge label="Section 08 — Marketplace" />
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

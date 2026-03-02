@@ -43,14 +43,14 @@ const roles = [
 const RolesSection = () => (
   <section id="roles" className="bg-section-muted py-24">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 05 — Coverage" />
+      <SectionBadge label="Section 05 — Who" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
       >
-        Structured Cognitive Enablement Across the Enterprise
+        AI Solutions for Every Role
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 15 }}
@@ -59,8 +59,8 @@ const RolesSection = () => (
         transition={{ delay: 0.1 }}
         className="mx-auto mt-4 max-w-2xl text-muted-foreground"
       >
-        AI Hub activates DCO-grade collaboration through role-based environments
-        for every stakeholder.
+        Role-based environments that preserve accountability while scaling AI
+        capability with governance and measurable value.
       </motion.p>
 
       <div className="mt-12 space-y-5">

@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "Why", href: "#hero" },
-  { label: "What", href: "#why" },
-  { label: "Structure", href: "#imperatives" },
-  { label: "Architecture", href: "#marketplace" },
-  { label: "Coverage", href: "#roles" },
+  { label: "Why", href: "#why" },
+  { label: "Imperatives", href: "#imperatives" },
+  { label: "Marketplace", href: "#marketplace" },
+  { label: "Roles", href: "#roles" },
   { label: "Modes", href: "#modes" },
+  { label: "Value", href: "#metrics" },
 ];
 
 const NavBar = () => {
