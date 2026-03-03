@@ -28,7 +28,7 @@ const cards = [
 const WhySection = () => (
   <section id="why" className="bg-section-light py-24">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 03 — Why" />
+      <SectionBadge label="Section 03 — Why AI Hub" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +66,43 @@ const WhySection = () => (
           </motion.div>
         ))}
       </div>
+
+      {/* Proof Metrics */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5 }}
+        className="mt-16 grid gap-8 sm:grid-cols-3"
+      >
+        <div className="text-center">
+          <div className="text-3xl font-bold gradient-hero-text">X%</div>
+          <p className="mt-1 text-sm text-muted-foreground">decision‑cycle compression</p>
+        </div>
+        <div className="text-center">
+          <div className="text-3xl font-bold gradient-hero-text">X%</div>
+          <p className="mt-1 text-sm text-muted-foreground">productivity uplift</p>
+        </div>
+        <div className="text-center">
+          <div className="text-3xl font-bold gradient-hero-text">X%</div>
+          <p className="mt-1 text-sm text-muted-foreground">risk/control reduction</p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 }}
+        className="mt-12"
+      >
+        <a
+          href="#architecture"
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+        >
+          Explore the Unified AI Architecture
+        </a>
+      </motion.div>
 
       <div className="gradient-divider mx-auto mt-16 max-w-xl" />
       <p className="mt-6 text-sm text-muted-foreground">

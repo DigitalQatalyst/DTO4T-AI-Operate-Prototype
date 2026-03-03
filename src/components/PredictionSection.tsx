@@ -1,40 +1,30 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { TrendingUp, Brain, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import { Brain, Zap, Shield, ArrowRight } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 
 const predictions = [
   {
     icon: Brain,
-    title: "Decision Intelligence Will Define Competitive Advantage",
-    desc: "Organisations that embed AI into decision-making loops—not just automation—will outperform peers by compressing decision cycles from weeks to hours.",
+    title: "Decision Intelligence Revolution",
+    desc: "AI-augmented decision-making transforms from reactive to predictive, enabling real-time strategic pivots.",
   },
   {
-    icon: TrendingUp,
-    title: "Multi-Agent Execution Will Replace Linear Workflows",
-    desc: "Governed autonomous agents will orchestrate cross-functional processes end-to-end, shifting enterprises from task-level AI to system-level intelligence.",
+    icon: Zap,
+    title: "Multi-Agent Execution at Scale",
+    desc: "Coordinated AI agents orchestrate complex workflows across departments with human oversight and governance.",
   },
   {
-    icon: ShieldCheck,
-    title: "AI Governance Will Become a Board-Level Priority",
-    desc: "Regulatory pressure and operational risk will force governance from an afterthought into the architecture itself—measurable, auditable, and embedded by design.",
+    icon: Shield,
+    title: "Governance-First AI Adoption",
+    desc: "Organizations shift from AI experimentation to governed, measurable, and accountable AI transformation.",
   },
 ];
 
 const PredictionSection = () => {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % predictions.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section id="predictions" className="bg-section-light py-24">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <SectionBadge label="Section 02 — Prediction" />
+      <div className="mx-auto max-w-6xl px-6 text-center">
+        <SectionBadge label="Section 02 — AI Prediction" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,50 +40,43 @@ const PredictionSection = () => {
           transition={{ delay: 0.1 }}
           className="mx-auto mt-4 max-w-2xl text-muted-foreground"
         >
-          Three high-impact predictions on decision intelligence, multi-agent
-          execution, and governance shifts.
+          Three rotating predictions on decision intelligence, multi-agent execution, 
+          governance shifts, and what it takes to become a measurable DCO.
         </motion.p>
 
-        <div className="relative mt-12 min-h-[220px]">
-          <AnimatePresence mode="wait">
+        <div className="mt-12 grid gap-8 md:grid-cols-3">
+          {predictions.map((prediction, i) => (
             <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-              className="glass-card mx-auto max-w-2xl rounded-2xl p-8 text-center"
+              key={prediction.title}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="glass-card group rounded-2xl p-8 text-center transition-all hover:-translate-y-2 hover:shadow-xl"
             >
-              <div className="gradient-hero mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                {(() => {
-                  const Icon = predictions[active].icon;
-                  return <Icon className="h-5 w-5 text-white" />;
-                })()}
+              <div className="gradient-hero mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
+                <prediction.icon className="h-7 w-7 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-foreground">
-                {predictions[active].title}
-              </h3>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {predictions[active].desc}
-              </p>
+              <h3 className="mb-4 text-xl font-bold text-foreground">{prediction.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{prediction.desc}</p>
             </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Dots */}
-        <div className="mt-6 flex justify-center gap-2">
-          {predictions.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`h-2 w-2 rounded-full transition-all ${
-                i === active
-                  ? "gradient-hero w-6"
-                  : "bg-border"
-              }`}
-            />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-12 flex justify-center"
+        >
+          <a
+            href="#insights"
+            className="gradient-hero inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+          >
+            View AI Frontier Insights
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

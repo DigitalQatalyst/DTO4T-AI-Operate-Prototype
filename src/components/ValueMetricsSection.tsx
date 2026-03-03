@@ -3,9 +3,41 @@ import { TrendingUp, Activity, ShieldCheck, ArrowRight } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 
 const metrics = [
-  { icon: TrendingUp, label: "Decision-Cycle Compression", value: "X%", desc: "Faster decision loops through AI-augmented analysis and recommendation." },
-  { icon: Activity, label: "Productivity Uplift", value: "X%", desc: "Measurable efficiency gains across copilot-enabled workflows." },
-  { icon: ShieldCheck, label: "Risk & Control Reduction", value: "X%", desc: "Reduced exposure through governed AI guardrails and audit trails." },
+  { 
+    icon: TrendingUp, 
+    label: "Adoption & Engagement Rates", 
+    value: "Active users, copilot utilisation, agent invocation frequency, and role-based penetration across the enterprise." 
+  },
+  { 
+    icon: Activity, 
+    label: "Decision-Cycle Compression", 
+    value: "Reduction in time-to-insight, approval latency, and end-to-end workflow execution duration." 
+  },
+  { 
+    icon: ShieldCheck, 
+    label: "Quality & Output Uplift", 
+    value: "Improvements in accuracy, consistency, compliance adherence, and deliverable quality benchmarks." 
+  },
+  { 
+    icon: TrendingUp, 
+    label: "Cost & Efficiency Optimisation", 
+    value: "Operational savings, automation impact, and productivity gains relative to baseline performance." 
+  },
+  { 
+    icon: ShieldCheck, 
+    label: "Risk & Control Reduction", 
+    value: "Decrease in compliance breaches, anomaly rates, governance incidents, and model drift exposure." 
+  },
+  { 
+    icon: Activity, 
+    label: "Cognitive Capacity Expansion", 
+    value: "Increase in analytical throughput, scenario simulations, strategic options generated, and cross-domain insight synthesis." 
+  },
+  { 
+    icon: TrendingUp, 
+    label: "AI Portfolio ROI", 
+    value: "Value realisation versus investment across use cases, functions, and transformation initiatives." 
+  },
 ];
 
 const ValueMetricsSection = () => (
@@ -31,7 +63,7 @@ const ValueMetricsSection = () => (
         gains, risk reduction, and portfolio ROI.
       </motion.p>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {metrics.map((m, i) => (
           <motion.div
             key={m.label}
@@ -39,14 +71,13 @@ const ValueMetricsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="glass-card rounded-2xl p-8 text-center transition-transform hover:-translate-y-1"
+            className="glass-card rounded-2xl p-6 text-left transition-transform hover:-translate-y-1"
           >
-            <div className="gradient-hero mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+            <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
               <m.icon className="h-5 w-5 text-white" />
             </div>
-            <span className="text-3xl font-bold gradient-hero-text">{m.value}</span>
-            <h3 className="mt-2 font-bold text-foreground">{m.label}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{m.desc}</p>
+            <h3 className="mb-3 font-bold text-foreground">{m.label}</h3>
+            <p className="text-sm text-muted-foreground">{m.value}</p>
           </motion.div>
         ))}
       </div>
@@ -61,7 +92,7 @@ const ValueMetricsSection = () => (
           href="#"
           className="gradient-hero inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
         >
-          View the AI Value Dashboard
+          View Enterprise AI Value Dashboard
           <ArrowRight className="h-4 w-4" />
         </a>
       </motion.div>

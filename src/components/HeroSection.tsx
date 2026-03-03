@@ -60,25 +60,56 @@ const HeroSection = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.45 }}
-        className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        className="mt-10 flex flex-col items-center justify-center gap-6"
       >
-        <a
-          href="#marketplace"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90"
-        >
-          <BookOpen className="h-4 w-4" />
-          Learn to work with AI today
-        </a>
-        <button
-          disabled
-          className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3 text-sm font-semibold text-white/35"
-        >
-          Explore AI Marketplaces
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">
-            <Clock className="h-2.5 w-2.5" />
-            Soon
-          </span>
-        </button>
+        {/* AI Prompt Bar */}
+        <div className="w-full max-w-2xl">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Ask AI anything..."
+              className="w-full rounded-full border border-white/20 bg-white/10 px-6 py-4 text-white placeholder-white/50 backdrop-blur-md transition focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
+            />
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary transition hover:bg-white/90">
+              Ask
+            </button>
+          </div>
+          
+          {/* Prompt Chips */}
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {[
+              "Explain LLM vs RAG",
+              "List available AI Agents", 
+              "Prompting Best Tips",
+              "How do I work with AI",
+              "Do something for me"
+            ].map((chip) => (
+              <button
+                key={chip}
+                className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-white/70 transition hover:bg-white/10 hover:text-white"
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="#learning"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90"
+          >
+            <BookOpen className="h-4 w-4" />
+            Learn to work with AI today
+          </a>
+          <a
+            href="#marketplace"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Explore AI Marketplaces
+          </a>
+        </div>
       </motion.div>
     </div>
   </section>

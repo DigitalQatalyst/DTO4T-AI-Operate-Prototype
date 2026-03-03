@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "Why", href: "#why" },
+  { label: "Predictions", href: "#predictions" },
+  { label: "Why AI Hub", href: "#why" },
   { label: "Imperatives", href: "#imperatives" },
-  { label: "Marketplace", href: "#marketplace" },
   { label: "Roles", href: "#roles" },
+  { label: "Collaboration", href: "#collaboration" },
   { label: "Modes", href: "#modes" },
+  { label: "Marketplace", href: "#marketplace" },
   { label: "Value", href: "#metrics" },
 ];
 

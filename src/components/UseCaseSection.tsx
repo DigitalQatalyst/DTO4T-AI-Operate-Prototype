@@ -3,12 +3,36 @@ import { Lightbulb, ArrowRight } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 
 const useCases = [
-  { title: "Automated Contract Review", function: "Legal & Compliance", impact: "70% faster review cycles" },
-  { title: "Predictive Maintenance Scheduling", function: "Operations", impact: "35% reduction in unplanned downtime" },
-  { title: "AI-Assisted Strategic Planning", function: "Executive Office", impact: "3x faster scenario modelling" },
-  { title: "Intelligent Customer Routing", function: "Customer Experience", impact: "45% improvement in first-contact resolution" },
-  { title: "Cognitive Document Processing", function: "Back Office", impact: "80% reduction in manual data entry" },
-  { title: "Real-Time Risk Scoring", function: "Risk & Governance", impact: "Continuous monitoring vs quarterly reviews" },
+  { 
+    title: "Finance Forecasting & Scenario Intelligence", 
+    function: "Finance", 
+    impact: "AI-augmented modelling, anomaly detection, and predictive planning integrated with executive decision cycles." 
+  },
+  { 
+    title: "Workforce Productivity Copilots", 
+    function: "Operations", 
+    impact: "Embedded copilots within daily workflows to accelerate drafting, analysis, coordination, and knowledge retrieval." 
+  },
+  { 
+    title: "Customer Personalisation & Experience Intelligence", 
+    function: "Customer Experience", 
+    impact: "Real-time recommendation engines, behavioral insights, and governed conversational assistants." 
+  },
+  { 
+    title: "Risk Detection & Compliance Monitoring", 
+    function: "Risk & Governance", 
+    impact: "Continuous anomaly detection, policy validation, and automated escalation aligned to governance controls." 
+  },
+  { 
+    title: "Predictive Maintenance & Operational Optimisation", 
+    function: "Operations", 
+    impact: "Sensor-driven forecasting, failure prediction, and workflow orchestration across operations." 
+  },
+  { 
+    title: "Executive Intelligence Assistants", 
+    function: "Executive Office", 
+    impact: "Strategic briefing generation, cross-domain insight synthesis, and decision-support augmentation for leadership." 
+  },
 ];
 
 const UseCaseSection = () => (
@@ -30,8 +54,8 @@ const UseCaseSection = () => (
         transition={{ delay: 0.1 }}
         className="mx-auto mt-4 max-w-2xl text-muted-foreground"
       >
-        A curated reel of enterprise use cases delivering measurable value
-        across core functions.
+        Enterprise-grade Man + Machine Collaboration patterns delivering measurable 
+        value across core functions.
       </motion.p>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -52,7 +76,7 @@ const UseCaseSection = () => (
               {uc.function}
             </span>
             <h3 className="mt-1 font-bold text-foreground">{uc.title}</h3>
-            <p className="mt-2 text-sm font-medium text-accent">{uc.impact}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{uc.impact}</p>
           </motion.div>
         ))}
       </div>

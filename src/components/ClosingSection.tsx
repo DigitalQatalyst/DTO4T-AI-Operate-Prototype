@@ -110,6 +110,28 @@ const ClosingSection = () => (
           </a>
         </div>
       </motion.div>
+
+      {/* Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-16 border-t border-white/10 pt-8"
+      >
+        <div className="flex flex-wrap justify-center gap-1 text-sm text-white/40">
+          <a href="#" className="hover:text-white/60 transition-colors">Explore</a>
+          <span>·</span>
+          <a href="#marketplace" className="hover:text-white/60 transition-colors">Marketplaces</a>
+          <span>·</span>
+          <a href="#" className="hover:text-white/60 transition-colors">Governance</a>
+          <span>·</span>
+          <a href="#metrics" className="hover:text-white/60 transition-colors">Value Dashboard</a>
+          <span>·</span>
+          <a href="#" className="hover:text-white/60 transition-colors">Support</a>
+          <span>·</span>
+          <a href="#" className="hover:text-white/60 transition-colors">Privacy/Terms</a>
+        </div>
+      </motion.div>
     </div>
   </section>
 );

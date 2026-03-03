@@ -33,31 +33,30 @@ const CollaborationSection = () => (
         Collaboration—designed for traceability and continuous improvement.
       </motion.p>
 
-      <div className="mt-12 space-y-4">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {steps.map((s, i) => (
           <motion.div
             key={s.step}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="group flex items-start gap-5 rounded-2xl border border-border/60 bg-card p-6 text-left transition-all hover:border-primary/20 hover:shadow-md"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 text-left transition-all hover:border-primary/20 hover:shadow-lg"
           >
-            <div className="gradient-hero flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+            <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
               <s.icon className="h-5 w-5 text-white" />
             </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Step {s.step}
-                </span>
-                <span className="rounded-full border border-primary/15 bg-primary/[0.06] px-2 py-0.5 text-[10px] font-semibold text-primary">
-                  {s.owner}
-                </span>
-              </div>
-              <h3 className="mt-1 font-bold text-foreground">{s.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                Step {s.step}
+              </span>
+              <span className="rounded-full border border-primary/15 bg-primary/[0.06] px-2 py-0.5 text-[10px] font-semibold text-primary">
+                {s.owner}
+              </span>
             </div>
+            <h3 className="mb-2 font-bold text-foreground">{s.title}</h3>
+            <p className="text-sm text-muted-foreground">{s.desc}</p>
           </motion.div>
         ))}
       </div>
