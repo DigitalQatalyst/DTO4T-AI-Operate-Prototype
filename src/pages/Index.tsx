@@ -10,6 +10,7 @@ import MarketplaceSection from "@/components/MarketplaceSection";
 import UseCaseSection from "@/components/UseCaseSection";
 import ValueMetricsSection from "@/components/ValueMetricsSection";
 import ClosingSection from "@/components/ClosingSection";
+import Footer from "@/components/Footer";
 
 const Index = () => (
   <>
@@ -25,6 +26,7 @@ const Index = () => (
     <UseCaseSection />
     <ValueMetricsSection />
     <ClosingSection />
+    <Footer />
   </>
 );
 

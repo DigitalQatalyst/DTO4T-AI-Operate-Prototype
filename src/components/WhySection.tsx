@@ -26,9 +26,9 @@ const cards = [
 ];
 
 const WhySection = () => (
-  <section id="why" className="bg-section-light py-24">
+  <section id="why" className="bg-white py-16">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 03 — Why AI Hub" />
+      <SectionBadge label="Why AI Hub" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -67,34 +67,14 @@ const WhySection = () => (
         ))}
       </div>
 
-      {/* Proof Metrics */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.5 }}
-        className="mt-16 grid gap-8 sm:grid-cols-3"
-      >
-        <div className="text-center">
-          <div className="text-3xl font-bold gradient-hero-text">X%</div>
-          <p className="mt-1 text-sm text-muted-foreground">decision‑cycle compression</p>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold gradient-hero-text">X%</div>
-          <p className="mt-1 text-sm text-muted-foreground">productivity uplift</p>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold gradient-hero-text">X%</div>
-          <p className="mt-1 text-sm text-muted-foreground">risk/control reduction</p>
-        </div>
-      </motion.div>
+
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.4 }}
-        className="mt-12"
+        className="mt-8"
       >
         <a
           href="#architecture"
@@ -103,12 +83,6 @@ const WhySection = () => (
           Explore the Unified AI Architecture
         </a>
       </motion.div>
-
-      <div className="gradient-divider mx-auto mt-16 max-w-xl" />
-      <p className="mt-6 text-sm text-muted-foreground">
-        AI must be orchestrated as shared cognitive infrastructure — integrated
-        with strategy, governance, and measurable outcomes.
-      </p>
     </div>
   </section>
 );

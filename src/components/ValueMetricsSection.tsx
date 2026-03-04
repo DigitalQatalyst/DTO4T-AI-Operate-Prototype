@@ -41,9 +41,9 @@ const metrics = [
 ];
 
 const ValueMetricsSection = () => (
-  <section id="metrics" className="bg-section-muted py-24">
+  <section id="metrics" className="bg-section-muted py-16">
     <div className="mx-auto max-w-5xl px-6 text-center">
-      <SectionBadge label="Section 10 — Value" />
+      <SectionBadge label="Value" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -36,9 +36,9 @@ const useCases = [
 ];
 
 const UseCaseSection = () => (
-  <section id="usecases" className="bg-section-light py-24">
+  <section id="usecases" className="bg-white py-16">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 09 — Spotlight" />
+      <SectionBadge label="Spotlight" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

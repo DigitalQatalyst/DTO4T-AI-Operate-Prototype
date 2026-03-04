@@ -57,10 +57,10 @@ const MarketplaceSection = () => {
       : marketplaceClasses.filter((c) => c.id === active);
 
   return (
-    <section id="marketplace" className="bg-section-light py-24">
+    <section id="marketplace" className="bg-section-muted py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
-          <SectionBadge label="Section 08 — Marketplace" />
+          <SectionBadge label="Marketplace" />
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

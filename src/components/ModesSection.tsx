@@ -30,9 +30,9 @@ const modes = [
 ];
 
 const ModesSection = () => (
-  <section id="modes" className="bg-section-light py-24">
+  <section id="modes" className="bg-white py-16">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 07 — Man + Machine Operating Modes" />
+      <SectionBadge label="Man + Machine Operating Modes" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

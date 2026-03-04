@@ -22,9 +22,9 @@ const predictions = [
 
 const PredictionSection = () => {
   return (
-    <section id="predictions" className="bg-section-light py-24">
+  <section id="predictions" className="bg-section-muted py-16">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <SectionBadge label="Section 02 — AI Prediction" />
+        <SectionBadge label="AI Prediction" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

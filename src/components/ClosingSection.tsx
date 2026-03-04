@@ -33,7 +33,7 @@ const ClosingSection = () => (
     <div className="dot-pattern absolute inset-0 opacity-[0.03]" />
 
     <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-      <SectionBadge label="Section 11 — Integration" variant="dark" />
+      <SectionBadge label="Integration" variant="dark" />
 
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -108,28 +108,6 @@ const ClosingSection = () => (
             <Send className="h-4 w-4" />
             Submit AI Service Request
           </a>
-        </div>
-      </motion.div>
-
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-16 border-t border-white/10 pt-8"
-      >
-        <div className="flex flex-wrap justify-center gap-1 text-sm text-white/40">
-          <a href="#" className="hover:text-white/60 transition-colors">Explore</a>
-          <span>·</span>
-          <a href="#marketplace" className="hover:text-white/60 transition-colors">Marketplaces</a>
-          <span>·</span>
-          <a href="#" className="hover:text-white/60 transition-colors">Governance</a>
-          <span>·</span>
-          <a href="#metrics" className="hover:text-white/60 transition-colors">Value Dashboard</a>
-          <span>·</span>
-          <a href="#" className="hover:text-white/60 transition-colors">Support</a>
-          <span>·</span>
-          <a href="#" className="hover:text-white/60 transition-colors">Privacy/Terms</a>
         </div>
       </motion.div>
     </div>

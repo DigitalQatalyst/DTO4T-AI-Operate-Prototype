@@ -41,9 +41,9 @@ const roleCategories = [
 ];
 
 const RolesSection = () => (
-  <section id="roles" className="bg-section-muted py-24">
+  <section id="roles" className="bg-white py-16">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 05 — Who the AI Hub Serves" />
+      <SectionBadge label="Who the AI Hub Serves" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -63,36 +63,38 @@ const RolesSection = () => (
         with governance and measurable value.
       </motion.p>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {roleCategories.map((role, i) => (
-          <motion.div
-            key={role.label}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 text-left transition-all hover:border-primary/20 hover:shadow-lg"
-          >
-            <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
-              <role.icon className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
-              {role.label}
-            </span>
-            <h3 className="mt-1 text-lg font-bold text-foreground">{role.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{role.desc}</p>
-            <div className="mt-4">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-accent"
-              >
-                {role.cta}
-                <ArrowRight className="h-3 w-3" />
-              </a>
-            </div>
-          </motion.div>
-        ))}
+      <div className="mt-12 overflow-x-auto pb-4">
+        <div className="flex gap-6 min-w-max px-6">
+          {roleCategories.map((role, i) => (
+            <motion.div
+              key={role.label}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gray-50 p-6 text-left transition-all hover:border-primary/20 hover:shadow-lg hover:bg-white flex-shrink-0 w-80"
+            >
+              <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
+                <role.icon className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-primary">
+                {role.label}
+              </span>
+              <h3 className="mt-1 text-lg font-bold text-foreground">{role.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{role.desc}</p>
+              <div className="mt-4">
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-accent"
+                >
+                  {role.cta}
+                  <ArrowRight className="h-3 w-3" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <motion.div

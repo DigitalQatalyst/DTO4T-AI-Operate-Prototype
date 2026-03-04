@@ -42,9 +42,9 @@ const imperatives = [
 ];
 
 const ImperativesSection = () => (
-  <section id="imperatives" className="bg-section-muted py-24">
+  <section id="imperatives" className="bg-section-muted py-16">
     <div className="mx-auto max-w-6xl px-6 text-center">
-      <SectionBadge label="Section 04 — How to Succeed with AI" />
+      <SectionBadge label="How to Succeed with AI" />
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -72,17 +72,22 @@ const ImperativesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-200 p-6 text-left transition-all hover:bg-white hover:shadow-lg hover:-translate-y-1"
           >
-            <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="mb-4 flex items-center gap-3">
-              <div className="gradient-hero flex h-12 w-12 items-center justify-center rounded-xl">
-                <imperative.icon className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-2xl font-bold text-primary">{imperative.number}</span>
+            {/* Number badge in top-right corner */}
+            <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 transition-all group-hover:bg-orange-500">
+              <span className="text-sm font-bold text-gray-600 group-hover:text-white transition-all">{imperative.number}</span>
             </div>
-            <h3 className="mb-2 font-bold text-foreground">{imperative.title}</h3>
-            <p className="text-sm text-muted-foreground">{imperative.desc}</p>
+            
+            {/* Icon */}
+            <div className="mb-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 transition-all group-hover:bg-orange-100">
+                <imperative.icon className="h-5 w-5 text-blue-600 transition-all group-hover:text-orange-600 group-hover:scale-110" />
+              </div>
+            </div>
+            
+            <h3 className="mb-3 text-lg font-bold text-gray-900 pr-8">{imperative.title}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">{imperative.desc}</p>
           </motion.div>
         ))}
       </div>
