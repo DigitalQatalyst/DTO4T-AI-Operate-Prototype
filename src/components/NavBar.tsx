@@ -2,17 +2,6 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { marketplaceClasses } from "../data/marketplace";
 
-const links = [
-  { label: "Predictions", href: "#predictions" },
-  { label: "Why AI Hub", href: "#why" },
-  { label: "Imperatives", href: "#imperatives" },
-  { label: "Roles", href: "#roles" },
-  { label: "Collaboration", href: "#collaboration" },
-  { label: "Modes", href: "#modes" },
-  { label: "Marketplace", href: "#marketplace" },
-  { label: "Value", href: "#metrics" },
-];
-
 // Sample featured products from marketplace for Explore dropdown
 const featuredProducts = [
   {
@@ -71,8 +60,8 @@ const NavBar = () => {
         background: 'linear-gradient(to right, rgba(139, 74, 111, 0.9), rgba(91, 74, 122, 0.9), rgba(58, 74, 122, 0.9))'
       }}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
-        <div className="flex items-center gap-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+        <div className="flex items-center gap-6">
           <span className="text-lg font-bold text-white">DIA AI Hub</span>
 
           {/* Explore Dropdown - Positioned after logo */}
@@ -119,16 +108,14 @@ const NavBar = () => {
           </div>
         </div>
 
-        <div className="hidden items-center gap-6 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-white/80 transition-colors hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
+        {/* Right side buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <button className="rounded-lg border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition hover:bg-white/20">
+            Request Support
+          </button>
+          <button className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-white/90">
+            Sign In
+          </button>
         </div>
 
         <button
@@ -143,7 +130,7 @@ const NavBar = () => {
       {open && (
         <div className="border-t border-white/10 bg-black/20 px-6 py-4 md:hidden">
           {/* Mobile Explore Section */}
-          <div className="mb-4">
+          <div>
             <button 
               onClick={() => setExploreOpen(!exploreOpen)}
               className="flex items-center justify-between w-full py-2 text-sm font-medium text-white/80 transition-colors hover:text-white"
@@ -169,7 +156,7 @@ const NavBar = () => {
                       <Icon className="h-4 w-4 flex-shrink-0 mt-0.5" />
                       <div>
                         <div className="font-medium">{product.name}</div>
-                        <div className="text-white/50">{product.subtitle || product.desc}</div>
+                        <div className="text-white/50 text-xs">{product.desc}</div>
                       </div>
                     </a>
                   );
@@ -177,17 +164,6 @@ const NavBar = () => {
               </div>
             )}
           </div>
-          
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block py-2 text-sm font-medium text-white/80 transition-colors hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
         </div>
       )}
     </nav>

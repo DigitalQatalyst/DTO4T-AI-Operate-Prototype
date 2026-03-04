@@ -15,103 +15,137 @@ const integrationTiles = [
 ];
 
 const ClosingSection = () => (
-  <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(228,100%,14%)] via-[hsl(224,56%,22%)] to-[hsl(228,100%,25%)] py-28 md:py-40">
-    {/* Coral accent glow */}
-    <div className="absolute inset-y-0 right-0 w-[55%] bg-gradient-to-l from-[hsl(14,97%,60%,0.08)] to-transparent" />
-
-    {/* Floating blurs */}
-    <motion.div
-      animate={float(0, -20)}
-      className="absolute left-[15%] top-[25%] h-64 w-64 rounded-full bg-white/5 blur-3xl"
-    />
-    <motion.div
-      animate={float(3, 25)}
-      className="absolute bottom-[20%] right-[20%] h-80 w-80 rounded-full bg-white/5 blur-3xl"
-    />
-
-    {/* Dot pattern */}
-    <div className="dot-pattern absolute inset-0 opacity-[0.03]" />
-
-    <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-      <SectionBadge label="Integration" variant="dark" />
-
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-6 text-3xl font-bold text-white sm:text-4xl lg:text-5xl"
-      >
-        Integrated Within the DBP.
-        <br />
-        <span className="gradient-coral-text">Orchestrated at Scale.</span>
-      </motion.h2>
-
-      <div className="mx-auto mt-6 h-[3px] w-16 rounded-full bg-gradient-to-r from-[hsl(14,97%,60%)] to-[hsl(14,97%,60%,0.5)]" />
-
-      <motion.p
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.15 }}
-        className="mx-auto mt-6 max-w-xl text-white/50"
-      >
-        DIA AI Hub synchronises experience, work, engineering, and analytics so
-        AI operates as one enterprise capability.
-      </motion.p>
-
-      {/* Integration tiles */}
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {integrationTiles.map((t, i) => (
-          <motion.a
-            key={t.title}
-            href={t.href}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 text-left backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/[0.08]"
-          >
-            <div className="absolute left-0 top-0 h-[1px] w-full bg-gradient-to-r from-transparent via-[hsl(14,97%,60%)]/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.06] transition-colors group-hover:border-accent/30 group-hover:bg-accent/10">
-              <t.icon className="h-5 w-5 text-white/60 transition-colors group-hover:text-accent" />
-            </div>
-            <h3 className="text-sm font-bold text-white/80">{t.title}</h3>
-            <p className="mt-1 text-xs text-white/40">{t.desc}</p>
-            <ArrowRight className="mt-3 h-4 w-4 text-white/30 transition-all group-hover:translate-x-1 group-hover:text-accent" />
-          </motion.a>
-        ))}
-      </div>
-
-      {/* Final CTA */}
-      <div className="gradient-divider mx-auto mt-16 max-w-xl opacity-20" />
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-10 text-center"
-      >
-        <h3 className="text-2xl font-bold text-white">Enter the DIA AI Hub</h3>
-        <p className="mx-auto mt-3 max-w-lg text-sm text-white/50">
-          Start with learning, then access governed copilots, agents, and
-          marketplaces to scale Man + Machine Collaboration.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="#marketplace" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90">
-            <BookOpen className="h-4 w-4" />
-            Learn to work with AI today
-          </a>
-          <a href="#marketplace" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white/70 transition hover:bg-white/10">
-            <ShoppingBag className="h-4 w-4" />
-            Explore AI Marketplaces
-          </a>
-          <a href="#" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white/70 transition hover:bg-white/10">
-            <Send className="h-4 w-4" />
-            Submit AI Service Request
-          </a>
+  <>
+    {/* Integration Section */}
+    <section className="relative overflow-hidden bg-gray-50 py-28 md:py-40">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-1.5 shadow-sm">
+          <ArrowRight className="h-3.5 w-3.5 text-gray-600" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">Integration</span>
         </div>
-      </motion.div>
-    </div>
-  </section>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
+        >
+          Integrated Within the DBP.
+          <br />
+          <span className="bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">Orchestrated at Scale.</span>
+        </motion.h2>
+
+        <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-orange-500" />
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15 }}
+          className="mx-auto mt-6 max-w-2xl text-gray-600"
+        >
+          DIA AI Hub synchronises experience, work, engineering, and analytics so
+          AI operates as one enterprise capability.
+        </motion.p>
+
+        {/* Integration tiles */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {integrationTiles.map((t, i) => (
+            <motion.div
+              key={t.title}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="group relative overflow-hidden rounded-2xl bg-white p-6 text-left shadow-sm transition-all hover:shadow-lg"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 transition-all group-hover:bg-gradient-to-br group-hover:from-blue-900 group-hover:via-purple-600 group-hover:to-orange-500">
+                <t.icon className="h-6 w-6 text-gray-700 transition-colors group-hover:text-white" />
+              </div>
+              <h3 className="text-base font-bold text-gray-900">{t.title}</h3>
+              <p className="mt-2 text-sm text-gray-600 leading-relaxed">{t.desc}</p>
+              <div className="mt-4">
+                <ArrowRight className="h-4 w-4 text-gray-400 transition-all group-hover:translate-x-1 group-hover:text-orange-500" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Enter the DIA AI Hub Section */}
+    <section className="relative overflow-hidden bg-gradient-to-r from-[#1a1a3e] via-[#4a2c5e] to-[#c85a54] py-20 md:py-28">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
+        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-left"
+          >
+            <h3 className="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight">
+              <span className="block text-white">Enter the</span>
+              <span className="block text-orange-400 mt-1">DIA AI Hub</span>
+            </h3>
+            
+            <div className="mt-4 h-1 w-12 bg-white/30 rounded-full" />
+            
+            <p className="mt-4 text-white/70 text-sm sm:text-base max-w-lg leading-relaxed">
+              Learn, collaborate, and scale AI-driven transformation.
+            </p>
+          </motion.div>
+
+          {/* Right Buttons */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-3"
+          >
+            <a 
+              href="#marketplace" 
+              className="group flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-left backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 flex-shrink-0">
+                  <BookOpen className="h-4 w-4 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-white">Learn to work with AI today</span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+            </a>
+
+            <a 
+              href="#marketplace" 
+              className="group flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-left backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 flex-shrink-0">
+                  <ShoppingBag className="h-4 w-4 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-white">Explore AI Marketplaces</span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+            </a>
+
+            <a 
+              href="#" 
+              className="group flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-left backdrop-blur-sm transition-all hover:bg-white/20"
+            >
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 flex-shrink-0">
+                  <Send className="h-4 w-4 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-white">Submit AI Service Request</span>
+              </div>
+              <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+            </a>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  </>
 );
 
 export default ClosingSection;
