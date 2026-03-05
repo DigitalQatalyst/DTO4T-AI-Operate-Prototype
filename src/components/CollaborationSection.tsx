@@ -73,7 +73,7 @@ const CollaborationSection = () => {
       </motion.div>
 
       {/* Horizontal Scrolling Cards */}
-      <div className="mt-12 overflow-x-auto pb-4">
+      <div className="mt-12 overflow-x-auto overflow-y-hidden pb-4">
         <div className="flex gap-6 min-w-max px-6">
           {steps.map((s, i) => (
             <motion.div
