@@ -114,10 +114,6 @@ const NavBar = () => {
                 </div>
               )}
             </div>
-
-            <a className="hover:text-[#FB5535] transition-colors duration-200 cursor-pointer" href="#discover">
-              Discover DQ
-            </a>
           </div>
 
           {/* Right Side Buttons */}
