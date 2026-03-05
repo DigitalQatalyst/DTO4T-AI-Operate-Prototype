@@ -39,7 +39,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="gradient-hero relative flex min-h-screen items-center justify-center overflow-hidden pt-16 pb-20"
+      className="gradient-hero relative flex min-h-screen items-center justify-center overflow-hidden py-20"
     >
       {/* floating circles */}
       <motion.div

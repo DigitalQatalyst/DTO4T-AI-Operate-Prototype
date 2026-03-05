@@ -11,7 +11,7 @@ const integrationTiles = [
 const ClosingSection = () => (
   <>
     {/* Integration Section */}
-    <section className="relative overflow-hidden bg-gray-50 py-28 md:py-40">
+    <section className="relative overflow-hidden bg-gray-50 py-16 md:py-20">
       <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-1.5 shadow-sm">
           <ArrowRight className="h-3.5 w-3.5 text-gray-600" />
@@ -83,7 +83,7 @@ const ClosingSection = () => (
     </section>
 
     {/* Enter the DIA AI Hub Section */}
-    <section className="relative overflow-hidden bg-gradient-to-r from-[#1a1a3e] via-[#4a2c5e] to-[#c85a54] py-20 md:py-28">
+    <section className="relative overflow-hidden bg-gradient-to-r from-[#1a1a3e] via-[#4a2c5e] to-[#c85a54] py-16 md:py-20">
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           {/* Left Content */}
