@@ -81,8 +81,8 @@ const ImperativesSection = () => (
             
             {/* Icon */}
             <div className="mb-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 transition-all group-hover:bg-orange-100">
-                <imperative.icon className="h-5 w-5 text-blue-600 transition-all group-hover:text-orange-600 group-hover:scale-110" />
+              <div className="gradient-hero flex h-12 w-12 items-center justify-center rounded-xl transition-all group-hover:scale-110">
+                <imperative.icon className="h-5 w-5 text-white transition-all group-hover:scale-110" />
               </div>
             </div>
             

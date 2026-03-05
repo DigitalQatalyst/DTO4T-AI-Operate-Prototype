@@ -1,17 +1,11 @@
 import { motion } from "framer-motion";
 import { Monitor, Wrench, ShieldCheck, BarChart3, BookOpen, ShoppingBag, ArrowRight, Send } from "lucide-react";
-import SectionBadge from "./SectionBadge";
-
-const float = (delay: number, y: number) => ({
-  y: [0, y, 0],
-  transition: { duration: 7 + delay, repeat: Infinity, ease: "easeInOut" as const },
-});
 
 const integrationTiles = [
-  { icon: Monitor, title: "DXP Integration", desc: "AI-driven personalisation and conversational interfaces.", href: "#" },
-  { icon: Wrench, title: "DWS Integration", desc: "Role-based copilots and workflow augmentation.", href: "#" },
-  { icon: ShieldCheck, title: "SDO Integration", desc: "Secure DevOps pipelines and release governance.", href: "#" },
-  { icon: BarChart3, title: "Analytics Integration", desc: "DIA Analytics Hub for cognitive intelligence.", href: "#" },
+  { icon: Monitor, title: "DXP Integration", desc: "AI-driven personalisation and conversational interfaces.", href: "#", cta: "Explore DXP Integration" },
+  { icon: Wrench, title: "DWS Integration", desc: "Role-based copilots and workflow augmentation.", href: "#", cta: "Explore DWS Integration" },
+  { icon: ShieldCheck, title: "SDO Integration", desc: "Secure DevOps pipelines and release governance.", href: "#", cta: "Explore SDO Integration" },
+  { icon: BarChart3, title: "Analytics Integration", desc: "DIA Analytics Hub for cognitive intelligence.", href: "#", cta: "Explore Analytics Integration" },
 ];
 
 const ClosingSection = () => (
@@ -30,9 +24,7 @@ const ClosingSection = () => (
           viewport={{ once: true }}
           className="mt-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
         >
-          Integrated Within the DBP.
-          <br />
-          <span className="bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">Orchestrated at Scale.</span>
+          DBP Master Architecture
         </motion.h2>
 
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-orange-500" />
@@ -44,8 +36,7 @@ const ClosingSection = () => (
           transition={{ delay: 0.15 }}
           className="mx-auto mt-6 max-w-2xl text-gray-600"
         >
-          DIA AI Hub synchronises experience, work, engineering, and analytics so
-          AI operates as one enterprise capability.
+          Connecting experience, work, and analytics through AI.
         </motion.p>
 
         {/* Integration tiles */}
@@ -57,15 +48,33 @@ const ClosingSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative overflow-hidden rounded-2xl bg-white p-6 text-left shadow-sm transition-all hover:shadow-lg"
+              className="group relative overflow-hidden rounded-2xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-gray-100"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 transition-all group-hover:bg-gradient-to-br group-hover:from-blue-900 group-hover:via-purple-600 group-hover:to-orange-500">
-                <t.icon className="h-6 w-6 text-gray-700 transition-colors group-hover:text-white" />
+              {/* Icon */}
+              <div className="gradient-integration-icon mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl group-hover:gradient-hero">
+                <t.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-base font-bold text-gray-900">{t.title}</h3>
-              <p className="mt-2 text-sm text-gray-600 leading-relaxed">{t.desc}</p>
-              <div className="mt-4">
-                <ArrowRight className="h-4 w-4 text-gray-400 transition-all group-hover:translate-x-1 group-hover:text-orange-500" />
+              
+              {/* Category Label */}
+              <div className="mb-3">
+                <span className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                  {t.title.includes('DXP') ? 'EXPERIENCE PLATFORM' : 
+                   t.title.includes('DWS') ? 'DIGITAL WORKSPACE' :
+                   t.title.includes('SDO') ? 'SECURE DEVOPS' : 'ANALYTICS HUB'}
+                </span>
+              </div>
+              
+              {/* Title */}
+              <h3 className="mb-3 text-lg font-bold text-gray-900">{t.title}</h3>
+              
+              {/* Description */}
+              <p className="mb-6 text-sm text-gray-600 leading-relaxed">{t.desc}</p>
+              
+              {/* CTA Button */}
+              <div className="mt-auto">
+                <button className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-100 hover:border-gray-300">
+                  {t.cta}
+                </button>
               </div>
             </motion.div>
           ))}

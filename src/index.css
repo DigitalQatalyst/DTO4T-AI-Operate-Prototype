@@ -124,6 +124,13 @@
     border-left: 3px solid transparent;
     border-image: linear-gradient(to bottom, hsl(228 100% 25%), hsl(14 97% 60%)) 1;
   }
+  .gradient-integration-icon {
+    background: linear-gradient(135deg, hsl(220 14% 71%) 0%, hsl(220 14% 71%) 100%);
+    transition: all 0.3s ease;
+  }
+  .gradient-integration-icon:hover {
+    background: linear-gradient(135deg, hsl(228 100% 25%) 0%, hsl(14 97% 60%) 100%);
+  }
   .dot-pattern {
     background-image: radial-gradient(circle, white 1px, transparent 1px);
     background-size: 32px 32px;

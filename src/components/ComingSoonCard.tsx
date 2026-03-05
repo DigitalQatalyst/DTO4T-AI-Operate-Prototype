@@ -13,8 +13,8 @@ const ComingSoonCard = ({ icon: Icon, title, description, audience }: ComingSoon
       <Clock className="h-3 w-3" />
       Coming Soon
     </div>
-    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-muted">
-      <Icon className="h-6 w-6 text-muted-foreground" />
+    <div className="gradient-hero mb-4 flex h-14 w-14 items-center justify-center rounded-full">
+      <Icon className="h-6 w-6 text-white" />
     </div>
     {audience && (
       <span className="mb-2 text-xs font-medium text-muted-foreground">{audience}</span>
