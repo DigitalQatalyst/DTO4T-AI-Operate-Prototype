@@ -52,7 +52,7 @@ const CollaborationSection = () => {
               <div className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold transition-all cursor-pointer ${
                 index <= selectedStep 
                   ? 'gradient-hero text-white' 
-                  : 'bg-gray-300 text-gray-600 hover:bg-gray-400'
+                  : 'bg-muted text-muted-foreground hover:bg-accent'
               }`}
               onClick={() => setSelectedStep(index)}
               >
@@ -64,7 +64,7 @@ const CollaborationSection = () => {
                 <div className={`flex-1 h-1 transition-all ${
                   index < selectedStep 
                     ? 'gradient-hero' 
-                    : 'bg-gray-300'
+                    : 'bg-muted'
                 }`} />
               )}
             </div>
@@ -82,7 +82,7 @@ const CollaborationSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className={`group relative overflow-hidden rounded-2xl border p-6 text-left transition-all hover:shadow-lg flex-shrink-0 w-80 cursor-pointer ${
+              className={`group relative overflow-hidden rounded-2xl border py-8 px-6 text-left transition-all hover:shadow-lg flex-shrink-0 w-80 cursor-pointer ${
                 i === selectedStep
                   ? 'border-primary/40 bg-card shadow-lg scale-105'
                   : 'border-border/60 bg-card hover:border-primary/20'
@@ -92,15 +92,25 @@ const CollaborationSection = () => {
               <div className={`absolute left-0 top-0 h-[1px] w-full transition-opacity ${
                 i === selectedStep ? 'gradient-hero opacity-100' : 'gradient-hero opacity-0 group-hover:opacity-100'
               }`} />
-              <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-all ${
+              
+              {/* Step number in top right corner */}
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                  STEP
+                </span>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-all group-hover:bg-primary/10">
+                  <span className="text-xs font-bold text-muted-foreground group-hover:text-primary">
+                    {s.step}
+                  </span>
+                </div>
+              </div>
+              
+              <div className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl transition-all ${
                 i === selectedStep ? 'gradient-hero' : 'gradient-hero'
               }`}>
                 <s.icon className="h-5 w-5 text-white" />
               </div>
-              <div className="mb-3 flex items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Step {s.step}
-                </span>
+              <div className="mb-4 flex items-center gap-2">
                 <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold transition-all ${
                   i === selectedStep 
                     ? 'border-primary/30 bg-primary/20 text-primary' 
@@ -109,8 +119,8 @@ const CollaborationSection = () => {
                   {s.owner}
                 </span>
               </div>
-              <h3 className="mb-2 font-bold text-foreground">{s.title}</h3>
-              <p className="text-sm text-muted-foreground">{s.desc}</p>
+              <h3 className="mb-3 font-bold text-foreground">{s.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -120,7 +130,7 @@ const CollaborationSection = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-10"
+        className="mt-12"
       >
         <a
           href="#"

@@ -82,7 +82,7 @@ const MarketplaceSection = () => {
         </div>
 
         {/* Filters */}
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
+        <div className="mt-12 flex flex-wrap justify-center gap-2">
           {filters.map((f) => (
             <button
               key={f.id}

@@ -75,8 +75,8 @@ const ImperativesSection = () => (
             className="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-200 p-6 text-left transition-all hover:bg-white hover:shadow-lg hover:-translate-y-1"
           >
             {/* Number badge in top-right corner */}
-            <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 transition-all group-hover:bg-orange-500">
-              <span className="text-sm font-bold text-gray-600 group-hover:text-white transition-all">{imperative.number}</span>
+            <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-all group-hover:bg-orange-500">
+              <span className="text-sm font-bold text-muted-foreground group-hover:text-white transition-all">{imperative.number}</span>
             </div>
             
             {/* Icon */}
@@ -86,8 +86,8 @@ const ImperativesSection = () => (
               </div>
             </div>
             
-            <h3 className="mb-3 text-lg font-bold text-gray-900 pr-8">{imperative.title}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{imperative.desc}</p>
+            <h3 className="mb-3 text-base font-bold text-foreground pr-8">{imperative.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{imperative.desc}</p>
           </motion.div>
         ))}
       </div>

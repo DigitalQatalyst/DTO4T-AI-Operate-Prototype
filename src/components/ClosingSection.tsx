@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Monitor, Wrench, ShieldCheck, BarChart3, BookOpen, ShoppingBag, ArrowRight, Send } from "lucide-react";
+import SectionBadge from "./SectionBadge";
 
 const integrationTiles = [
   { icon: Monitor, title: "DXP Integration", desc: "AI-driven personalisation and conversational interfaces.", href: "#", cta: "Explore DXP Integration" },
@@ -13,28 +14,23 @@ const ClosingSection = () => (
     {/* Integration Section */}
     <section className="relative overflow-hidden bg-gray-50 py-16 md:py-20">
       <div className="relative z-10 mx-auto max-w-6xl px-6 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-1.5 shadow-sm">
-          <ArrowRight className="h-3.5 w-3.5 text-gray-600" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-gray-600">Integration</span>
-        </div>
+        <SectionBadge label="Integration" />
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
+          className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
         >
           DBP Master Architecture
         </motion.h2>
-
-        <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-orange-500" />
 
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.15 }}
-          className="mx-auto mt-6 max-w-2xl text-gray-600"
+          transition={{ delay: 0.1 }}
+          className="mx-auto mt-4 max-w-2xl text-muted-foreground"
         >
           Connecting experience, work, and analytics through AI.
         </motion.p>
@@ -57,7 +53,7 @@ const ClosingSection = () => (
               
               {/* Category Label */}
               <div className="mb-3">
-                <span className="text-xs font-medium uppercase tracking-wider text-gray-500">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   {t.title.includes('DXP') ? 'EXPERIENCE PLATFORM' : 
                    t.title.includes('DWS') ? 'DIGITAL WORKSPACE' :
                    t.title.includes('SDO') ? 'SECURE DEVOPS' : 'ANALYTICS HUB'}
@@ -65,14 +61,14 @@ const ClosingSection = () => (
               </div>
               
               {/* Title */}
-              <h3 className="mb-3 text-lg font-bold text-gray-900">{t.title}</h3>
+              <h3 className="mb-3 text-base font-bold text-foreground">{t.title}</h3>
               
               {/* Description */}
-              <p className="mb-6 text-sm text-gray-600 leading-relaxed">{t.desc}</p>
+              <p className="mb-6 text-sm text-muted-foreground leading-relaxed">{t.desc}</p>
               
               {/* CTA Button */}
               <div className="mt-auto">
-                <button className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-100 hover:border-gray-300">
+                <button className="w-full rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground">
                   {t.cta}
                 </button>
               </div>
@@ -93,7 +89,7 @@ const ClosingSection = () => (
             viewport={{ once: true }}
             className="text-left"
           >
-            <h3 className="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight">
+            <h3 className="text-3xl font-bold sm:text-4xl leading-tight">
               <span className="block text-white">Enter the</span>
               <span className="block text-orange-400 mt-1">DIA AI Hub</span>
             </h3>
