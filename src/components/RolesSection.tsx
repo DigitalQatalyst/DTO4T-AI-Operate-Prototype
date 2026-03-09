@@ -63,8 +63,8 @@ const RolesSection = () => (
         with governance and measurable value.
       </motion.p>
 
-      <div className="mt-12 overflow-x-auto overflow-y-hidden pb-4">
-        <div className="flex gap-6 min-w-max px-6">
+      <div className="mt-12 overflow-x-auto overflow-y-hidden scrollbar-hide">
+        <div className="flex gap-6 min-w-max pl-6 pr-12">
           {roleCategories.map((role, i) => (
             <motion.div
               key={role.label}

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Target, Cpu, CheckCircle, Play, RefreshCw, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import SectionBadge from "./SectionBadge";
 
 const steps = [
@@ -13,6 +13,48 @@ const steps = [
 
 const CollaborationSection = () => {
   const [selectedStep, setSelectedStep] = useState(0); // Default to first step
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Update progress based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollContainerRef.current) return;
+      
+      const container = scrollContainerRef.current;
+      const scrollLeft = container.scrollLeft;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      
+      if (maxScroll === 0) return; // No scrolling needed
+      
+      // Calculate which step should be active based on scroll position
+      const scrollProgress = scrollLeft / maxScroll;
+      const stepIndex = Math.round(scrollProgress * (steps.length - 1));
+      
+      setSelectedStep(Math.max(0, Math.min(stepIndex, steps.length - 1)));
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  // Handle step circle click - scroll to corresponding card
+  const handleStepClick = (index: number) => {
+    setSelectedStep(index);
+    
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const cardWidth = 320 + 24; // w-80 (320px) + gap-6 (24px)
+      const scrollPosition = index * cardWidth;
+      
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
   <section id="collaboration" className="bg-section-muted py-16">
@@ -54,7 +96,7 @@ const CollaborationSection = () => {
                   ? 'gradient-hero text-white' 
                   : 'bg-muted text-muted-foreground hover:bg-accent'
               }`}
-              onClick={() => setSelectedStep(index)}
+              onClick={() => handleStepClick(index)}
               >
                 {index + 1}
               </div>
@@ -73,8 +115,8 @@ const CollaborationSection = () => {
       </motion.div>
 
       {/* Horizontal Scrolling Cards */}
-      <div className="mt-12 overflow-x-auto overflow-y-hidden pb-4">
-        <div className="flex gap-6 min-w-max px-6">
+      <div className="mt-12 overflow-x-auto overflow-y-hidden scrollbar-hide" ref={scrollContainerRef}>
+        <div className="flex gap-6 min-w-max pl-6 pr-12">
           {steps.map((s, i) => (
             <motion.div
               key={s.step}
@@ -87,7 +129,7 @@ const CollaborationSection = () => {
                   ? 'border-primary/40 bg-card shadow-lg scale-105'
                   : 'border-border/60 bg-card hover:border-primary/20'
               }`}
-              onClick={() => setSelectedStep(i)}
+              onClick={() => handleStepClick(i)}
             >
               <div className={`absolute left-0 top-0 h-[1px] w-full transition-opacity ${
                 i === selectedStep ? 'gradient-hero opacity-100' : 'gradient-hero opacity-0 group-hover:opacity-100'
