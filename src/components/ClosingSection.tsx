@@ -68,7 +68,7 @@ const ClosingSection = () => (
               
               {/* CTA Button */}
               <div className="mt-auto">
-                <button className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent hover:text-accent-foreground">
+                <button className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent hover:text-accent-foreground h-10 flex items-center justify-center">
                   {t.cta}
                 </button>
               </div>
