@@ -66,7 +66,7 @@ const UseCaseSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="group relative overflow-hidden rounded-2xl border border-border/60 bg-muted p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
             <div className="gradient-hero mb-3 flex h-10 w-10 items-center justify-center rounded-lg">

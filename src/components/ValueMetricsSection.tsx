@@ -63,30 +63,32 @@ const ValueMetricsSection = () => (
         gains, risk reduction, and portfolio ROI.
       </motion.p>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {metrics.map((m, i) => (
-          <motion.div
-            key={m.label}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="glass-card rounded-2xl p-6 text-left transition-transform hover:-translate-y-1"
-          >
-            <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-              <m.icon className="h-5 w-5 text-white" />
-            </div>
-            <h3 className="mb-3 font-bold text-foreground">{m.label}</h3>
-            <p className="text-sm text-muted-foreground">{m.value}</p>
-          </motion.div>
-        ))}
+      <div className="mt-12 overflow-x-auto overflow-y-hidden scrollbar-hide">
+        <div className="flex gap-6 min-w-max pl-6 pr-12">
+          {metrics.map((m, i) => (
+            <motion.div
+              key={m.label}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="rounded-2xl bg-white border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg flex-shrink-0 w-80"
+            >
+              <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                <m.icon className="h-5 w-5 text-white" />
+              </div>
+              <h3 className="mb-3 font-bold text-foreground">{m.label}</h3>
+              <p className="text-sm text-muted-foreground">{m.value}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-10"
+        className="mt-12"
       >
         <a
           href="#"

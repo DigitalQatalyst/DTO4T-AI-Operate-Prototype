@@ -44,7 +44,7 @@ const ClosingSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative overflow-hidden rounded-2xl bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-gray-100"
+              className="group relative overflow-hidden rounded-2xl bg-muted border border-border/60 p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
             >
               {/* Icon */}
               <div className="gradient-integration-icon mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl group-hover:gradient-hero">
@@ -68,7 +68,7 @@ const ClosingSection = () => (
               
               {/* CTA Button */}
               <div className="mt-auto">
-                <button className="w-full rounded-lg border border-border bg-muted px-4 py-2.5 text-sm font-medium text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground">
+                <button className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent hover:text-accent-foreground">
                   {t.cta}
                 </button>
               </div>

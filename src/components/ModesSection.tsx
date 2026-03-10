@@ -60,7 +60,7 @@ const ModesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="group relative overflow-hidden rounded-2xl border border-border bg-muted p-8 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             <div className="gradient-hero absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 

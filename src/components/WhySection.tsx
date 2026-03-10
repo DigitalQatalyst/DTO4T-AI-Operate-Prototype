@@ -56,7 +56,7 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="glass-card group rounded-xl p-6 text-left transition-transform hover:-translate-y-1"
+            className="rounded-xl bg-muted border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
               <c.icon className="h-5 w-5 text-white" />
@@ -78,7 +78,7 @@ const WhySection = () => (
       >
         <a
           href="#architecture"
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+          className="gradient-hero inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
         >
           Explore the Unified AI Architecture
         </a>

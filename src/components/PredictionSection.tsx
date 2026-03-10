@@ -52,7 +52,7 @@ const PredictionSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="glass-card group rounded-2xl p-8 text-center transition-all hover:-translate-y-2 hover:shadow-xl"
+              className="rounded-2xl bg-white border border-border/60 p-8 text-center transition-all hover:-translate-y-2 hover:shadow-xl"
             >
               <div className="gradient-hero mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl">
                 <prediction.icon className="h-7 w-7 text-white" />

@@ -72,7 +72,7 @@ const ImperativesSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-200 p-6 text-left transition-all hover:bg-white hover:shadow-lg hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-2xl bg-white border border-border/60 p-6 text-left transition-all hover:shadow-lg hover:-translate-y-1"
           >
             {/* Number badge in top-right corner */}
             <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-all group-hover:bg-orange-500">
