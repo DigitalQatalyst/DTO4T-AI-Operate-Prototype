@@ -70,8 +70,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mt-8 text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl"
         >
-          The Enterprise AI Hub for DCO‑Grade{" "}
-          <span className="text-white/70">Man + Machine Collaboration</span>
+          The Enterprise AI Hub for Human-AI Collaboration
         </motion.h1>
 
         <motion.p

@@ -1,25 +1,24 @@
 import { motion } from "framer-motion";
-import { Cpu, ShieldCheck, BarChart3, Eye } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 
 const cards = [
   {
-    icon: Cpu,
+    percentage: "85%",
     title: "Productivity Acceleration",
     desc: "Governed copilots augment human work without compromising accountability.",
   },
   {
-    icon: ShieldCheck,
+    percentage: "92%",
     title: "Execution at Scale",
     desc: "Agent frameworks automate workflows under permissions, monitoring, and audit controls.",
   },
   {
-    icon: BarChart3,
+    percentage: "78%",
     title: "Cognitive Capacity Expansion",
     desc: "Intelligence scales beyond linear headcount through structured AI enablement.",
   },
   {
-    icon: Eye,
+    percentage: "96%",
     title: "Trust & Risk Control",
     desc: "Guardrails, approvals, and traceability reduce exposure across every AI interaction.",
   },
@@ -58,8 +57,8 @@ const WhySection = () => (
             transition={{ delay: i * 0.1, duration: 0.5 }}
             className="rounded-xl bg-muted border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
           >
-            <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-              <c.icon className="h-5 w-5 text-white" />
+            <div className="mb-4">
+              <span className="text-3xl font-bold gradient-hero-text">{c.percentage}</span>
             </div>
             <h3 className="mb-2 font-bold text-foreground">{c.title}</h3>
             <p className="text-sm text-muted-foreground">{c.desc}</p>
