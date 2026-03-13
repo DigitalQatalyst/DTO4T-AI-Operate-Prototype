@@ -72,7 +72,8 @@ const RolesSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="group relative overflow-hidden rounded-2xl border border-border/60 bg-muted p-6 text-left transition-all hover:border-primary/20 hover:shadow-lg flex-shrink-0 w-80"
+              className="group relative overflow-hidden rounded-2xl border border-border/60 p-6 text-left transition-all hover:border-primary/20 hover:shadow-lg flex-shrink-0 w-80"
+              style={{ backgroundColor: '#fafbff' }}
             >
               <div className="gradient-hero absolute left-0 top-0 h-[1px] w-full opacity-0 transition-opacity group-hover:opacity-100" />
               <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-xl">

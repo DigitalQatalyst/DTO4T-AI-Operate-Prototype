@@ -42,7 +42,7 @@ const imperatives = [
 ];
 
 const ImperativesSection = () => (
-  <section id="imperatives" className="bg-section-muted py-16">
+  <section id="imperatives" className="py-16" style={{ backgroundColor: '#f0f6ff' }}>
     <div className="mx-auto max-w-6xl px-6 text-center">
       <SectionBadge label="How to Succeed with AI" />
       <motion.h2

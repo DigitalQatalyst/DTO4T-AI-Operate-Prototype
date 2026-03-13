@@ -41,7 +41,7 @@ const metrics = [
 ];
 
 const ValueMetricsSection = () => (
-  <section id="metrics" className="bg-section-muted py-16">
+  <section id="metrics" className="py-16" style={{ backgroundColor: '#f0f6ff' }}>
     <div className="mx-auto max-w-5xl px-6 text-center">
       <SectionBadge label="Value" />
       <motion.h2

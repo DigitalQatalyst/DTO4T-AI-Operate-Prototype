@@ -57,7 +57,7 @@ const CollaborationSection = () => {
   };
 
   return (
-  <section id="collaboration" className="bg-section-muted py-16">
+  <section id="collaboration" className="py-16" style={{ backgroundColor: '#f0f6ff' }}>
     <div className="mx-auto max-w-6xl px-6 text-center">
       <SectionBadge label="Collaboration" />
       <motion.h2

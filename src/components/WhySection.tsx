@@ -55,7 +55,8 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="rounded-xl bg-muted border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="rounded-xl border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg"
+            style={{ backgroundColor: '#fafbff' }}
           >
             <div className="mb-4">
               <span className="text-3xl font-bold gradient-hero-text">{c.percentage}</span>

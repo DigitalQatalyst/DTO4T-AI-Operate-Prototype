@@ -57,7 +57,7 @@ const MarketplaceSection = () => {
       : marketplaceClasses.filter((c) => c.id === active);
 
   return (
-    <section id="marketplace" className="bg-section-muted py-16">
+    <section id="marketplace" className="py-16" style={{ backgroundColor: '#f0f6ff' }}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center">
           <SectionBadge label="Marketplace" />
