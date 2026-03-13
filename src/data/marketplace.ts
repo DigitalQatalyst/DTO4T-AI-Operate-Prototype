@@ -28,8 +28,7 @@ export const marketplaceClasses: MarketplaceClass[] = [
     icon: BookOpen,
     intro: "Build shared AI fluency before scaling automation. Curated news, insights, learning, and knowledge resources.",
     products: [
-      { icon: BookOpen, tag: "Cognitive Literacy", name: "AI News Center", subtitle: "Curated AI Updates", desc: "Real-time AI developments filtered for enterprise relevance and strategic awareness.", cta: "Explore Discern Marketplace" },
-      { icon: BookOpen, tag: "Cognitive Literacy", name: "AI Insight Center", subtitle: "Strategic Intelligence", desc: "Analyst-grade AI insights mapped to enterprise priorities and decision-making.", cta: "Explore Discern Marketplace" },
+      { icon: BookOpen, tag: "Cognitive Literacy", name: "AI Updates & Insights Center", subtitle: "Curated AI Updates", desc: "A governed feed of AI updates and decision briefs—what changed, why it matters, and actions teams should take.", cta: "Explore Discern Marketplace" },
       { icon: AlertTriangle, tag: "Risk & Regulatory", name: "AI Risk & Regulatory Alerts", subtitle: "Compliance Monitoring", desc: "Automated alerts on AI regulation changes, risk advisories, and compliance updates.", cta: "Explore Discern Marketplace" },
       { icon: BookOpen, tag: "Cognitive Literacy", name: "AI Learning Center", subtitle: "Structured Enablement", desc: "Role-based AI learning pathways from literacy to advanced prompt engineering.", cta: "Explore Discern Marketplace" },
       { icon: BookOpen, tag: "Cognitive Literacy", name: "AI Knowledge Center", subtitle: "Policy & Guidelines", desc: "Strategy, policies, guardrails, and governance documentation for AI adoption.", cta: "Explore Discern Marketplace" },
