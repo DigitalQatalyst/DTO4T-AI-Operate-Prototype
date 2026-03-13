@@ -36,6 +36,17 @@ const HeroSection = () => {
     }, 150);
   };
 
+  const scrollToMarketplace = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const marketplaceSection = document.getElementById('marketplace');
+    if (marketplaceSection) {
+      marketplaceSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section
       id="hero"
@@ -90,14 +101,14 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.45 }}
           className="mt-10 flex flex-col items-center justify-center gap-6"
         >
-          {/* Enhanced AI Prompt Bar - Matching Screenshot 1 */}
+          {/* Enhanced AI Prompt Bar - White Background with Modern Design */}
           <div className="w-full max-w-4xl">
             {/* Main Search Container */}
-            <div className="rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-6 shadow-2xl">
+            <div className="rounded-2xl bg-white p-2 shadow-2xl">
               {/* Search Bar */}
-              <div className="relative mb-4">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2">
-                  <Sparkles className="h-4 w-4 text-white/60" />
+              <div className="relative">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                  <Sparkles className="h-5 w-5 text-primary" />
                 </div>
                 <input
                   type="text"
@@ -106,15 +117,15 @@ const HeroSection = () => {
                   onFocus={handleSearchFocus}
                   onBlur={handleSearchBlur}
                   placeholder="Ask me anything about DWS... What do you need help with?"
-                  className="flex h-12 w-full rounded-xl border border-white/20 bg-white/5 pl-10 pr-24 text-white placeholder:text-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:border-white/40 transition-all"
+                  className="flex h-14 w-full rounded-xl border-2 border-transparent bg-gray-50 pl-12 pr-32 text-gray-900 placeholder:text-gray-400 focus-visible:outline-none focus-visible:border-primary focus-visible:bg-white transition-all text-base"
                 />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                  <div className="flex items-center gap-1 rounded-full bg-green-500/20 px-2 py-1">
-                    <div className="h-2 w-2 rounded-full bg-green-400"></div>
-                    <span className="text-xs font-medium text-green-400">AI Ready</span>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1.5 border border-green-200">
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <span className="text-xs font-semibold text-green-700">AI Ready</span>
                   </div>
-                  <button className="rounded-lg p-1.5 text-white/60 hover:bg-white/10 hover:text-white transition">
-                    <MessageCircle className="h-4 w-4" />
+                  <button className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-primary transition-all">
+                    <MessageCircle className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -122,65 +133,82 @@ const HeroSection = () => {
               {/* AI Assistant Examples Section - Only visible when search is focused */}
               {isSearchFocused && (
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="space-y-3"
+                  initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, height: "auto", scale: 1 }}
+                  exit={{ opacity: 0, height: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="mt-4 space-y-4 px-2 pb-2"
                 >
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-blue-400" />
-                    <span className="text-sm font-medium text-white/90">AI Assistant Examples:</span>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold text-gray-700">AI Assistant Examples:</span>
+                  </motion.div>
                   
                   {/* First Row - 3 chips */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {promptChips.slice(0, 3).map((chip) => (
-                      <button
+                    {promptChips.slice(0, 3).map((chip, index) => (
+                      <motion.button
                         key={chip}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 + index * 0.05 }}
                         onClick={() => handleChipClick(chip)}
-                        className="rounded-lg bg-white/10 border border-white/20 px-3 py-2 text-sm text-white/80 hover:bg-white/20 hover:text-white transition-all text-left"
+                        className="rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 hover:border-primary hover:shadow-md transition-all text-left"
                       >
                         {chip}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                   
                   {/* Second Row - 2 chips centered */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-2xl mx-auto">
-                    {promptChips.slice(3).map((chip) => (
-                      <button
+                    {promptChips.slice(3).map((chip, index) => (
+                      <motion.button
                         key={chip}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 + index * 0.05 }}
                         onClick={() => handleChipClick(chip)}
-                        className="rounded-lg bg-white/10 border border-white/20 px-3 py-2 text-sm text-white/80 hover:bg-white/20 hover:text-white transition-all text-left"
+                        className="rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 hover:border-primary hover:shadow-md transition-all text-left"
                       >
                         {chip}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
 
                   {/* Powered by AI Footer */}
-                  <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                    <Sparkles className="h-3 w-3 text-white/50" />
-                    <span className="text-xs text-white/50">Powered by AI - I can explain features, guide you, and help you find what you need</span>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center gap-2 pt-3 border-t border-gray-200"
+                  >
+                    <Sparkles className="h-3.5 w-3.5 text-primary" />
+                    <span className="text-xs text-gray-500">Powered by AI - I can explain features, guide you, and help you find what you need</span>
+                  </motion.div>
                 </motion.div>
               )}
             </div>
           </div>
 
           {/* CTAs */}
-          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href="#learning"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90"
+              className="inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-semibold text-primary transition hover:bg-white/90 shadow-lg"
             >
-              <BookOpen className="h-4 w-4" />
+              <BookOpen className="h-5 w-5" />
               Learn to work with AI today
             </a>
             <a
               href="#marketplace"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              onClick={scrollToMarketplace}
+              className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/30 bg-transparent px-8 py-4 text-base font-semibold text-white transition hover:bg-white/10 hover:border-white/50"
             >
               Explore AI Marketplaces
             </a>
