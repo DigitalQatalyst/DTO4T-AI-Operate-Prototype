@@ -72,13 +72,17 @@ const ValueMetricsSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl bg-white border border-border/60 p-6 text-left transition-all hover:-translate-y-1 hover:shadow-lg flex-shrink-0 w-80"
+              className="rounded-2xl bg-white border border-border/60 p-8 text-left transition-all hover:-translate-y-1 hover:shadow-lg flex-shrink-0 flex flex-col"
+              style={{ width: '420px', minHeight: '280px' }}
             >
               <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
                 <m.icon className="h-5 w-5 text-white" />
               </div>
               <h3 className="mb-3 font-bold text-foreground">{m.label}</h3>
-              <p className="text-sm text-muted-foreground">{m.value}</p>
+              <p className="text-sm text-muted-foreground flex-grow">{m.value}</p>
+              <button className="mt-4 w-full rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-primary transition hover:bg-gray-50 hover:border-primary/30">
+                Learn More
+              </button>
             </motion.div>
           ))}
         </div>

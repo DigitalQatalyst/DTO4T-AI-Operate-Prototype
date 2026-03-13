@@ -39,7 +39,8 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="gradient-hero relative flex min-h-screen items-center justify-center overflow-hidden py-20"
+      className="gradient-hero relative flex items-center justify-center overflow-hidden py-16"
+      style={{ minHeight: '70vh' }}
     >
       {/* floating circles */}
       <motion.div
@@ -55,7 +56,7 @@ const HeroSection = () => {
         className="absolute right-[30%] top-[40%] h-48 w-48 rounded-full bg-white/5 blur-3xl"
       />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center flex flex-col justify-center min-h-[80vh]">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,7 +71,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mt-8 text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl"
         >
-          The Enterprise AI Hub for Human-AI Collaboration
+          The Enterprise AI Hub for Human-<span style={{ color: '#d8c6cd' }}>AI Collaboration</span>
         </motion.h1>
 
         <motion.p
