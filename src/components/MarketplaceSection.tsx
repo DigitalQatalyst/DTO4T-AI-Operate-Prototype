@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import SectionBadge from "./SectionBadge";
 import { marketplaceClasses, type MarketplaceClass } from "@/data/marketplace";
 
@@ -16,9 +17,11 @@ const ClassBlock = ({ cls }: { cls: MarketplaceClass }) => (
         <cls.icon className="h-4 w-4 text-white" />
       </div>
       <div>
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-          {cls.label}
-        </span>
+        {cls.label && (
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+            {cls.label}
+          </span>
+        )}
         <h3 className="text-xl font-bold text-foreground">{cls.name}</h3>
       </div>
     </div>
@@ -38,10 +41,20 @@ const ClassBlock = ({ cls }: { cls: MarketplaceClass }) => (
           <h4 className="mt-2 font-bold text-foreground">{p.name}</h4>
           <p className="text-xs text-primary/70">{p.subtitle}</p>
           <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-          <button className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5">
-            {p.cta}
-            <ArrowRight className="h-3 w-3" />
-          </button>
+          {p.name === "AI Updates & Insights Center" ? (
+            <Link 
+              to="/discern"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : (
+            <button className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5">
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </button>
+          )}
         </div>
       ))}
     </div>

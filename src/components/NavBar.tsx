@@ -6,7 +6,7 @@ import { marketplaceClasses } from "../data/marketplace";
 const featuredProducts = [
   {
     ...marketplaceClasses[0].products[0], // AI News Center
-    category: "DISCERN CLASS 01"
+    category: "DISCERN"
   },
   {
     name: "AI DocWriter",
@@ -14,12 +14,12 @@ const featuredProducts = [
     desc: "AI-powered document creation and content generation for specifications, reports, and enterprise documentation.",
     icon: marketplaceClasses[1].icon,
     tag: "Content Generation",
-    category: "DESIGNS CLASS 02",
+    category: "DESIGNS",
     cta: "Explore Designs Marketplace"
   },
   {
     ...marketplaceClasses[0].products[3], // AI Learning Center
-    category: "DISCERN CLASS 01"
+    category: "DISCERN"
   },
   {
     name: "AI Specification Studio",
@@ -27,16 +27,16 @@ const featuredProducts = [
     desc: "Collaborative workspace for defining AI solution specifications and requirements.",
     icon: marketplaceClasses[1].icon,
     tag: "Design & Spec",
-    category: "DESIGNS CLASS 02",
+    category: "DESIGNS",
     cta: "Explore Designs Marketplace"
   },
   {
     ...marketplaceClasses[2].products[7], // Digital Twin Ops (DTOps)
-    category: "DEPLOYS CLASS 03"
+    category: "DEPLOYS"
   },
   {
     ...marketplaceClasses[3].products[0], // AI Self-Service Portal
-    category: "DRIVE CLASS 04"
+    category: "DRIVE"
   },
 ];
 
