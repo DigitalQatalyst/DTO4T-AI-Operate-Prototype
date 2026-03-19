@@ -2,10 +2,10 @@ import { ChevronRight, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface BreadcrumbProps {
-  activeTab: string;
+  pageName: string;
 }
 
-const Breadcrumb = ({ activeTab }: BreadcrumbProps) => {
+const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
   return (
     <div className="flex items-center gap-2 text-xs text-gray-600">
       <Home className="h-3.5 w-3.5" />
@@ -15,9 +15,9 @@ const Breadcrumb = ({ activeTab }: BreadcrumbProps) => {
       <ChevronRight className="h-3.5 w-3.5" />
       <Link to="/" className="hover:text-gray-900">DIA AI Hub</Link>
       <ChevronRight className="h-3.5 w-3.5" />
-      <Link to="/" className="hover:text-gray-900">Discern</Link>
+      <Link to="/" className="hover:text-gray-900">Designs</Link>
       <ChevronRight className="h-3.5 w-3.5" />
-      <span className="text-gray-900">AI Updates & Insights Center</span>
+      <span className="text-gray-900">{pageName}</span>
     </div>
   );
 };
