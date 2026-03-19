@@ -23,7 +23,7 @@ export const marketplaceClasses: MarketplaceClass[] = [
   {
     id: "discern",
     filterLabel: "01 Discern",
-    label: "CLASS 01",
+    label: "",
     name: "DISCERN",
     icon: BookOpen,
     intro: "Build shared AI fluency before scaling automation. Curated news, insights, learning, and knowledge resources.",
@@ -39,7 +39,7 @@ export const marketplaceClasses: MarketplaceClass[] = [
   {
     id: "designs",
     filterLabel: "02 Designs",
-    label: "CLASS 02",
+    label: "",
     name: "DESIGNS",
     icon: Shield,
     intro: "Ensure AI initiatives are intentional, architecturally aligned, risk-aware, and value-designed before deployment.",
@@ -55,7 +55,7 @@ export const marketplaceClasses: MarketplaceClass[] = [
   {
     id: "deploys",
     filterLabel: "03 Deploys",
-    label: "CLASS 03",
+    label: "",
     name: "DEPLOYS",
     icon: Wrench,
     intro: "Turn AI assets into governed, reusable, enterprise-grade capability with lifecycle controls.",
@@ -73,7 +73,7 @@ export const marketplaceClasses: MarketplaceClass[] = [
   {
     id: "drive",
     filterLabel: "04 Drive",
-    label: "CLASS 04",
+    label: "",
     name: "DRIVE",
     icon: Rocket,
     intro: "Institutionalise adoption with monitoring, governance, measurable impact, and continuous improvement.",

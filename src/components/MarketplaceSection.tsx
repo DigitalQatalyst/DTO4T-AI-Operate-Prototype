@@ -17,9 +17,11 @@ const ClassBlock = ({ cls }: { cls: MarketplaceClass }) => (
         <cls.icon className="h-4 w-4 text-white" />
       </div>
       <div>
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-          {cls.label}
-        </span>
+        {cls.label && (
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+            {cls.label}
+          </span>
+        )}
         <h3 className="text-xl font-bold text-foreground">{cls.name}</h3>
       </div>
     </div>
