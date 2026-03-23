@@ -71,7 +71,7 @@ const DiscernMarketplace = () => {
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-100">
           <div className={`${px} py-2.5`}>
-            <Breadcrumb activeTab={tabs.find(t => t.id === activeTab)?.label || ''} />
+            <Breadcrumb pageName="AI Updates & Insights Center" />
           </div>
         </div>
 

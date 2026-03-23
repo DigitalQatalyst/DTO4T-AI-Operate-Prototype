@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DiscernMarketplace from "./pages/DiscernMarketplace";
+import AIOpsFrameworkMarketplace from "./pages/AIOpsFrameworkMarketplace";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/discern" element={<DiscernMarketplace />} />
+          <Route path="/aiops-framework" element={<AIOpsFrameworkMarketplace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
