@@ -49,6 +49,14 @@ const ClassBlock = ({ cls }: { cls: MarketplaceClass }) => (
               {p.cta}
               <ArrowRight className="h-3 w-3" />
             </Link>
+          ) : p.name === "AI Learning Center" ? (
+            <Link 
+              to="/learning"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
           ) : (
             <button className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5">
               {p.cta}
