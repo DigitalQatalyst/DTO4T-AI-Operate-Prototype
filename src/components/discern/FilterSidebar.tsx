@@ -52,6 +52,26 @@ const tabFilters: Record<string, Record<string, string[]>> = {
     'Trend Type':['Market', 'Tech', 'Regulation', 'Competitive'],
     Horizon:     ['Now', '6–12m', '12–24m'],
   },
+  'governance-models': {
+    'Framework Type': ['Operating Model', 'Decision Authority', 'Ownership Matrix', 'RACI'],
+    'Maturity Level': ['Basic', 'Intermediate', 'Advanced'],
+    'Implementation': ['Template', 'Guide', 'Policy'],
+  },
+  'lifecycle-standards': {
+    'Lifecycle Stage': ['Intake', 'Build', 'Release', 'Monitor', 'Retire'],
+    'Gate Type': ['Quality', 'Security', 'Compliance', 'Business'],
+    'Standard Type': ['Process', 'Checklist', 'Template'],
+  },
+  'accountability-frameworks': {
+    'Framework Focus': ['Roles', 'Approvals', 'Escalation', 'Accountability'],
+    'Organizational Level': ['Team', 'Department', 'Enterprise'],
+    'Decision Type': ['Technical', 'Business', 'Risk'],
+  },
+  'responsible-ai-policies': {
+    'Policy Area': ['Risk Management', 'Transparency', 'Compliance', 'Ethics'],
+    'Regulation': ['NIST', 'EU AI Act', 'Internal', 'Industry'],
+    'Control Type': ['Preventive', 'Detective', 'Corrective'],
+  },
 };
 
 // Animated collapsible section

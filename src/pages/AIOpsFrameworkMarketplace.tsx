@@ -7,7 +7,6 @@ import FilterSidebar from '@/components/discern/FilterSidebar';
 import SearchBar from '@/components/discern/SearchBar';
 import CardGrid from '@/components/discern/CardGrid';
 import Breadcrumb from '@/components/discern/Breadcrumb';
-
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { SlidersHorizontal } from 'lucide-react';
@@ -15,87 +14,59 @@ import { SlidersHorizontal } from 'lucide-react';
 const AIOpsFrameworkMarketplace = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filteredItems, setFilteredItems] = useState<MarketplaceItem[]>(mockItems);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const activeTab = searchParams.get('tab') || tabs[0].id;
-  const searchQuery = searchParams.get('search') || '';
+  const activeTab   = searchParams.get('tab')  || 'governance-models';
+  const searchQuery = searchParams.get('q')    || '';
+  const sortBy      = searchParams.get('sort') || 'recent';
+
+  const searchPlaceholders: Record<string, string> = {
+    'governance-models':      'Search governance models… e.g., decision authority, ownership',
+    'lifecycle-standards':    'Search lifecycle standards… e.g., intake, build, release',
+    'accountability-frameworks': 'Search accountability frameworks… e.g., roles, approvals',
+    'responsible-ai-policies': 'Search responsible AI policies… e.g., risk, transparency',
+  };
+
+  const autoRefreshTabs = ['governance-models', 'lifecycle-standards', 'accountability-frameworks', 'responsible-ai-policies'];
 
   useEffect(() => {
-    let filtered = mockItems;
+    let items = [...mockItems];
+    const currentTab = tabs.find(t => t.id === activeTab);
+    if (currentTab) items = items.filter(i => i.type === currentTab.type);
 
-    // Filter by active tab
-    const activeTabConfig = tabs.find(t => t.id === activeTab);
-    if (activeTabConfig) {
-      filtered = filtered.filter(item => item.type === activeTabConfig.type);
-    }
-
-    // Filter by search query
     if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(item =>
-        item.title.toLowerCase().includes(query) ||
-        item.summary.toLowerCase().includes(query) ||
-        item.tags.some(tag => tag.toLowerCase().includes(query))
+      const q = searchQuery.toLowerCase();
+      items = items.filter(i =>
+        i.title.toLowerCase().includes(q) ||
+        i.summary.toLowerCase().includes(q) ||
+        i.tags.some(t => t.toLowerCase().includes(q))
       );
     }
 
-    // Apply other filters from URL params
-    const topicFilter = searchParams.get('topic');
-    if (topicFilter) {
-      const topics = topicFilter.split(',');
-      filtered = filtered.filter(item =>
-        topics.some(topic => item.topic.includes(topic))
-      );
-    }
+    const topicFilter  = searchParams.get('topic')?.split(',').filter(Boolean)  || [];
+    const roleFilter   = searchParams.get('role')?.split(',').filter(Boolean)   || [];
+    const sourceFilter = searchParams.get('source')?.split(',').filter(Boolean) || [];
 
-    const audienceFilter = searchParams.get('audience');
-    if (audienceFilter) {
-      const audiences = audienceFilter.split(',');
-      filtered = filtered.filter(item =>
-        audiences.some(audience => item.audience.includes(audience))
-      );
-    }
+    if (topicFilter.length)  items = items.filter(i => i.topic.some(t => topicFilter.includes(t.toLowerCase())));
+    if (roleFilter.length)   items = items.filter(i => i.audience.some(a => roleFilter.includes(a.toLowerCase())));
+    if (sourceFilter.length) items = items.filter(i => sourceFilter.includes(i.source.toLowerCase()));
 
-    setFilteredItems(filtered);
-  }, [searchParams, activeTab, searchQuery]);
+    if (sortBy === 'recent') items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-  const handleTabChange = (tabId: string) => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('tab', tabId);
-    setSearchParams(newParams);
-  };
+    setFilteredItems(items);
+  }, [searchParams]);
 
-  const handleSearch = (query: string) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (query) {
-      newParams.set('search', query);
-    } else {
-      newParams.delete('search');
-    }
-    setSearchParams(newParams);
-  };
-
-  const handleFilterChange = (filterType: string, values: string[]) => {
-    const newParams = new URLSearchParams(searchParams);
-    if (values.length > 0) {
-      newParams.set(filterType, values.join(','));
-    } else {
-      newParams.delete(filterType);
-    }
-    setSearchParams(newParams);
-  };
-
-  // Responsive padding
-  const px = 'px-4 sm:px-6 lg:px-8';
+  // shared horizontal padding — matches reference left edge
+  const px = 'px-16';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
       <NavBar />
-      
-      <div className="pt-16">
+      <div className="min-h-screen bg-white pt-16">
+
         {/* Breadcrumb */}
-        <div className={`${px} py-3 border-b border-gray-200 bg-white`}>
-          <div className="flex items-center text-sm text-gray-500">
+        <div className="bg-gray-50 border-b border-gray-100">
+          <div className={`${px} py-2.5`}>
             <Breadcrumb pageName="AIOps Framework Library" />
           </div>
         </div>
@@ -106,69 +77,67 @@ const AIOpsFrameworkMarketplace = () => {
           <p className="mt-1 text-sm text-gray-500">
             Define the rules that make AI governable at enterprise scale. Governance models, lifecycle standards, accountability frameworks, and responsible AI policies.
           </p>
-          
-          <div className="mt-6">
+          <div className="mt-4">
             <TabNavigation
               tabs={tabs}
               activeTab={activeTab}
-              onTabChange={handleTabChange}
+              onTabChange={(id) => setSearchParams({ tab: id })}
             />
           </div>
         </div>
 
-        {/* Search + Filter Toggle */}
-        <div className={`${px} pt-4 pb-6 bg-white border-b border-gray-200`}>
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <div className="flex-1 max-w-md">
-              <SearchBar
-                value={searchQuery}
-                onChange={handleSearch}
-                placeholder="Search frameworks and policies..."
+        {/* Description + Search boxes */}
+        <div className={`${px} py-4 space-y-3`}>
+          <div className="border border-gray-200 rounded-md bg-gray-50 px-4 py-3">
+            <p className="text-sm text-gray-600">
+              {tabs.find(t => t.id === activeTab)?.description}
+            </p>
+          </div>
+          <div className="border border-gray-200 rounded-md bg-white">
+            <SearchBar
+              value={searchQuery}
+              onChange={(v) => {
+                const p = new URLSearchParams(searchParams);
+                v ? p.set('q', v) : p.delete('q');
+                setSearchParams(p);
+              }}
+              placeholder={searchPlaceholders[activeTab] || 'Search...'}
+            />
+          </div>
+        </div>
+
+        {/* Sidebar + Cards */}
+        <div className={`${px} pb-10`}>
+          <div className="flex gap-6">
+
+            {/* Filter sidebar */}
+            <aside className="hidden lg:block w-44 flex-shrink-0">
+              <FilterSidebar
+                activeTab={activeTab}
+                searchParams={searchParams}
+                onFilterChange={setSearchParams}
               />
-            </div>
-            
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </button>
-          </div>
-        </div>
+            </aside>
 
-        {/* Main content area */}
-        <div className="flex">
-          {/* Sidebar */}
-          <div className={`
-            ${sidebarOpen ? 'block' : 'hidden'} lg:block
-            w-full lg:w-64 bg-white border-r border-gray-200
-            ${sidebarOpen ? 'fixed inset-y-0 left-0 z-40 pt-16' : ''}
-          `}>
-            <FilterSidebar
-              searchParams={searchParams}
-              onFilterChange={handleFilterChange}
-              onClose={() => setSidebarOpen(false)}
-            />
-          </div>
-
-          {/* Overlay for mobile */}
-          {sidebarOpen && (
-            <div
-              className="lg:hidden fixed inset-0 bg-black bg-opacity-25 z-30"
-              onClick={() => setSidebarOpen(false)}
-            />
-          )}
-
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className={`${px} py-6`}>
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-sm text-gray-500">
-                  {filteredItems.length} framework{filteredItems.length !== 1 ? 's' : ''} available
-                </p>
-                <div className="text-xs text-gray-400">
-                  Auto-refresh: <span className="text-blue-600 font-medium">Live</span>
+            {/* Card area */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-medium text-gray-700">
+                  Available Items ({filteredItems.length})
+                </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsFilterOpen(true)}
+                    className="lg:hidden flex items-center gap-1.5 text-sm border border-gray-300 rounded px-3 py-1.5 hover:bg-gray-50"
+                  >
+                    <SlidersHorizontal className="h-4 w-4" />
+                    Filters
+                  </button>
+                  {autoRefreshTabs.includes(activeTab) && (
+                    <span className="text-sm text-gray-500">
+                      Auto-refresh · <span className="text-green-600 font-medium">Live</span>
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -176,10 +145,28 @@ const AIOpsFrameworkMarketplace = () => {
             </div>
           </div>
         </div>
-      </div>
 
+        {/* Mobile filter overlay */}
+        {isFilterOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <div className="absolute inset-0 bg-black/40" onClick={() => setIsFilterOpen(false)} />
+            <div className="absolute right-0 top-0 bottom-0 w-72 bg-white shadow-xl overflow-y-auto p-5">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-base font-semibold">Filters</h2>
+                <button onClick={() => setIsFilterOpen(false)} className="text-gray-400 hover:text-gray-600 text-lg">✕</button>
+              </div>
+              <FilterSidebar
+                activeTab={activeTab}
+                searchParams={searchParams}
+                onFilterChange={(p) => { setSearchParams(p); setIsFilterOpen(false); }}
+              />
+            </div>
+          </div>
+        )}
+
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
