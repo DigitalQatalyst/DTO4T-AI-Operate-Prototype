@@ -88,63 +88,60 @@ const FilterSection = ({
   searchParams: URLSearchParams;
   onToggle: (key: string, val: string) => void;
 }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const toggle = () => {
-    const el = contentRef.current;
-    if (!el) return;
-    if (open) {
-      // collapse: set explicit px height first, then animate to 0
-      el.style.height = `${el.scrollHeight}px`;
-      requestAnimationFrame(() => {
-        el.style.height = '0px';
-      });
-    } else {
-      // expand: animate to scrollHeight, then clear to auto
-      el.style.height = `${el.scrollHeight}px`;
-      el.addEventListener('transitionend', () => {
-        el.style.height = 'auto';
-      }, { once: true });
-    }
     setOpen(!open);
   };
 
   const active = searchParams.get(filterKey)?.split(',') || [];
 
   return (
-    <div className="border-b border-gray-100 py-3">
+    <div className="border-b border-gray-100 py-2">
       <button
         onClick={toggle}
-        className="flex items-center justify-between w-full text-left"
+        className="flex items-center justify-between w-full text-left hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 p-1.5 rounded-lg -mx-1.5"
+        style={{ letterSpacing: '0.3px' }}
       >
-        <span className="text-sm font-semibold text-gray-800">{title}</span>
+        <span 
+          className="font-semibold text-gray-800"
+          style={{
+            fontSize: '13px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.3px'
+          }}
+        >
+          {title}
+        </span>
         <ChevronDown
-          className="h-4 w-4 text-gray-400 transition-transform duration-200"
-          style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          className={`h-3 w-3 text-gray-400 transition-transform duration-200 ${
+            open ? 'rotate-180' : 'rotate-0'
+          }`}
         />
       </button>
 
-      <div
-        ref={contentRef}
-        style={{ overflow: 'hidden', transition: 'height 0.22s ease' }}
-      >
-        <div className="pt-2.5 space-y-2">
+      {open && (
+        <div className="pt-2 space-y-2 animate-in slide-in-from-top-1 duration-200">
           {options.map((opt) => (
-            <label key={opt} className="flex items-center gap-2 cursor-pointer group">
+            <label 
+              key={opt} 
+              className="flex items-center gap-2 cursor-pointer group hover:bg-gray-50 p-1.5 rounded-lg transition-all duration-200"
+              style={{ letterSpacing: '0.3px' }}
+            >
               <input
                 type="checkbox"
                 checked={active.includes(opt.toLowerCase())}
                 onChange={() => onToggle(filterKey, opt)}
-                className="rounded border-gray-300 text-[#0f1f5c] focus:ring-[#0f1f5c] h-3.5 w-3.5"
+                className="rounded border-gray-300 text-[#0f1f5c] focus:ring-[#0f1f5c] h-3 w-3 transition-colors"
               />
-              <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
+              <span className="text-xs text-gray-600 group-hover:text-gray-900 transition-colors">
                 {opt}
               </span>
             </label>
           ))}
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -175,11 +172,39 @@ const FilterSidebar = ({ activeTab, searchParams, onFilterChange }: FilterSideba
   const specific = tabFilters[activeTab] || {};
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-sm font-bold text-gray-900">Filters</span>
+    <div 
+      className="rounded-xl bg-white shadow-lg border border-gray-100"
+      style={{
+        fontFamily: 'Inter, -apple-system, system-ui, "Segoe UI", sans-serif',
+        fontSize: '14px',
+        lineHeight: '20px',
+        letterSpacing: '0.3px',
+        color: '#000000',
+        backgroundColor: '#FFFFFF',
+        padding: '16px',
+        margin: '0px',
+        width: '280px',
+        height: '400px',
+        overflow: 'auto'
+      }}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span 
+          className="font-bold text-gray-900"
+          style={{
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.3px'
+          }}
+        >
+          Filters
+        </span>
         {hasActiveFilters && (
-          <button onClick={clearAll} className="text-xs text-blue-600 hover:underline">
+          <button 
+            onClick={clearAll} 
+            className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+            style={{ letterSpacing: '0.3px' }}
+          >
             Clear all
           </button>
         )}

@@ -21,14 +21,14 @@ const DiscernMarketplace = () => {
   const sortBy      = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'enterprise-updates':      'Search announcements and updates… e.g., townhall, product update',
-    'model-briefings':         'Search model briefings… e.g., GPT-5, Claude 3',
-    'regulatory-alerts':       'Search regulatory alerts… e.g., EU AI Act, disclosure',
-    'risk-advisories':         'Search risk advisories… e.g., privacy, restricted tools',
-    'transformation-insights': 'Search insights… e.g., adoption, governance',
-    'dco-briefs':              'Search DCO briefs… e.g., decision quality, man+machine',
-    'use-cases':               'Search use cases… e.g., HR, finance, agent',
-    'industry-analysis':       'Search industry analysis… e.g., finance, public sector',
+    'enterprise-updates':      'Search enterprise updates… e.g., platform updates, tool releases, announcements',
+    'model-releases':          'Search model briefings… e.g., GPT-4, Claude 3, model recommendations',
+    'regulatory-alerts':       'Search regulatory alerts… e.g., EU AI Act, compliance, policy changes',
+    'risk-advisories':         'Search risk advisories… e.g., security alerts, privacy risks, mitigation',
+    'transformation-insights': 'Search transformation insights… e.g., adoption strategy, governance, change',
+    'dco-briefs':              'Search DCO briefs… e.g., decision quality, man+machine, collaboration',
+    'use-cases':               'Search use cases… e.g., HR automation, finance AI, agent patterns',
+    'industry-analysis':       'Search industry analysis… e.g., public sector, market trends, competitive',
   };
 
   const autoRefreshTabs = ['enterprise-updates', 'model-briefings', 'regulatory-alerts', 'risk-advisories'];
@@ -92,7 +92,17 @@ const DiscernMarketplace = () => {
 
         {/* Description + Search boxes */}
         <div className={`${px} py-4 space-y-3`}>
-          <div className="border border-gray-200 rounded-md bg-gray-50 px-4 py-3">
+          <div 
+            className="bg-white rounded-lg border border-gray-200 px-4 py-3"
+            style={{
+              fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif',
+              fontSize: '16px',
+              lineHeight: '24px',
+              color: '#000000',
+              backgroundColor: '#FFFFFF',
+              padding: '12px 16px'
+            }}
+          >
             <p className="text-sm text-gray-600">
               {tabs.find(t => t.id === activeTab)?.description}
             </p>
@@ -112,10 +122,10 @@ const DiscernMarketplace = () => {
 
         {/* Sidebar + Cards */}
         <div className={`${px} pb-10`}>
-          <div className="flex gap-6">
+          <div className="flex gap-6 items-start">
 
             {/* Filter sidebar */}
-            <aside className="hidden lg:block w-44 flex-shrink-0">
+            <aside className="hidden lg:block flex-shrink-0" style={{ width: '280px' }}>
               <FilterSidebar
                 activeTab={activeTab}
                 searchParams={searchParams}
@@ -124,7 +134,7 @@ const DiscernMarketplace = () => {
             </aside>
 
             {/* Card area */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 max-w-full">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-medium text-gray-700">
                   Available Items ({filteredItems.length})

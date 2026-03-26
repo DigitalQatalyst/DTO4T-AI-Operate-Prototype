@@ -21,10 +21,10 @@ const AIOpsFrameworkMarketplace = () => {
   const sortBy      = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'governance-models':      'Search governance models… e.g., decision authority, ownership',
-    'lifecycle-standards':    'Search lifecycle standards… e.g., intake, build, release',
-    'accountability-frameworks': 'Search accountability frameworks… e.g., roles, approvals',
-    'responsible-ai-policies': 'Search responsible AI policies… e.g., risk, transparency',
+    'governance-models':      'Search governance models… e.g., operating model, decision authority, RACI',
+    'lifecycle-standards':    'Search lifecycle standards… e.g., intake gates, build process, release criteria',
+    'accountability-frameworks': 'Search accountability frameworks… e.g., roles matrix, approval workflows, escalation',
+    'responsible-ai-policies': 'Search responsible AI policies… e.g., risk controls, transparency, compliance frameworks',
   };
 
   const autoRefreshTabs = ['governance-models', 'lifecycle-standards', 'accountability-frameworks', 'responsible-ai-policies'];
@@ -88,7 +88,17 @@ const AIOpsFrameworkMarketplace = () => {
 
         {/* Description + Search boxes */}
         <div className={`${px} py-4 space-y-3`}>
-          <div className="border border-gray-200 rounded-md bg-gray-50 px-4 py-3">
+          <div 
+            className="bg-white rounded-lg border border-gray-200 px-4 py-3"
+            style={{
+              fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif',
+              fontSize: '16px',
+              lineHeight: '24px',
+              color: '#000000',
+              backgroundColor: '#FFFFFF',
+              padding: '12px 16px'
+            }}
+          >
             <p className="text-sm text-gray-600">
               {tabs.find(t => t.id === activeTab)?.description}
             </p>
@@ -108,10 +118,10 @@ const AIOpsFrameworkMarketplace = () => {
 
         {/* Sidebar + Cards */}
         <div className={`${px} pb-10`}>
-          <div className="flex gap-6">
+          <div className="flex gap-6 items-start">
 
             {/* Filter sidebar */}
-            <aside className="hidden lg:block w-44 flex-shrink-0">
+            <aside className="hidden lg:block flex-shrink-0" style={{ width: '280px' }}>
               <FilterSidebar
                 activeTab={activeTab}
                 searchParams={searchParams}
@@ -120,7 +130,7 @@ const AIOpsFrameworkMarketplace = () => {
             </aside>
 
             {/* Card area */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 max-w-full">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm font-medium text-gray-700">
                   Available Items ({filteredItems.length})

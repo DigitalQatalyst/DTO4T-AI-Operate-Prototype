@@ -22,13 +22,44 @@ const ContentCard = ({ item }: ContentCardProps) => {
     new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
   return (
-    <div className="w-full max-w-[492px] min-h-[820px] max-h-[880px] bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col p-5">
+    <div 
+      className="w-full max-w-[360px] min-h-[420px] max-h-[460px] bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
+      style={{
+        fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+        fontSize: '14px',
+        lineHeight: '20px',
+        letterSpacing: 'normal',
+        wordSpacing: '0px',
+        fontWeight: '400',
+        fontStyle: 'normal',
+        textDecoration: 'none',
+        textAlign: 'start',
+        padding: '16px',
+        margin: '0px'
+      }}
+    >
       {/* Thumbnail / hero image */}
-      <div className="relative w-full h-[404px] bg-gradient-to-br from-[#0f1f5c] to-[#1a3a8f] rounded-[14px] flex items-center justify-center overflow-hidden mb-4">
+      <div className="relative w-full h-[200px] bg-gradient-to-br from-[#0f1f5c] to-[#1a3a8f] rounded-[12px] flex items-center justify-center overflow-hidden mb-3">
         {/* Type pill top-left */}
-        <div className="absolute top-3 left-3 h-6 flex items-center gap-1.5 bg-white/90 rounded-full px-2.5 py-1.5">
+        <div 
+          className="absolute top-3 left-3 h-6 flex items-center gap-1.5 bg-white/90 rounded-full px-2.5 py-1.5"
+          style={{
+            fontFamily: 'inherit'
+          }}
+        >
           <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
-          <span className="text-xs font-semibold text-gray-800">{cfg.label}</span>
+          <span 
+            className="text-xs font-semibold text-gray-800"
+            style={{
+              fontFamily: 'inherit',
+              fontSize: '12px',
+              lineHeight: '16px',
+              fontWeight: '600',
+              letterSpacing: 'normal'
+            }}
+          >
+            {cfg.label}
+          </span>
         </div>
         {/* Logo top-right */}
         <div className="absolute top-3 right-3 bg-white/10 rounded px-2 py-1">
@@ -45,31 +76,76 @@ const ContentCard = ({ item }: ContentCardProps) => {
       </div>
 
       {/* Content block */}
-      <div className="flex flex-col flex-1 max-w-[357px]">
+      <div className="flex flex-col flex-1 max-w-full">
         {/* Title */}
-        <h4 className="text-2xl font-bold text-gray-900 mb-1.5 line-clamp-2 leading-tight">
+        <h4 
+          className="text-lg font-bold text-gray-900 mb-1 line-clamp-2 leading-tight"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '16px',
+            lineHeight: '22px',
+            fontWeight: '700',
+            letterSpacing: 'normal'
+          }}
+        >
           {item.title}
         </h4>
 
         {/* Owner/provider line */}
-        <p className="text-sm font-medium text-gray-600 mb-3.5">
+        <p 
+          className="text-xs font-medium text-gray-600 mb-2"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '12px',
+            lineHeight: '16px',
+            fontWeight: '500',
+            letterSpacing: 'normal'
+          }}
+        >
           {item.source}
         </p>
 
         {/* Summary */}
-        <p className="text-base text-gray-700 line-clamp-3 mb-4.5 flex-1">
+        <p 
+          className="text-sm text-gray-700 line-clamp-2 mb-2 flex-1"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '13px',
+            lineHeight: '18px',
+            fontWeight: '400',
+            letterSpacing: 'normal'
+          }}
+        >
           {item.summary}
         </p>
 
         {/* Meta row */}
-        <div className="flex items-center gap-3.5 text-sm font-medium text-gray-600 mb-4.5">
+        <div 
+          className="flex items-center gap-2 text-xs font-medium text-gray-600 mb-2"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '11px',
+            lineHeight: '16px',
+            fontWeight: '400',
+            letterSpacing: 'normal'
+          }}
+        >
           <span>{cfg.label}</span>
           <span>·</span>
           <span>{formatDate(item.publishedAt)}</span>
         </div>
 
         {/* Primary CTA button */}
-        <button className="w-full h-14 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-base font-semibold rounded-[14px] transition-colors mt-auto">
+        <button 
+          className="w-full h-10 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-semibold rounded-lg transition-colors mt-auto"
+          style={{
+            fontFamily: 'inherit',
+            fontSize: '12px',
+            lineHeight: '16px',
+            fontWeight: '600',
+            letterSpacing: 'normal'
+          }}
+        >
           View Details
         </button>
       </div>
