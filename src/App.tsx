@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import KnowledgeCenter from "./pages/KnowledgeCenter";
 import DiscernMarketplace from "./pages/DiscernMarketplace";
 import AIOpsFrameworkMarketplace from "./pages/AIOpsFrameworkMarketplace";
 
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/discern" element={<DiscernMarketplace />} />
           <Route path="/aiops-framework" element={<AIOpsFrameworkMarketplace />} />
+          <Route path="/knowledge" element={<KnowledgeCenter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
