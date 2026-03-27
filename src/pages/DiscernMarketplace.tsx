@@ -1,183 +1,254 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { tabs, mockItems } from '@/data/discernMarketplace';
-import { MarketplaceItem } from '@/types/marketplace';
-import TabNavigation from '@/components/discern/TabNavigation';
-import FilterSidebar from '@/components/discern/FilterSidebar';
-import SearchBar from '@/components/discern/SearchBar';
-import CardGrid from '@/components/discern/CardGrid';
-import Breadcrumb from '@/components/discern/Breadcrumb';
+import { useState, useMemo, useEffect } from 'react';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import { SlidersHorizontal } from 'lucide-react';
+import { InsightCard } from '@/components/aihub/InsightCard';
+import { AHTabNavigation } from '@/components/aihub/AHTabNavigation';
+import { AHSearchBar } from '@/components/aihub/AHSearchBar';
+import { AHFilterSidebar } from '@/components/aihub/AHFilterSidebar';
+import { AHSortDropdown } from '@/components/aihub/AHSortDropdown';
+import { AHPagination } from '@/components/aihub/AHPagination';
+import { TABS, GLOBAL_FILTERS, SEED_DATA, TabSlug, SortOption, FilterGroup } from '@/data/aiHubData';
+import { Home, ChevronRight, SlidersHorizontal, FilterX } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const PAGE_SIZE = 6;
+const REF_DATE = new Date('2026-03-27');
+
+const SEV_ORDER: Record<string, number> = { Critical: 0, High: 1, Normal: 2 };
+
+function dateInRange(dateStr: string, range: string): boolean {
+  const d = new Date(dateStr);
+  const diff = Math.floor((REF_DATE.getTime() - d.getTime()) / 86400000);
+  if (range === 'Last 7 days') return diff <= 7;
+  if (range === 'Last 30 days') return diff <= 30;
+  if (range === 'Last 90 days') return diff <= 90;
+  if (range === 'This year') return d.getFullYear() === 2026;
+  return true;
+}
 
 const DiscernMarketplace = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [filteredItems, setFilteredItems] = useState<MarketplaceItem[]>(mockItems);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  // ── URL state init ──────────────────────────────────────────────────────
+  const getParam = (key: string) => new URLSearchParams(window.location.search).get(key) ?? '';
 
-  const activeTab   = searchParams.get('tab')  || 'enterprise-updates';
-  const searchQuery = searchParams.get('q')    || '';
-  const sortBy      = searchParams.get('sort') || 'recent';
+  const [activeTab, setActiveTab] = useState<TabSlug>((getParam('tab') as TabSlug) || 'enterprise-ai-updates');
+  const [search, setSearch] = useState(getParam('q'));
+  const [sort, setSort] = useState<SortOption>((getParam('sort') as SortOption) || 'recent');
+  const [page, setPage] = useState(parseInt(getParam('page') || '1', 10));
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const searchPlaceholders: Record<string, string> = {
-    'enterprise-updates':      'Search enterprise updates… e.g., platform updates, tool releases, announcements',
-    'model-releases':          'Search model briefings… e.g., GPT-4, Claude 3, model recommendations',
-    'regulatory-alerts':       'Search regulatory alerts… e.g., EU AI Act, compliance, policy changes',
-    'risk-advisories':         'Search risk advisories… e.g., security alerts, privacy risks, mitigation',
-    'transformation-insights': 'Search transformation insights… e.g., adoption strategy, governance, change',
-    'dco-briefs':              'Search DCO briefs… e.g., decision quality, man+machine, collaboration',
-    'use-cases':               'Search use cases… e.g., HR automation, finance AI, agent patterns',
-    'industry-analysis':       'Search industry analysis… e.g., public sector, market trends, competitive',
+  const tabCfg = TABS.find(t => t.slug === activeTab)!;
+  const filterGroups: FilterGroup[] = [...GLOBAL_FILTERS, ...tabCfg.filters];
+
+  // Build initial selected filters from URL
+  const initFilters = (): Record<string, string[]> => {
+    const params = new URLSearchParams(window.location.search);
+    const result: Record<string, string[]> = {};
+    filterGroups.forEach(g => {
+      const v = params.get(g.id);
+      if (v) result[g.id] = v.split(',');
+    });
+    return result;
+  };
+  const [selected, setSelected] = useState<Record<string, string[]>>(initFilters);
+
+  // ── Sync URL ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const params = new URLSearchParams();
+    params.set('tab', activeTab);
+    if (search) params.set('q', search);
+    if (sort !== 'recent') params.set('sort', sort);
+    if (page > 1) params.set('page', String(page));
+    Object.entries(selected).forEach(([k, v]) => { if (v.length) params.set(k, v.join(',')); });
+    window.history.replaceState(null, '', `?${params.toString()}`);
+  }, [activeTab, search, sort, page, selected]);
+
+  // ── Tab switch resets everything ────────────────────────────────────────
+  const handleTabChange = (slug: string) => {
+    setActiveTab(slug as TabSlug);
+    setSearch('');
+    setSelected({});
+    setSort('recent');
+    setPage(1);
   };
 
-  const autoRefreshTabs = ['enterprise-updates', 'model-briefings', 'regulatory-alerts', 'risk-advisories'];
+  // ── Filter toggle ───────────────────────────────────────────────────────
+  const handleFilterChange = (groupId: string, value: string) => {
+    setSelected(prev => {
+      const cur = prev[groupId] || [];
+      return {
+        ...prev,
+        [groupId]: cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value],
+      };
+    });
+    setPage(1);
+  };
 
-  useEffect(() => {
-    let items = [...mockItems];
-    const currentTab = tabs.find(t => t.id === activeTab);
-    if (currentTab) items = items.filter(i => i.type === currentTab.type);
+  const clearAll = () => { setSelected({}); setPage(1); };
 
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
+  // ── Filtered + sorted items ─────────────────────────────────────────────
+  const processed = useMemo(() => {
+    let items = SEED_DATA.filter(i => i.tab === activeTab);
+
+    // Search
+    if (search.trim()) {
+      const q = search.toLowerCase();
       items = items.filter(i =>
         i.title.toLowerCase().includes(q) ||
         i.summary.toLowerCase().includes(q) ||
-        i.tags.some(t => t.toLowerCase().includes(q))
+        i.tags.some(t => t.toLowerCase().includes(q)) ||
+        i.owner.toLowerCase().includes(q) ||
+        i.source.toLowerCase().includes(q)
       );
     }
 
-    const topicFilter  = searchParams.get('topic')?.split(',').filter(Boolean)  || [];
-    const roleFilter   = searchParams.get('role')?.split(',').filter(Boolean)   || [];
-    const sourceFilter = searchParams.get('source')?.split(',').filter(Boolean) || [];
+    // Checkbox filters — OR within group, AND across groups
+    Object.entries(selected).forEach(([groupId, vals]) => {
+      if (!vals.length) return;
+      if (groupId === 'Date') {
+        items = items.filter(i => vals.some(v => dateInRange(i.date, v)));
+      } else {
+        items = items.filter(i => {
+          const field = i[groupId];
+          if (Array.isArray(field)) return (field as string[]).some(f => vals.includes(f));
+          return vals.includes(field as string);
+        });
+      }
+    });
 
-    if (topicFilter.length)  items = items.filter(i => i.topic.some(t => topicFilter.includes(t.toLowerCase())));
-    if (roleFilter.length)   items = items.filter(i => i.audience.some(a => roleFilter.includes(a.toLowerCase())));
-    if (sourceFilter.length) items = items.filter(i => sourceFilter.includes(i.source.toLowerCase()));
+    // Sort
+    if (sort === 'recent') {
+      items = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (sort === 'severity') {
+      items = [...items].sort((a, b) => (SEV_ORDER[a.Severity as string] ?? 9) - (SEV_ORDER[b.Severity as string] ?? 9));
+    } else if (sort === 'recommended') {
+      items = [...items].sort((a, b) => a.title.length - b.title.length);
+    }
 
-    if (sortBy === 'recent') items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    return items;
+  }, [activeTab, search, selected, sort]);
 
-    setFilteredItems(items);
-  }, [searchParams]);
+  const totalPages = Math.ceil(processed.length / PAGE_SIZE);
+  const paged = processed.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  // shared horizontal padding — matches reference left edge
-  const px = 'px-16';
+  // Sort options per tab
+  const sortOptions = useMemo(() => {
+    const base = [{ value: 'recent' as SortOption, label: 'Most Recent' }];
+    if (['ai-transformation-insights', 'dco-intelligence-briefs'].includes(activeTab))
+      base.push({ value: 'recommended', label: 'Recommended' });
+    if (['risk-advisories', 'regulatory-alerts'].includes(activeTab))
+      base.push({ value: 'severity', label: 'Highest Severity' });
+    return base;
+  }, [activeTab]);
+
+  const totalActive = Object.values(selected).reduce((s, v) => s + v.length, 0);
 
   return (
     <>
       <NavBar />
-      <div className="min-h-screen bg-white pt-16">
+      <div className="min-h-screen pt-16" style={{ background: '#fafafa' }}>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
 
-        {/* Breadcrumb */}
-        <div className="bg-gray-50 border-b border-gray-100">
-          <div className={`${px} py-2.5`}>
-            <Breadcrumb pageName="AI Updates & Insights Center" />
-          </div>
-        </div>
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-1.5 text-sm text-gray-500 py-4 overflow-x-auto scrollbar-none">
+            <Home className="h-3.5 w-3.5 flex-shrink-0" />
+            <Link to="/" className="hover:text-gray-800 transition-colors whitespace-nowrap">Home</Link>
+            <ChevronRight className="h-3.5 w-3.5 flex-shrink-0 text-gray-300" />
+            <span className="whitespace-nowrap hover:text-gray-800 cursor-pointer">DIA AI Hub</span>
+            <ChevronRight className="h-3.5 w-3.5 flex-shrink-0 text-gray-300" />
+            <span className="whitespace-nowrap hover:text-gray-800 cursor-pointer">Discern</span>
+            <ChevronRight className="h-3.5 w-3.5 flex-shrink-0 text-gray-300" />
+            <span className="whitespace-nowrap font-semibold text-gray-900">AI Updates & Insights Center</span>
+          </nav>
 
-        {/* Page title + subtitle + tabs */}
-        <div className={`${px} pt-5 pb-0`}>
-          <h1 className="text-2xl font-bold text-gray-900">AI Updates & Insights Center</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Your starting point for AI updates, decision briefs, and insights—what changed, why it matters, and actions teams should take.
-          </p>
-          <div className="mt-4">
-            <TabNavigation
-              tabs={tabs}
-              activeTab={activeTab}
-              onTabChange={(id) => setSearchParams({ tab: id })}
-            />
-          </div>
-        </div>
-
-        {/* Description + Search boxes */}
-        <div className={`${px} py-4 space-y-3`}>
-          <div 
-            className="bg-white rounded-lg border border-gray-200 px-4 py-3"
-            style={{
-              fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif',
-              fontSize: '16px',
-              lineHeight: '24px',
-              color: '#000000',
-              backgroundColor: '#FFFFFF',
-              padding: '12px 16px'
-            }}
-          >
-            <p className="text-sm text-gray-600">
-              {tabs.find(t => t.id === activeTab)?.description}
+          {/* Page header */}
+          <div className="mb-5">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-2">
+              AI Updates & Insights Center
+            </h1>
+            <p className="text-base text-gray-600 max-w-3xl">
+              A governed feed of AI updates and decision briefs—what changed, why it matters, and actions teams should take.
             </p>
           </div>
-          <div className="border border-gray-200 rounded-md bg-white">
-            <SearchBar
-              value={searchQuery}
-              onChange={(v) => {
-                const p = new URLSearchParams(searchParams);
-                v ? p.set('q', v) : p.delete('q');
-                setSearchParams(p);
-              }}
-              placeholder={searchPlaceholders[activeTab] || 'Search...'}
+
+          {/* Tabs */}
+          <div className="mb-5">
+            <AHTabNavigation tabs={TABS} activeTab={activeTab} onTabChange={handleTabChange} />
+          </div>
+
+          {/* Info strip */}
+          <div className="bg-white border border-gray-200 rounded-xl px-5 py-4 mb-5 shadow-sm">
+            <p className="text-sm text-gray-500">{tabCfg.overview}</p>
+          </div>
+
+          {/* Search */}
+          <div className="mb-6">
+            <AHSearchBar
+              value={search}
+              onChange={v => { setSearch(v); setPage(1); }}
+              placeholder={tabCfg.searchPlaceholder}
             />
           </div>
-        </div>
 
-        {/* Sidebar + Cards */}
-        <div className={`${px} pb-10`}>
-          <div className="flex gap-6 items-start">
+          {/* Two-column layout */}
+          <div className="flex gap-6 items-start pb-12">
 
-            {/* Filter sidebar */}
-            <aside className="hidden lg:block flex-shrink-0" style={{ width: '280px' }}>
-              <FilterSidebar
-                activeTab={activeTab}
-                searchParams={searchParams}
-                onFilterChange={setSearchParams}
+            {/* Sidebar */}
+            <aside className="w-64 flex-shrink-0 sticky top-8">
+              <AHFilterSidebar
+                groups={filterGroups}
+                selected={selected}
+                onChange={handleFilterChange}
+                onClearAll={clearAll}
+                isMobileOpen={mobileOpen}
+                onCloseMobile={() => setMobileOpen(false)}
+                activeTabKey={activeTab}
               />
             </aside>
 
-            {/* Card area */}
-            <div className="flex-1 min-w-0 max-w-full">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-medium text-gray-700">
-                  Available Items ({filteredItems.length})
+            {/* Results */}
+            <div className="flex-1 min-w-0">
+              {/* Results header */}
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+                <span className="text-sm font-bold text-gray-900">
+                  Available Items ({processed.length})
                 </span>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-sm text-gray-500 hidden sm:inline">
+                    Showing {paged.length > 0 ? (page - 1) * PAGE_SIZE + 1 : 0}–{Math.min(page * PAGE_SIZE, processed.length)} of {processed.length} items
+                  </span>
                   <button
-                    onClick={() => setIsFilterOpen(true)}
-                    className="lg:hidden flex items-center gap-1.5 text-sm border border-gray-300 rounded px-3 py-1.5 hover:bg-gray-50"
+                    onClick={() => setMobileOpen(true)}
+                    className="lg:hidden flex items-center gap-1.5 text-sm border border-gray-300 rounded-lg px-3 py-2 bg-white hover:bg-gray-50 transition-colors"
                   >
                     <SlidersHorizontal className="h-4 w-4" />
-                    Filters
+                    Filters {totalActive > 0 && `(${totalActive})`}
                   </button>
-                  {autoRefreshTabs.includes(activeTab) && (
-                    <span className="text-sm text-gray-500">
-                      Auto-refresh · <span className="text-green-600 font-medium">Live</span>
-                    </span>
-                  )}
+                  <AHSortDropdown value={sort} onChange={v => { setSort(v); setPage(1); }} options={sortOptions} />
                 </div>
               </div>
 
-              <CardGrid items={filteredItems} />
+              {/* Grid */}
+              {paged.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {paged.map(item => <InsightCard key={item.id} item={item} />)}
+                </div>
+              ) : (
+                <div className="border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center py-20 text-center">
+                  <FilterX className="h-10 w-10 text-gray-300 mb-3" />
+                  <p className="text-gray-500 mb-3 text-sm">No items found matching your criteria.</p>
+                  <button
+                    onClick={() => { clearAll(); setSearch(''); }}
+                    className="text-sm text-indigo-600 hover:underline"
+                  >
+                    Clear filters
+                  </button>
+                </div>
+              )}
+
+              <AHPagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
             </div>
           </div>
         </div>
-
-        {/* Mobile filter overlay */}
-        {isFilterOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden">
-            <div className="absolute inset-0 bg-black/40" onClick={() => setIsFilterOpen(false)} />
-            <div className="absolute right-0 top-0 bottom-0 w-72 bg-white shadow-xl overflow-y-auto p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-base font-semibold">Filters</h2>
-                <button onClick={() => setIsFilterOpen(false)} className="text-gray-400 hover:text-gray-600 text-lg">✕</button>
-              </div>
-              <FilterSidebar
-                activeTab={activeTab}
-                searchParams={searchParams}
-                onFilterChange={(p) => { setSearchParams(p); setIsFilterOpen(false); }}
-              />
-            </div>
-          </div>
-        )}
-
       </div>
       <Footer />
     </>

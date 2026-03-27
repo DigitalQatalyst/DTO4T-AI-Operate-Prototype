@@ -1,30 +1,27 @@
-export interface LearningItem {
+export interface Course {
   id: string;
-  type: 'foundational' | 'prompt' | 'pathway' | 'governance' | 'tool' | 'advanced' | 'certification' | 'resource';
   title: string;
-  summary: string;
-  contentUrl: string;
-  publishedAt: string;
-  ownerTeam: string;
-  source: 'Internal' | 'External';
-  status: 'Active' | 'Archived';
-  tags: string[];
-  topic: string[];
-  audience: string[];
-  // optional by type
-  role?: string;
-  level?: 'Beginner' | 'Intermediate' | 'Advanced';
-  durationMins?: number;
-  format?: 'Course' | 'Guide' | 'Video' | 'Workshop' | 'Playbook' | 'Reference';
-  pathway?: string;
-  certificationTrack?: string;
-  toolName?: string;
-  completionRate?: number;
+  description: string;
+  duration: string;
+  lessons: number;
+  image?: string;
+  department?: string;
+  category?: string;
+  provider?: string;
+  courseType?: string;
+  rating?: number;
+  location?: string;
+  audience?: string;
 }
 
-export interface LearningTabConfig {
-  id: string;
-  label: string;
-  description: string;
-  type: LearningItem['type'];
+export type LearningTab = 'courses' | 'learning-tracks' | 'reviews';
+
+export interface FilterState {
+  department: string[];
+  category: string[];
+  provider: string[];
+  courseType: string[];
+  rating: string[];
+  location: string[];
+  audience: string[];
 }

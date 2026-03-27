@@ -1,31 +1,37 @@
 import { URLSearchParamsInit } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import { TabId } from '@/types/marketplace';
 
 interface FilterSidebarProps {
-  activeTab: string;
+  activeTab: TabId;
   searchParams: URLSearchParams;
   onFilterChange: (params: URLSearchParamsInit) => void;
 }
 
 const globalFilters: Record<string, string[]> = {
-  Topic:           ['LLM', 'RAG', 'Agents', 'Agentic', 'Governance', 'Security', 'Adoption', 'Tools'],
+  Topic:           ['LLM', 'Prompting', 'RAG', 'Chatbots', 'Agents', 'Agentic', 'Governance', 'Risk', 'Tools'],
   'Role/Audience': ['Employee', 'Manager', 'Leader', 'Developer', 'Risk'],
+  'Owner/Team':    ['DIA.AI', 'Governance', 'Architecture', 'Risk', 'Other'],
+  Source:          ['Internal', 'External'],
   Date:            ['Last 7 days', 'Last 30 days', 'Last 90 days', 'This year'],
+  Status:          ['Approved', 'Archived'],
 };
 
-const tabFilters: Record<string, Record<string, string[]>> = {
-  'enterprise-updates': {
+const tabFilters: Partial<Record<TabId, Record<string, string[]>>> = {
+  'enterprise-ai-updates': {
     'Update Type': ['Announcement', 'Tool Update', 'Platform Update', 'Capability Update'],
     Impact:        ['Low', 'Medium', 'High'],
   },
-  'model-briefings': {
+  'model-release-briefings': {
     Vendor:         ['OpenAI', 'Microsoft', 'Google', 'Anthropic', 'Other'],
     'Model Family': ['GPT', 'Claude', 'Gemini', 'Other'],
     Recommendation: ['Approved', 'Pilot', 'Not Approved'],
+    'Use Type':     ['Writing', 'Coding', 'Analysis', 'Agents'],
   },
   'regulatory-alerts': {
     Region:            ['Global', 'UAE', 'EU', 'US', 'Other'],
+    'Policy Impacted': ['GDPR', 'AI Act', 'Local Regulations', 'Other'],
     'Action Required': ['Yes', 'No'],
   },
   'risk-advisories': {
@@ -33,48 +39,29 @@ const tabFilters: Record<string, Record<string, string[]>> = {
     Severity:               ['Critical', 'High', 'Normal'],
     'Mitigation Available': ['Yes', 'No'],
   },
-  'transformation-insights': {
-    Theme:      ['Strategy', 'Operating Model', 'Adoption', 'Governance', 'Change'],
-    Stage:      ['Discern', 'Design', 'Deploy', 'Drive'],
-    'Read Time':['<5 min', '5–10 min', '10+ min'],
+  'ai-transformation-insights': {
+    Theme:       ['Strategy', 'Operating Model', 'Adoption', 'Governance', 'Change'],
+    Stage:       ['Discern', 'Design', 'Deploy', 'Drive'],
+    'Read Time': ['<5 min', '5–10 min', '10+ min'],
   },
-  'dco-briefs': {
+  'dco-intelligence-briefs': {
     'DCO Theme':      ['Cognition', 'Decision Quality', 'Man+Machine', 'Governance', 'Value'],
     'Audience Level': ['Exec', 'Leaders', 'Practitioners'],
+    'Read Time':      ['<5 min', '5–10 min', '10+ min'],
   },
-  'use-cases': {
-    Function: ['HR', 'Finance', 'Ops', 'Legal', 'Product', 'Delivery', 'Support'],
-    Pattern:  ['Copilot', 'RAG', 'Agent', 'Workflow Automation'],
-    Maturity: ['Idea', 'Validated', 'In Delivery', 'Live'],
+  'enterprise-use-cases': {
+    Function:     ['HR', 'Finance', 'Ops', 'Legal', 'Product', 'Delivery', 'Support'],
+    Pattern:      ['Copilot', 'RAG', 'Agent', 'Workflow Automation'],
+    Maturity:     ['Idea', 'Validated', 'In Delivery', 'Live'],
+    'Value Band': ['Low', 'Medium', 'High'],
   },
   'industry-analysis': {
     Industry:    ['Public Sector', 'Finance', 'Retail', 'Healthcare', 'Manufacturing', 'Other'],
     'Trend Type':['Market', 'Tech', 'Regulation', 'Competitive'],
     Horizon:     ['Now', '6–12m', '12–24m'],
   },
-  'governance-models': {
-    'Framework Type': ['Operating Model', 'Decision Authority', 'Ownership Matrix', 'RACI'],
-    'Maturity Level': ['Basic', 'Intermediate', 'Advanced'],
-    'Implementation': ['Template', 'Guide', 'Policy'],
-  },
-  'lifecycle-standards': {
-    'Lifecycle Stage': ['Intake', 'Build', 'Release', 'Monitor', 'Retire'],
-    'Gate Type': ['Quality', 'Security', 'Compliance', 'Business'],
-    'Standard Type': ['Process', 'Checklist', 'Template'],
-  },
-  'accountability-frameworks': {
-    'Framework Focus': ['Roles', 'Approvals', 'Escalation', 'Accountability'],
-    'Organizational Level': ['Team', 'Department', 'Enterprise'],
-    'Decision Type': ['Technical', 'Business', 'Risk'],
-  },
-  'responsible-ai-policies': {
-    'Policy Area': ['Risk Management', 'Transparency', 'Compliance', 'Ethics'],
-    'Regulation': ['NIST', 'EU AI Act', 'Internal', 'Industry'],
-    'Control Type': ['Preventive', 'Detective', 'Corrective'],
-  },
 };
 
-// Animated collapsible section
 const FilterSection = ({
   title,
   filterKey,
@@ -89,55 +76,39 @@ const FilterSection = ({
   onToggle: (key: string, val: string) => void;
 }) => {
   const [open, setOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  const toggle = () => {
-    setOpen(!open);
-  };
-
-  const active = searchParams.get(filterKey)?.split(',') || [];
+  const active = searchParams.get(filterKey)?.split(',').filter(Boolean) || [];
 
   return (
-    <div className="border-b border-gray-100 py-2">
+    <div className="border-b border-gray-100">
       <button
-        onClick={toggle}
-        className="flex items-center justify-between w-full text-left hover:text-gray-900 hover:bg-gray-50 transition-all duration-200 p-1.5 rounded-lg -mx-1.5"
-        style={{ letterSpacing: '0.3px' }}
+        onClick={() => setOpen(!open)}
+        className="flex items-center justify-between w-full py-3 px-4 text-left hover:bg-gray-50 transition-colors"
+        aria-expanded={open}
       >
-        <span 
-          className="font-semibold text-gray-800"
-          style={{
-            fontSize: '13px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.3px'
-          }}
-        >
+        <span style={{ fontSize: 12, fontWeight: 600, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
           {title}
         </span>
         <ChevronDown
-          className={`h-3 w-3 text-gray-400 transition-transform duration-200 ${
-            open ? 'rotate-180' : 'rotate-0'
-          }`}
+          className={`transition-transform duration-200 flex-shrink-0 ${open ? 'rotate-180' : ''}`}
+          style={{ width: 14, height: 14, color: '#9CA3AF' }}
         />
       </button>
-
       {open && (
-        <div className="pt-2 space-y-2 animate-in slide-in-from-top-1 duration-200">
+        <div className="pb-2 px-4">
           {options.map((opt) => (
-            <label 
-              key={opt} 
-              className="flex items-center gap-2 cursor-pointer group hover:bg-gray-50 p-1.5 rounded-lg transition-all duration-200"
-              style={{ letterSpacing: '0.3px' }}
+            <label
+              key={opt}
+              className="flex items-center gap-2 py-1.5 cursor-pointer hover:text-gray-900 transition-colors"
+              style={{ fontSize: 13, color: '#4B5563' }}
             >
               <input
                 type="checkbox"
                 checked={active.includes(opt.toLowerCase())}
                 onChange={() => onToggle(filterKey, opt)}
-                className="rounded border-gray-300 text-[#0f1f5c] focus:ring-[#0f1f5c] h-3 w-3 transition-colors"
+                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                style={{ width: 14, height: 14 }}
               />
-              <span className="text-xs text-gray-600 group-hover:text-gray-900 transition-colors">
-                {opt}
-              </span>
+              {opt}
             </label>
           ))}
         </div>
@@ -155,57 +126,32 @@ const FilterSidebar = ({ activeTab, searchParams, onFilterChange }: FilterSideba
     else current.push(value.toLowerCase());
     if (current.length > 0) params.set(filterKey, current.join(','));
     else params.delete(filterKey);
+    params.delete('page');
     onFilterChange(params);
   };
 
-  const hasActiveFilters = [...searchParams.entries()].some(
-    ([k]) => !['tab', 'q', 'sort', 'page'].includes(k)
-  );
+  const hasActiveFilters = [...searchParams.entries()].some(([k]) => !['tab', 'q', 'sort', 'page'].includes(k));
 
   const clearAll = () => {
     const params = new URLSearchParams();
     if (searchParams.get('tab')) params.set('tab', searchParams.get('tab')!);
-    if (searchParams.get('q'))   params.set('q',   searchParams.get('q')!);
+    if (searchParams.get('q')) params.set('q', searchParams.get('q')!);
     onFilterChange(params);
   };
 
   const specific = tabFilters[activeTab] || {};
 
   return (
-    <div 
-      className="rounded-xl bg-white shadow-lg border border-gray-100"
-      style={{
-        fontFamily: 'Inter, -apple-system, system-ui, "Segoe UI", sans-serif',
-        fontSize: '14px',
-        lineHeight: '20px',
-        letterSpacing: '0.3px',
-        color: '#000000',
-        backgroundColor: '#FFFFFF',
-        padding: '16px',
-        margin: '0px',
-        width: '280px',
-        height: '400px',
-        overflow: 'auto'
-      }}
-    >
-      <div className="flex items-center justify-between mb-3">
-        <span 
-          className="font-bold text-gray-900"
-          style={{
-            fontSize: '14px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.3px'
-          }}
-        >
-          Filters
-        </span>
+    <div className="bg-white">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+        <span style={{ fontSize: 13, fontWeight: 600, color: '#111827' }}>Filters</span>
         {hasActiveFilters && (
-          <button 
-            onClick={clearAll} 
-            className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-            style={{ letterSpacing: '0.3px' }}
+          <button
+            onClick={clearAll}
+            style={{ fontSize: 12, color: '#6366F1', background: 'none', border: 'none', cursor: 'pointer' }}
+            className="hover:underline"
           >
-            Clear all
+            Reset all
           </button>
         )}
       </div>
@@ -226,7 +172,7 @@ const FilterSidebar = ({ activeTab, searchParams, onFilterChange }: FilterSideba
           key={title}
           title={title}
           filterKey={title.toLowerCase().replace(/\s+/g, '-')}
-          options={opts}
+          options={opts as string[]}
           searchParams={searchParams}
           onToggle={handleToggle}
         />

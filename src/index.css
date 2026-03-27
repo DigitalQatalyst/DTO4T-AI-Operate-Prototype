@@ -4,14 +4,27 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 65% 15%;
+    /* DWS Color Scheme */
+    --hero: 226 71% 10%;
+    --hero-foreground: 210 40% 98%;
+    --hero-muted: 220 20% 65%;
+    --cta: 11 71% 52%;
+    --cta-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --nav-dark: 226 71% 7%;
+    --nav-dark-foreground: 210 40% 98%;
+    --footer: 226 71% 7%;
+    --footer-foreground: 220 20% 75%;
+
+    --background: 0 0% 98%;
+    --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 65% 15%;
+    --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 65% 15%;
+    --popover-foreground: 222.2 84% 4.9%;
 
     --primary: 220 65% 30%;
     --primary-foreground: 210 40% 98%;
@@ -19,8 +32,8 @@
     --secondary: 216 33% 96%;
     --secondary-foreground: 220 65% 15%;
 
-    --muted: 228 40% 93%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --accent: 14 97% 60%;
     --accent-foreground: 0 0% 100%;
@@ -28,9 +41,9 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 220 65% 30%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
     --radius: 0.75rem;
 

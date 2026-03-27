@@ -1,125 +1,87 @@
-import { ExternalLink, BookOpen, FileText, Brain, Palette, MessageSquare, Share2, Linkedin, Youtube, Globe } from "lucide-react";
+import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-[hsl(228,100%,14%)] via-[hsl(224,56%,18%)] to-[hsl(228,100%,20%)] py-16">
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 md:grid-cols-3">
-          {/* Left Column - Brand */}
+    <footer style={{ background: '#0B1736', color: '#9CA3AF' }} className="px-6 py-12">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-8">
+
+          {/* Column 1 — Brand */}
           <div>
-            <h3 className="text-xl font-bold text-white">DIA AI Hub</h3>
-            <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              The Cognitive Core
+            <div className="flex items-center gap-2 mb-3">
+              <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg, #6366F1, #4F46E5)', borderRadius: 8 }} />
+              <span style={{ color: 'white', fontWeight: 700, fontSize: 15 }}>DQ | Digital<br />Workspace</span>
+            </div>
+            <p style={{ fontSize: 13, lineHeight: 1.6, marginBottom: 16 }}>
+              Stay connected with the latest tools, learning resources, and workspace updates from DQ.
             </p>
-            <p className="mt-2 text-sm text-white/50 leading-relaxed">
-              Stay updated with the latest AI insights, governed copilots, agents, and innovations for DCO-Grade Man + Machine Collaboration.
-            </p>
+            {/* Email input */}
+            <div className="flex" style={{ border: '1px solid rgba(255,255,255,0.15)', borderRadius: 8, overflow: 'hidden' }}>
+              <input
+                type="email"
+                placeholder="Enter your DQ email"
+                style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', padding: '8px 12px', fontSize: 13, color: 'white' }}
+              />
+              <button
+                style={{ background: '#6366F1', border: 'none', padding: '8px 12px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              >
+                <ArrowRight style={{ width: 16, height: 16, color: 'white' }} />
+              </button>
+            </div>
           </div>
 
-          {/* Middle Column - For You */}
+          {/* Column 2 — Get to Know Us */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">For You</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="#marketplace" className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
-                  <BookOpen className="h-4 w-4" />
-                  <span>AI Learning Center</span>
-                </a>
-              </li>
-              <li>
-                <a href="#marketplace" className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
-                  <FileText className="h-4 w-4" />
-                  <span>AI Knowledge Center</span>
-                </a>
-              </li>
-              <li>
-                <a href="#marketplace" className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
-                  <Brain className="h-4 w-4" />
-                  <span>AI Services Center</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
-                  <Palette className="h-4 w-4" />
-                  <span>Design System</span>
-                </a>
-              </li>
+            <h4 style={{ color: 'white', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>Get to Know Us</h4>
+            <ul className="space-y-2">
+              {['About DQ Workspace', 'Help Centre', 'DQ Governance & Guidelines', 'Privacy Policy', 'Terms of Use'].map(item => (
+                <li key={item}>
+                  <a href="#" style={{ fontSize: 13, color: '#9CA3AF', display: 'block', transition: 'color 0.15s' }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = 'white')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = '#9CA3AF')}
+                  >{item}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Right Column - Find Us */}
+          {/* Column 3 — For You */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Find Us</h4>
-            <ul className="space-y-3">
-              <li>
-                <a 
-                  href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  <span>Viva Engage</span>
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <Share2 className="h-4 w-4" />
-                  <span>SharePoint</span>
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  <span>LinkedIn</span>
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <Youtube className="h-4 w-4" />
-                  <span>YouTube</span>
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <Globe className="h-4 w-4" />
-                  <span>DQ Corporate Website</span>
-                  <ExternalLink className="h-3 w-3 ml-auto" />
-                </a>
-              </li>
+            <h4 style={{ color: 'white', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>For You</h4>
+            <ul className="space-y-2">
+              {['DQ Learning Center', 'Services & Requests', 'Communities & Surveys', 'News & Announcements'].map(item => (
+                <li key={item}>
+                  <a href="#" style={{ fontSize: 13, color: '#9CA3AF', display: 'block', transition: 'color 0.15s' }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = 'white')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = '#9CA3AF')}
+                  >{item}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4 — Find Us */}
+          <div>
+            <h4 style={{ color: 'white', fontSize: 13, fontWeight: 600, marginBottom: 16 }}>Find Us</h4>
+            <ul className="space-y-2">
+              {['Viva Engage', 'SharePoint', 'LinkedIn', 'YouTube', 'DQ Corporate Website'].map(item => (
+                <li key={item}>
+                  <a href="#" className="flex items-center gap-1.5" style={{ fontSize: 13, color: '#9CA3AF', transition: 'color 0.15s' }}
+                    onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = 'white')}
+                    onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = '#9CA3AF')}
+                  >
+                    {item}
+                    <ExternalLink style={{ width: 11, height: 11, flexShrink: 0 }} />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Bottom Copyright */}
-        <div className="mt-12 border-t border-white/10 pt-8">
-          <p className="text-xs text-white/40">
-            © 2026 DIA AI Hub. All rights reserved.
-          </p>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+          <p style={{ fontSize: 12 }}>© 2025 DQ | Digital Workspace. All rights reserved.</p>
+          <p style={{ fontSize: 12 }}>Version v2.1.0</p>
         </div>
       </div>
     </footer>

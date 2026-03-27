@@ -1,150 +1,166 @@
 import { MarketplaceItem } from '@/types/marketplace';
+import { Calendar, User, Globe } from 'lucide-react';
 
 interface ContentCardProps {
   item: MarketplaceItem;
+  onViewDetail?: (id: string) => void;
+  compact?: boolean;
 }
 
-const typeConfig: Record<string, { label: string; dot: string }> = {
-  update:    { label: 'Enterprise Update',       dot: 'bg-blue-500' },
-  release:   { label: 'Model Briefing',          dot: 'bg-purple-500' },
-  regulatory:{ label: 'Regulatory Alert',        dot: 'bg-red-500' },
-  risk:      { label: 'Risk Advisory',           dot: 'bg-orange-500' },
-  insight:   { label: 'Transformation Insight',  dot: 'bg-green-500' },
-  dco_brief: { label: 'DCO Brief',               dot: 'bg-teal-500' },
-  use_case:  { label: 'Use Case',                dot: 'bg-indigo-500' },
-  industry:  { label: 'Industry Analysis',       dot: 'bg-yellow-500' },
+const typeLabels: Record<string, string> = {
+  update:     'Enterprise Update',
+  release:    'Model Briefing',
+  regulatory: 'Regulatory Alert',
+  risk:       'Risk Advisory',
+  insight:    'Transformation Insight',
+  dco_brief:  'DCO Brief',
+  use_case:   'Use Case',
+  industry:   'Industry Analysis',
 };
 
-const ContentCard = ({ item }: ContentCardProps) => {
-  const cfg = typeConfig[item.type] || { label: item.type, dot: 'bg-gray-400' };
+// Impact badge — matches reference: colored text, light bg, subtle border
+const ImpactBadge = ({ value }: { value: string }) => {
+  const styles: Record<string, { color: string; bg: string; border: string }> = {
+    High:     { color: '#DC2626', bg: '#FEF2F2', border: '#FECACA' },
+    Critical: { color: '#DC2626', bg: '#FEF2F2', border: '#FECACA' },
+    Medium:   { color: '#D97706', bg: '#FFFBEB', border: '#FDE68A' },
+    Low:      { color: '#6B7280', bg: '#F9FAFB', border: '#E5E7EB' },
+    Normal:   { color: '#6B7280', bg: '#F9FAFB', border: '#E5E7EB' },
+  };
+  const s = styles[value] || styles.Normal;
+  return (
+    <span style={{ color: s.color, background: s.bg, border: `1px solid ${s.border}`, fontSize: 11, fontWeight: 600, padding: '3px 8px', borderRadius: 4, display: 'inline-block' }}>
+      {value}
+    </span>
+  );
+};
 
-  const formatDate = (d: string) =>
-    new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+const ContentCard = ({ item, onViewDetail }: ContentCardProps) => {
+  const label = typeLabels[item.type] || item.type;
+
+  const formatDate = (d: string) => {
+    const date = new Date(d);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return '1 day ago';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 14) return '1 week ago';
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  const handleViewDetails = () => {
+    if (onViewDetail) onViewDetail(item.id);
+    else window.dispatchEvent(new CustomEvent('viewItemDetail', { detail: { itemId: item.id } }));
+  };
 
   return (
-    <div 
-      className="w-full max-w-[360px] min-h-[420px] max-h-[460px] bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col"
-      style={{
-        fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
-        fontSize: '14px',
-        lineHeight: '20px',
-        letterSpacing: 'normal',
-        wordSpacing: '0px',
-        fontWeight: '400',
-        fontStyle: 'normal',
-        textDecoration: 'none',
-        textAlign: 'start',
-        padding: '16px',
-        margin: '0px'
-      }}
+    <div
+      className="rounded-xl overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+      style={{ border: '1px solid #E5E7EB', background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}
+      onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)')}
+      onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.06)')}
     >
-      {/* Thumbnail / hero image */}
-      <div className="relative w-full h-[200px] bg-gradient-to-br from-[#0f1f5c] to-[#1a3a8f] rounded-[12px] flex items-center justify-center overflow-hidden mb-3">
-        {/* Type pill top-left */}
-        <div 
-          className="absolute top-3 left-3 h-6 flex items-center gap-1.5 bg-white/90 rounded-full px-2.5 py-1.5"
-          style={{
-            fontFamily: 'inherit'
-          }}
-        >
-          <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
-          <span 
-            className="text-xs font-semibold text-gray-800"
+      {/* Visual area — light periwinkle/blue-gray gradient matching reference */}
+      <div
+        className="relative flex flex-col justify-between p-4 flex-shrink-0"
+        style={{
+          height: 160,
+          background: 'linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #C7D2FE 100%)',
+        }}
+      >
+        {/* Type badge top-left */}
+        <div className="flex items-start justify-between">
+          <span
             style={{
-              fontFamily: 'inherit',
-              fontSize: '12px',
-              lineHeight: '16px',
-              fontWeight: '600',
-              letterSpacing: 'normal'
+              fontSize: 11,
+              fontWeight: 600,
+              color: '#4338CA',
+              background: 'rgba(255,255,255,0.85)',
+              border: '1px solid rgba(99,102,241,0.2)',
+              padding: '4px 10px',
+              borderRadius: 20,
+              backdropFilter: 'blur(4px)',
             }}
           >
-            {cfg.label}
+            {label}
           </span>
         </div>
-        {/* Logo top-right */}
-        <div className="absolute top-3 right-3 bg-white/10 rounded px-2 py-1">
-          <span className="text-white text-xs font-bold tracking-widest">DIA</span>
+
+        {/* Center icon — blue square matching reference */}
+        <div className="flex items-center justify-center flex-1">
+          <div
+            style={{
+              width: 52,
+              height: 52,
+              borderRadius: 12,
+              background: 'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)',
+              boxShadow: '0 4px 12px rgba(99,102,241,0.35)',
+            }}
+          />
         </div>
-        {/* Center text */}
-        <div className="text-center text-white px-6 z-10">
-          <p className="text-lg font-bold leading-snug">AI Updates &</p>
-          <p className="text-lg font-bold leading-snug">Insights Center</p>
-        </div>
-        {/* Decorative circles */}
-        <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-white/5" />
-        <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-white/5" />
       </div>
 
-      {/* Content block */}
-      <div className="flex flex-col flex-1 max-w-full">
-        {/* Title */}
-        <h4 
-          className="text-lg font-bold text-gray-900 mb-1 line-clamp-2 leading-tight"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '16px',
-            lineHeight: '22px',
-            fontWeight: '700',
-            letterSpacing: 'normal'
-          }}
+      {/* White content area */}
+      <div className="flex flex-col flex-1 p-4 bg-white">
+        <h4
+          className="line-clamp-2 mb-2"
+          style={{ fontSize: 15, fontWeight: 700, color: '#111827', lineHeight: 1.4 }}
         >
           {item.title}
         </h4>
 
-        {/* Owner/provider line */}
-        <p 
-          className="text-xs font-medium text-gray-600 mb-2"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '12px',
-            lineHeight: '16px',
-            fontWeight: '500',
-            letterSpacing: 'normal'
-          }}
-        >
-          {item.source}
-        </p>
-
-        {/* Summary */}
-        <p 
-          className="text-sm text-gray-700 line-clamp-2 mb-2 flex-1"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '13px',
-            lineHeight: '18px',
-            fontWeight: '400',
-            letterSpacing: 'normal'
-          }}
+        <p
+          className="line-clamp-3 flex-1"
+          style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 12 }}
         >
           {item.summary}
         </p>
 
-        {/* Meta row */}
-        <div 
-          className="flex items-center gap-2 text-xs font-medium text-gray-600 mb-2"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '11px',
-            lineHeight: '16px',
-            fontWeight: '400',
-            letterSpacing: 'normal'
-          }}
-        >
-          <span>{cfg.label}</span>
-          <span>·</span>
-          <span>{formatDate(item.publishedAt)}</span>
+        {/* Meta row — matches reference: date · owner · source with icons */}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3" style={{ fontSize: 12, color: '#9CA3AF' }}>
+          <span className="flex items-center gap-1">
+            <Calendar className="h-3 w-3 flex-shrink-0" />
+            {formatDate(item.publishedAt)}
+          </span>
+          <span className="flex items-center gap-1">
+            <User className="h-3 w-3 flex-shrink-0" />
+            {item.ownerTeam}
+          </span>
+          <span className="flex items-center gap-1">
+            <Globe className="h-3 w-3 flex-shrink-0" />
+            {item.source}
+          </span>
         </div>
 
-        {/* Primary CTA button */}
-        <button 
-          className="w-full h-10 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-semibold rounded-lg transition-colors mt-auto"
-          style={{
-            fontFamily: 'inherit',
-            fontSize: '12px',
-            lineHeight: '16px',
-            fontWeight: '600',
-            letterSpacing: 'normal'
-          }}
+        {/* Badges row */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {item.impact && <ImpactBadge value={item.impact} />}
+          {item.severity && !item.impact && <ImpactBadge value={item.severity} />}
+          {item.recommendation && (
+            <span style={{ fontSize: 11, fontWeight: 500, color: item.recommendation === 'Approved' ? '#059669' : item.recommendation === 'Pilot' ? '#D97706' : '#DC2626', background: item.recommendation === 'Approved' ? '#ECFDF5' : item.recommendation === 'Pilot' ? '#FFFBEB' : '#FEF2F2', border: `1px solid ${item.recommendation === 'Approved' ? '#A7F3D0' : item.recommendation === 'Pilot' ? '#FDE68A' : '#FECACA'}`, padding: '3px 8px', borderRadius: 4 }}>
+              {item.recommendation}
+            </span>
+          )}
+          {item.tags.slice(0, 2).map(tag => (
+            <span
+              key={tag}
+              style={{ fontSize: 11, fontWeight: 500, color: '#374151', background: '#F3F4F6', border: '1px solid #E5E7EB', padding: '3px 8px', borderRadius: 4 }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={handleViewDetails}
+          className="w-full transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-gray-400"
+          style={{ background: '#0B1736', color: 'white', padding: '10px', borderRadius: 8, fontSize: 13, fontWeight: 600, border: 'none', cursor: 'pointer' }}
+          onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.background = '#1a2d5a')}
+          onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.background = '#0B1736')}
         >
           View Details
         </button>

@@ -1,3 +1,21 @@
+export type TabId =
+  | 'enterprise-ai-updates'
+  | 'model-release-briefings'
+  | 'regulatory-alerts'
+  | 'risk-advisories'
+  | 'ai-transformation-insights'
+  | 'dco-intelligence-briefs'
+  | 'enterprise-use-cases'
+  | 'industry-analysis';
+
+export interface TabConfig {
+  id: TabId;
+  label: string;
+  infoText: string;
+  searchPlaceholder: string;
+  type: MarketplaceItem['type'];
+}
+
 export interface MarketplaceItem {
   id: string;
   type: 'update' | 'release' | 'regulatory' | 'risk' | 'insight' | 'dco_brief' | 'use_case' | 'industry';
@@ -31,24 +49,39 @@ export interface MarketplaceItem {
   valueBand?: string;
   industry?: string;
   horizon?: string;
+  // detail content
+  detailContent?: DetailContent;
 }
 
-export interface TabConfig {
-  id: string;
+export interface DetailContent {
+  details: ContentBlock[];
+  keyTakeaways: string[];
+  resources: ResourceLink[];
+}
+
+export interface ContentBlock {
+  type: 'heading' | 'paragraph' | 'checklist' | 'divider' | 'highlight';
+  text?: string;
+  items?: string[];
+  variant?: 'danger' | 'warning' | 'info';
+}
+
+export interface ResourceLink {
   label: string;
-  description: string;
-  type: MarketplaceItem['type'];
+  url: string;
+  description?: string;
 }
 
 export interface FilterOption {
-  label: string;
-  value: string;
-  count?: number;
-}
-
-export interface FilterGroup {
   id: string;
   label: string;
-  options: FilterOption[];
-  multiSelect: boolean;
 }
+
+export interface FilterCategory {
+  id: string;
+  name: string;
+  options: FilterOption[];
+  showOnTabs?: TabId[];
+}
+
+export type SortOption = 'most-recent' | 'title-az' | 'recommended' | 'highest-severity';
