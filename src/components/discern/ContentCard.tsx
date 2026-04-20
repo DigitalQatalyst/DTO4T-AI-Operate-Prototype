@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 interface ContentCardProps {
   item: MarketplaceItem;
+  basePath?: string; // e.g., '/discern' or '/aiops-framework'
 }
 
 const typeConfig: Record<string, { label: string; dot: string }> = {
@@ -24,13 +25,13 @@ const typeConfig: Record<string, { label: string; dot: string }> = {
   prompt_library: { label: 'Prompt Library',     dot: 'bg-indigo-500' },
 };
 
-const ContentCard = ({ item }: ContentCardProps) => {
+const ContentCard = ({ item, basePath }: ContentCardProps) => {
   const location = useLocation();
   const cfg = typeConfig[item.type] || { label: item.type, dot: 'bg-gray-400' };
 
-  // Determine marketplace from current URL
+  // Determine marketplace from basePath prop or current URL
   const getMarketplaceInfo = () => {
-    const path = location.pathname;
+    const path = basePath || location.pathname;
     if (path.includes('/discern')) return { marketplace: 'discern', title: 'AI Updates &\nInsights Center' };
     if (path.includes('/risk-regulatory')) return { marketplace: 'risk-regulatory', title: 'Risk & Regulatory\nAlerts' };
     if (path.includes('/learning')) return { marketplace: 'learning', title: 'AI Learning\nCenter' };
@@ -40,6 +41,13 @@ const ContentCard = ({ item }: ContentCardProps) => {
     if (path.includes('/drive')) return { marketplace: 'drive', title: 'Drive\nMarketplace' };
     if (path.includes('/design')) return { marketplace: 'design', title: 'AI Design\nLibrary' };
     if (path.includes('/aiops-framework')) return { marketplace: 'aiops-framework', title: 'AIOps Framework\nLibrary' };
+    if (path.includes('/experiment-tracking')) return { marketplace: 'experiment-tracking', title: 'Experiment Tracking &\nModel Registry' };
+    if (path.includes('/mlops')) return { marketplace: 'mlops', title: 'Model Lifecycle\nManagement (MLOps)' };
+    if (path.includes('/botops')) return { marketplace: 'botops', title: 'Conversational Lifecycle\nManagement (BotOps)' };
+    if (path.includes('/agentops')) return { marketplace: 'agentops', title: 'Agent Lifecycle\nManagement (AgentOps)' };
+    if (path.includes('/promptops')) return { marketplace: 'promptops', title: 'Prompt Management &\nRelease Pipeline' };
+    if (path.includes('/ragops')) return { marketplace: 'ragops', title: 'RAG Evaluation &\nTest Set Builder' };
+    if (path.includes('/dtops')) return { marketplace: 'dtops', title: 'Digital Twin Ops\n(DTOps)' };
     return { marketplace: 'discern', title: 'Marketplace' };
   };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { tabs, mockItems } from '@/data/discernMarketplace';
+import { tabs, mockItems } from '@/data/promptOpsMarketplace';
 import { MarketplaceItem } from '@/types/marketplace';
 import TabNavigation from '@/components/discern/TabNavigation';
 import FilterSidebar from '@/components/discern/FilterSidebar';
@@ -12,27 +12,23 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { SlidersHorizontal } from 'lucide-react';
 
-const DiscernMarketplace = () => {
+const PromptOpsMarketplace = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filteredItems, setFilteredItems] = useState<MarketplaceItem[]>(mockItems);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const activeTab   = searchParams.get('tab')  || 'enterprise-updates';
-  const searchQuery = searchParams.get('q')    || '';
-  const sortBy      = searchParams.get('sort') || 'recent';
+  const activeTab = searchParams.get('tab') || tabs[0].id;
+  const searchQuery = searchParams.get('q') || '';
+  const sortBy = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'enterprise-updates':      'Search announcements and updates… e.g., townhall, product update',
-    'model-briefings':         'Search model briefings… e.g., GPT-5, Claude 3',
-    'regulatory-alerts':       'Search regulatory alerts… e.g., EU AI Act, disclosure',
-    'risk-advisories':         'Search risk advisories… e.g., privacy, restricted tools',
-    'transformation-insights': 'Search insights… e.g., adoption, governance',
-    'dco-briefs':              'Search DCO briefs… e.g., decision quality, man+machine',
-    'use-cases':               'Search use cases… e.g., HR, finance, agent',
-    'industry-analysis':       'Search industry analysis… e.g., finance, public sector',
+    'prompt-development': 'Search development tools... e.g., templates, testing',
+    'prompt-versioning': 'Search versioning... e.g., git, control',
+    'prompt-deployment': 'Search deployment... e.g., pipeline, rollback',
+    'prompt-monitoring': 'Search monitoring... e.g., performance, quality'
   };
 
-  const autoRefreshTabs = ['enterprise-updates', 'model-briefings', 'regulatory-alerts', 'risk-advisories'];
+  const autoRefreshTabs = ['prompt-monitoring'];
 
   useEffect(() => {
     let items = [...mockItems];
@@ -48,12 +44,12 @@ const DiscernMarketplace = () => {
       );
     }
 
-    const topicFilter  = searchParams.get('topic')?.split(',').filter(Boolean)  || [];
-    const roleFilter   = searchParams.get('role')?.split(',').filter(Boolean)   || [];
+    const topicFilter = searchParams.get('topic')?.split(',').filter(Boolean) || [];
+    const roleFilter = searchParams.get('role')?.split(',').filter(Boolean) || [];
     const sourceFilter = searchParams.get('source')?.split(',').filter(Boolean) || [];
 
-    if (topicFilter.length)  items = items.filter(i => i.topic.some(t => topicFilter.includes(t.toLowerCase())));
-    if (roleFilter.length)   items = items.filter(i => i.audience.some(a => roleFilter.includes(a.toLowerCase())));
+    if (topicFilter.length) items = items.filter(i => i.topic.some(t => topicFilter.includes(t.toLowerCase())));
+    if (roleFilter.length) items = items.filter(i => i.audience.some(a => roleFilter.includes(a.toLowerCase())));
     if (sourceFilter.length) items = items.filter(i => sourceFilter.includes(i.source.toLowerCase()));
 
     if (sortBy === 'recent') items.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
@@ -61,7 +57,6 @@ const DiscernMarketplace = () => {
     setFilteredItems(items);
   }, [searchParams]);
 
-  // shared horizontal padding — matches reference left edge
   const px = 'px-16';
 
   return (
@@ -72,15 +67,15 @@ const DiscernMarketplace = () => {
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-100">
           <div className={`${px} py-2.5`}>
-            <Breadcrumb pageName="AI Updates & Insights Center" section="Discern" />
+            <Breadcrumb pageName="Prompt Management & Release Pipeline" section="Deploys" />
           </div>
         </div>
 
         {/* Page title + subtitle + tabs */}
         <div className={`${px} pt-5 pb-0`}>
-          <h1 className="text-2xl font-bold text-gray-900">AI Updates & Insights Center</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Prompt Management & Release Pipeline</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Your starting point for AI updates, decision briefs, and insights—what changed, why it matters, and actions teams should take.
+            Version control, testing, and deployment pipelines for AI prompts.
           </p>
           <div className="mt-4">
             <TabNavigation
@@ -140,7 +135,7 @@ const DiscernMarketplace = () => {
                     }}
                   />
                   <button
-                    onClick={() => setIsFilterOpen(true)}
+                    onClick={() => setSidebarOpen(true)}
                     className="lg:hidden flex items-center gap-1.5 text-sm border border-gray-300 rounded px-3 py-1.5 hover:bg-gray-50"
                   >
                     <SlidersHorizontal className="h-4 w-4" />
@@ -154,24 +149,24 @@ const DiscernMarketplace = () => {
                 </div>
               </div>
 
-              <CardGrid items={filteredItems} />
+              <CardGrid items={filteredItems} basePath="/promptops" />
             </div>
           </div>
         </div>
 
         {/* Mobile filter overlay */}
-        {isFilterOpen && (
+        {sidebarOpen && (
           <div className="fixed inset-0 z-50 lg:hidden">
-            <div className="absolute inset-0 bg-black/40" onClick={() => setIsFilterOpen(false)} />
+            <div className="absolute inset-0 bg-black/40" onClick={() => setSidebarOpen(false)} />
             <div className="absolute right-0 top-0 bottom-0 w-72 bg-white shadow-xl overflow-y-auto p-5">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold">Filters</h2>
-                <button onClick={() => setIsFilterOpen(false)} className="text-gray-400 hover:text-gray-600 text-lg">✕</button>
+                <button onClick={() => setSidebarOpen(false)} className="text-gray-400 hover:text-gray-600 text-lg">✕</button>
               </div>
               <FilterSidebar
                 activeTab={activeTab}
                 searchParams={searchParams}
-                onFilterChange={(p) => { setSearchParams(p); setIsFilterOpen(false); }}
+                onFilterChange={(p) => { setSearchParams(p); setSidebarOpen(false); }}
               />
             </div>
           </div>
@@ -183,4 +178,4 @@ const DiscernMarketplace = () => {
   );
 };
 
-export default DiscernMarketplace;
+export default PromptOpsMarketplace;

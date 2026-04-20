@@ -1,19 +1,18 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { mockItems } from '@/data/aiopsFrameworkMarketplace';
+import { mockItems } from '@/data/agentOpsMarketplace';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LoginModal from '@/components/LoginModal';
 import { ChevronRight, Home, Clock, Users, Target, Award, BookOpen, CheckCircle2, ArrowLeft, Lock } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-const AIOpsFrameworkDetail = () => {
+const AgentOpsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showFullContent, setShowFullContent] = useState(false);
-  const [isChecking, setIsChecking] = useState(true); // Add loading state
   
   useEffect(() => {
     // Check if user is logged in AND has unlocked content in this session
@@ -28,14 +27,11 @@ const AIOpsFrameworkDetail = () => {
       setShowFullContent(false);
       setIsLoggedIn(false);
     }
-    
-    setIsChecking(false);
   }, [id]);
 
   const handleViewContent = () => {
     // Check if user is logged in
     const user = localStorage.getItem('currentUser');
-    
     if (!user) {
       setShowLoginModal(true);
     } else {
@@ -63,8 +59,8 @@ const AIOpsFrameworkDetail = () => {
         <div className="min-h-screen bg-white pt-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-2xl font-bold text-gray-900">Content Not Found</h1>
-            <Link to="/aiops-framework" className="text-blue-600 hover:underline mt-4 inline-block">
-              ← Back to AIOps Build Library
+            <Link to="/agentops" className="text-blue-600 hover:underline mt-4 inline-block">
+              ← Back to Agent Lifecycle Management (AgentOps)
             </Link>
           </div>
         </div>
@@ -74,8 +70,8 @@ const AIOpsFrameworkDetail = () => {
   }
 
   const typeLabels: Record<string, string> = {
-    insight: 'Framework Document',
-    regulatory: 'Policy Document',
+    insight: 'MLOps Tool',
+    regulatory: 'Governance Policy',
   };
 
   return (
@@ -96,7 +92,7 @@ const AIOpsFrameworkDetail = () => {
               <ChevronRight className="h-3.5 w-3.5" />
               <Link to="/" className="hover:text-gray-900">Deploys</Link>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link to="/aiops-framework" className="hover:text-gray-900">AIOps Build Library</Link>
+              <Link to="/agentops" className="hover:text-gray-900">Agent Lifecycle Management (AgentOps)</Link>
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="text-gray-900">{typeLabels[item.type]}</span>
             </div>
@@ -106,11 +102,11 @@ const AIOpsFrameworkDetail = () => {
         {/* Back Button */}
         <div className="max-w-7xl mx-auto px-16 pt-6">
           <button 
-            onClick={() => navigate('/aiops-framework')}
+            onClick={() => navigate('/agentops')}
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to AIOps Build Library
+            Back to Agent Lifecycle Management (AgentOps)
           </button>
         </div>
 
@@ -124,7 +120,7 @@ const AIOpsFrameworkDetail = () => {
               {/* Header Card */}
               <div className="bg-white rounded-lg border border-gray-200 p-8">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block px-3 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full">
+                  <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">
                     {typeLabels[item.type]}
                   </span>
                   <span className="text-sm text-gray-500">
@@ -208,7 +204,7 @@ const AIOpsFrameworkDetail = () => {
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2">Content Locked</h3>
                       <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                        Login to access the full framework documentation, implementation guides, and governance templates.
+                        Login to access the full tool documentation, implementation guides, and integration examples.
                       </p>
                       <button
                         onClick={handleViewContent}
@@ -228,22 +224,22 @@ const AIOpsFrameworkDetail = () => {
                               {item.summary}
                             </p>
                             <p className="text-gray-700 leading-relaxed">
-                              This {typeLabels[item.type].toLowerCase()} provides essential guidance for implementing 
-                              enterprise-grade AI governance. The content has been reviewed and approved by the {item.ownerTeam} team 
-                              to ensure alignment with organizational standards and regulatory requirements.
+                              This {typeLabels[item.type].toLowerCase()} provides essential capabilities for managing 
+                              ML experiments and models. The tool has been reviewed and approved by the {item.ownerTeam} team 
+                              to ensure alignment with MLOps best practices and organizational standards.
                             </p>
                           </div>
 
                           <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-3">Key Information</h3>
+                            <h3 className="text-lg font-bold text-gray-900 mb-3">Key Features</h3>
                             <ul className="space-y-2">
                               <li className="flex items-start gap-2">
                                 <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700">Target audience: {item.audience.join(', ')}</span>
+                                <span className="text-gray-700">Target users: {item.audience.join(', ')}</span>
                               </li>
                               <li className="flex items-start gap-2">
                                 <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700">Topic areas: {item.topic.join(', ')}</span>
+                                <span className="text-gray-700">Capabilities: {item.topic.join(', ')}</span>
                               </li>
                               <li className="flex items-start gap-2">
                                 <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
@@ -252,64 +248,41 @@ const AIOpsFrameworkDetail = () => {
                               {item.theme && (
                                 <li className="flex items-start gap-2">
                                   <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700">Theme: {item.theme}</span>
-                                </li>
-                              )}
-                              {item.stage && (
-                                <li className="flex items-start gap-2">
-                                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                  <span className="text-gray-700">Lifecycle stage: {item.stage}</span>
+                                  <span className="text-gray-700">Category: {item.theme}</span>
                                 </li>
                               )}
                             </ul>
                           </div>
 
-                          {item.type === 'insight' && (
-                            <div>
-                              <h3 className="text-lg font-bold text-gray-900 mb-3">Framework Components</h3>
-                              <p className="text-gray-700 leading-relaxed mb-3">
-                                This framework provides comprehensive guidance across multiple dimensions:
-                              </p>
-                              <ul className="space-y-2 ml-4">
-                                <li className="text-gray-700">• Clear roles and responsibilities definition</li>
-                                <li className="text-gray-700">• Decision-making authority and escalation paths</li>
-                                <li className="text-gray-700">• Process workflows and approval gates</li>
-                                <li className="text-gray-700">• Compliance and audit requirements</li>
-                              </ul>
-                            </div>
-                          )}
-
-                          {item.type === 'regulatory' && (
-                            <div>
-                              <h3 className="text-lg font-bold text-gray-900 mb-3">Policy Requirements</h3>
-                              <p className="text-gray-700 leading-relaxed mb-3">
-                                This policy document establishes mandatory controls and requirements:
-                              </p>
-                              <ul className="space-y-2 ml-4">
-                                <li className="text-gray-700">• Risk assessment and mitigation procedures</li>
-                                <li className="text-gray-700">• Transparency and explainability standards</li>
-                                <li className="text-gray-700">• Data governance and privacy controls</li>
-                                <li className="text-gray-700">• Monitoring and reporting obligations</li>
-                              </ul>
-                            </div>
-                          )}
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-3">Core Capabilities</h3>
+                            <p className="text-gray-700 leading-relaxed mb-3">
+                              This tool provides comprehensive support for:
+                            </p>
+                            <ul className="space-y-2 ml-4">
+                              <li className="text-gray-700">• Automated tracking and versioning</li>
+                              <li className="text-gray-700">• Reproducibility and auditability</li>
+                              <li className="text-gray-700">• Collaboration and knowledge sharing</li>
+                              <li className="text-gray-700">• Integration with existing ML workflows</li>
+                            </ul>
+                          </div>
                         </div>
                       )}
 
                       {activeTab === 'details' && (
                         <div className="space-y-6">
                           <div>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">Detailed Information</h2>
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">Technical Details</h2>
                             <p className="text-gray-700 leading-relaxed mb-4">
-                              This section provides comprehensive details about the {typeLabels[item.type].toLowerCase()}.
+                              Comprehensive technical information about this {typeLabels[item.type].toLowerCase()}.
                             </p>
                           </div>
 
                           <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-3">Document Specifications</h3>
+                            <h3 className="text-lg font-bold text-gray-900 mb-3">Tool Specifications</h3>
                             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                               <div className="flex justify-between py-2 border-b border-gray-200">
-                                <span className="text-gray-600">Document Type</span>
+                                <span className="text-gray-600">Type</span>
                                 <span className="font-semibold text-gray-900">{typeLabels[item.type]}</span>
                               </div>
                               <div className="flex justify-between py-2 border-b border-gray-200">
@@ -321,31 +294,12 @@ const AIOpsFrameworkDetail = () => {
                                 <span className="font-semibold text-gray-900">{item.status}</span>
                               </div>
                               {item.theme && (
-                                <div className="flex justify-between py-2 border-b border-gray-200">
-                                  <span className="text-gray-600">Theme</span>
+                                <div className="flex justify-between py-2">
+                                  <span className="text-gray-600">Category</span>
                                   <span className="font-semibold text-gray-900">{item.theme}</span>
                                 </div>
                               )}
-                              {item.stage && (
-                                <div className="flex justify-between py-2">
-                                  <span className="text-gray-600">Lifecycle Stage</span>
-                                  <span className="font-semibold text-gray-900">{item.stage}</span>
-                                </div>
-                              )}
                             </div>
-                          </div>
-
-                          <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-3">Scope and Applicability</h3>
-                            <p className="text-gray-700 leading-relaxed mb-3">
-                              This framework applies to all AI initiatives within the organization and is mandatory for:
-                            </p>
-                            <ul className="space-y-2 ml-4">
-                              <li className="text-gray-700">• All AI/ML model development and deployment</li>
-                              <li className="text-gray-700">• Third-party AI tool procurement and integration</li>
-                              <li className="text-gray-700">• AI-powered business process automation</li>
-                              <li className="text-gray-700">• Generative AI and LLM implementations</li>
-                            </ul>
                           </div>
                         </div>
                       )}
@@ -355,7 +309,7 @@ const AIOpsFrameworkDetail = () => {
                           <div>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">Implementation Guide</h2>
                             <p className="text-gray-700 leading-relaxed mb-4">
-                              Practical guidance for implementing this {typeLabels[item.type].toLowerCase()} in your organization.
+                              Step-by-step guide for implementing this {typeLabels[item.type].toLowerCase()}.
                             </p>
                           </div>
 
@@ -367,9 +321,9 @@ const AIOpsFrameworkDetail = () => {
                                   1
                                 </div>
                                 <div>
-                                  <h4 className="font-semibold text-gray-900 mb-1">Review and Customize</h4>
+                                  <h4 className="font-semibold text-gray-900 mb-1">Setup and Configuration</h4>
                                   <p className="text-gray-700 text-sm">
-                                    Review the framework documentation and customize it to fit your organizational context and requirements.
+                                    Install and configure the tool in your ML environment with proper authentication and access controls.
                                   </p>
                                 </div>
                               </div>
@@ -378,9 +332,9 @@ const AIOpsFrameworkDetail = () => {
                                   2
                                 </div>
                                 <div>
-                                  <h4 className="font-semibold text-gray-900 mb-1">Stakeholder Alignment</h4>
+                                  <h4 className="font-semibold text-gray-900 mb-1">Integration</h4>
                                   <p className="text-gray-700 text-sm">
-                                    Engage key stakeholders across {item.audience.join(', ')} roles to ensure buy-in and alignment.
+                                    Integrate with your existing ML pipelines and workflows for seamless tracking and versioning.
                                   </p>
                                 </div>
                               </div>
@@ -389,9 +343,9 @@ const AIOpsFrameworkDetail = () => {
                                   3
                                 </div>
                                 <div>
-                                  <h4 className="font-semibold text-gray-900 mb-1">Pilot Implementation</h4>
+                                  <h4 className="font-semibold text-gray-900 mb-1">Team Onboarding</h4>
                                   <p className="text-gray-700 text-sm">
-                                    Start with a pilot project to validate the framework and identify any adjustments needed.
+                                    Train {item.audience.join(' and ')} teams on best practices and usage patterns.
                                   </p>
                                 </div>
                               </div>
@@ -400,29 +354,11 @@ const AIOpsFrameworkDetail = () => {
                                   4
                                 </div>
                                 <div>
-                                  <h4 className="font-semibold text-gray-900 mb-1">Scale and Monitor</h4>
+                                  <h4 className="font-semibold text-gray-900 mb-1">Monitor and Optimize</h4>
                                   <p className="text-gray-700 text-sm">
-                                    Roll out across the organization and establish ongoing monitoring and improvement processes.
+                                    Establish monitoring and continuous improvement processes for optimal usage.
                                   </p>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-3">Available Resources</h3>
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <BookOpen className="h-5 w-5 text-purple-600" />
-                                <span className="font-medium text-gray-900">Implementation Templates</span>
-                              </div>
-                              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <BookOpen className="h-5 w-5 text-purple-600" />
-                                <span className="font-medium text-gray-900">Training Materials</span>
-                              </div>
-                              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <BookOpen className="h-5 w-5 text-purple-600" />
-                                <span className="font-medium text-gray-900">Best Practice Examples</span>
                               </div>
                             </div>
                           </div>
@@ -440,7 +376,7 @@ const AIOpsFrameworkDetail = () => {
               {/* Provider Info */}
               <div className="bg-white rounded-lg border border-gray-200 p-6">
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                  Document Info
+                  Tool Info
                 </h3>
                 <div className="space-y-3 text-sm">
                   <div>
@@ -457,7 +393,7 @@ const AIOpsFrameworkDetail = () => {
                   </div>
                   {item.theme && (
                     <div>
-                      <span className="text-gray-600">Theme</span>
+                      <span className="text-gray-600">Category</span>
                       <div className="font-semibold text-gray-900 mt-1">{item.theme}</div>
                     </div>
                   )}
@@ -465,23 +401,23 @@ const AIOpsFrameworkDetail = () => {
               </div>
 
               {/* Quick Stats */}
-              <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg border border-purple-200 p-6">
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border border-green-200 p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Award className="h-5 w-5 text-purple-600" />
+                  <Award className="h-5 w-5 text-green-600" />
                   <h3 className="font-semibold text-gray-900">Quick Stats</h3>
                 </div>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Downloads</span>
-                    <span className="font-semibold text-gray-900">847</span>
+                    <span className="text-gray-700">Active Users</span>
+                    <span className="font-semibold text-gray-900">342</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Implementations</span>
-                    <span className="font-semibold text-gray-900">23</span>
+                    <span className="text-gray-700">Experiments Tracked</span>
+                    <span className="font-semibold text-gray-900">12.5K</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-700">Rating</span>
-                    <span className="font-semibold text-gray-900">4.7/5.0</span>
+                    <span className="font-semibold text-gray-900">4.8/5.0</span>
                   </div>
                 </div>
               </div>
@@ -505,7 +441,7 @@ const AIOpsFrameworkDetail = () => {
                   )}
                 </button>
                 <button className="w-full py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
-                  Download Framework
+                  Download Guide
                 </button>
                 <button className="w-full py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
                   Share with Team
@@ -517,7 +453,7 @@ const AIOpsFrameworkDetail = () => {
                 <h3 className="font-semibold text-gray-900 mb-4">Related Topics</h3>
                 <div className="flex flex-wrap gap-2">
                   {item.topic.map(topic => (
-                    <span key={topic} className="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-medium rounded-full">
+                    <span key={topic} className="px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
                       {topic}
                     </span>
                   ))}
@@ -528,12 +464,12 @@ const AIOpsFrameworkDetail = () => {
 
           {/* Related Content */}
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Frameworks</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Tools</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {mockItems.filter(i => i.id !== id).slice(0, 3).map(relatedItem => (
                 <Link
                   key={relatedItem.id}
-                  to={`/aiops-framework/${relatedItem.id}`}
+                  to={`/agentops/${relatedItem.id}`}
                   className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow"
                 >
                   <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded mb-3">
@@ -564,4 +500,4 @@ const AIOpsFrameworkDetail = () => {
   );
 };
 
-export default AIOpsFrameworkDetail;
+export default AgentOpsDetail;
