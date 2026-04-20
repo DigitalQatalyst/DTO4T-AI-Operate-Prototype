@@ -9,7 +9,7 @@ import DiscernMarketplace from "./pages/DiscernMarketplace";
 import DiscernDetail from "./pages/DiscernDetail";
 import AIOpsFrameworkMarketplace from "./pages/AIOpsFrameworkMarketplace";
 import Login from "./pages/Login";
-import Workspace from "./pages/Workspace";
+import WorkspaceApp from "./pages/WorkspaceApp";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +25,7 @@ const App = () => (
           <Route path="/discern/:id" element={<DiscernDetail />} />
           <Route path="/aiops-framework" element={<AIOpsFrameworkMarketplace />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/workspace" element={<Workspace />} />
+          <Route path="/workspace/*" element={<WorkspaceApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
