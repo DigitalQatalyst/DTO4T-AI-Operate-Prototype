@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { tabs, mockItems } from '@/data/ragOpsMarketplace';
+import { tabs, mockItems } from '@/data/botOpsMarketplace';
 import { MarketplaceItem } from '@/types/marketplace';
 import TabNavigation from '@/components/discern/TabNavigation';
 import FilterSidebar from '@/components/discern/FilterSidebar';
@@ -12,7 +12,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { SlidersHorizontal } from 'lucide-react';
 
-const RagOpsMarketplace = () => {
+const BotOpsMarketplace = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filteredItems, setFilteredItems] = useState<MarketplaceItem[]>(mockItems);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,13 +22,13 @@ const RagOpsMarketplace = () => {
   const sortBy = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'rag-development': 'Search development... e.g., builder, retrieval',
-    'rag-evaluation': 'Search evaluation... e.g., metrics, quality',
-    'test-set-management': 'Search test sets... e.g., builder, version',
-    'rag-monitoring': 'Search monitoring... e.g., performance, quality'
+    'model-training': 'Search training tools... e.g., distributed, automl',
+    'model-versioning': 'Search versioning... e.g., lineage, control',
+    'model-deployment': 'Search deployment... e.g., cicd, serving',
+    'model-monitoring': 'Search monitoring... e.g., drift, performance'
   };
 
-  const autoRefreshTabs = ['rag-monitoring'];
+  const autoRefreshTabs = ['model-monitoring'];
 
   useEffect(() => {
     let items = [...mockItems];
@@ -67,15 +67,15 @@ const RagOpsMarketplace = () => {
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-100">
           <div className={`${px} py-2.5`}>
-            <Breadcrumb pageName="RAG Evaluation & Test Set Builder" section="Deploys" />
+            <Breadcrumb pageName="Conversational Lifecycle Management (BotOps)" section="Deploys" />
           </div>
         </div>
 
         {/* Page title + subtitle + tabs */}
         <div className={`${px} pt-5 pb-0`}>
-          <h1 className="text-2xl font-bold text-gray-900">RAG Evaluation & Test Set Builder</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Conversational Lifecycle Management (BotOps)</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Evaluation frameworks and test set management for RAG systems.
+            Governed lifecycle management for conversational AI and chatbot deployments.
           </p>
           <div className="mt-4">
             <TabNavigation
@@ -149,7 +149,7 @@ const RagOpsMarketplace = () => {
                 </div>
               </div>
 
-              <CardGrid items={filteredItems} basePath="/ragops" />
+              <CardGrid items={filteredItems} basePath="/botops" />
             </div>
           </div>
         </div>
@@ -178,4 +178,4 @@ const RagOpsMarketplace = () => {
   );
 };
 
-export default RagOpsMarketplace;
+export default BotOpsMarketplace;

@@ -91,7 +91,7 @@ const FilterSection = ({
     setOpen(!open);
   };
 
-  const active = searchParams.get(filterKey)?.split(',') || [];
+  const active = searchParams.get(filterKey === 'role-audience' ? 'role' : filterKey)?.split(',') || [];
 
   return (
     <div className="border-b border-gray-100 py-3">
@@ -133,12 +133,18 @@ const FilterSection = ({
 const FilterSidebar = ({ activeTab, searchParams, onFilterChange }: FilterSidebarProps) => {
   const handleToggle = (filterKey: string, value: string) => {
     const params = new URLSearchParams(searchParams);
-    const current = params.get(filterKey)?.split(',').filter(Boolean) || [];
+    // Map display names to actual parameter names
+    const paramMap: Record<string, string> = {
+      'role-audience': 'role',
+    };
+    const actualKey = paramMap[filterKey] || filterKey;
+    
+    const current = params.get(actualKey)?.split(',').filter(Boolean) || [];
     const idx = current.indexOf(value.toLowerCase());
     if (idx > -1) current.splice(idx, 1);
     else current.push(value.toLowerCase());
-    if (current.length > 0) params.set(filterKey, current.join(','));
-    else params.delete(filterKey);
+    if (current.length > 0) params.set(actualKey, current.join(','));
+    else params.delete(actualKey);
     onFilterChange(params);
   };
 

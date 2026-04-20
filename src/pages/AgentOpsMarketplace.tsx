@@ -22,13 +22,13 @@ const AgentOpsMarketplace = () => {
   const sortBy = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'model-training': 'Search training tools... e.g., distributed, automl',
-    'model-versioning': 'Search versioning... e.g., lineage, control',
-    'model-deployment': 'Search deployment... e.g., cicd, serving',
-    'model-monitoring': 'Search monitoring... e.g., drift, performance'
+    'agent-development': 'Search development... e.g., framework, tools',
+    'agent-orchestration': 'Search orchestration... e.g., multi-agent, coordination',
+    'agent-monitoring': 'Search monitoring... e.g., decisions, performance',
+    'agent-governance': 'Search governance... e.g., safety, controls'
   };
 
-  const autoRefreshTabs = ['model-monitoring'];
+  const autoRefreshTabs = ['agent-monitoring'];
 
   useEffect(() => {
     let items = [...mockItems];

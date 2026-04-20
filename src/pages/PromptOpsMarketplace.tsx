@@ -22,13 +22,13 @@ const PromptOpsMarketplace = () => {
   const sortBy = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'model-training': 'Search training tools... e.g., distributed, automl',
-    'model-versioning': 'Search versioning... e.g., lineage, control',
-    'model-deployment': 'Search deployment... e.g., cicd, serving',
-    'model-monitoring': 'Search monitoring... e.g., drift, performance'
+    'prompt-development': 'Search development tools... e.g., templates, testing',
+    'prompt-versioning': 'Search versioning... e.g., git, control',
+    'prompt-deployment': 'Search deployment... e.g., pipeline, rollback',
+    'prompt-monitoring': 'Search monitoring... e.g., performance, quality'
   };
 
-  const autoRefreshTabs = ['model-monitoring'];
+  const autoRefreshTabs = ['prompt-monitoring'];
 
   useEffect(() => {
     let items = [...mockItems];

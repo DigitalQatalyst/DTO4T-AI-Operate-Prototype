@@ -34,6 +34,21 @@ const ContentCard = ({ item, basePath = '/discern' }: ContentCardProps) => {
     if (basePath === '/mlops') {
       return { line1: 'Model Lifecycle', line2: 'Management (MLOps)' };
     }
+    if (basePath === '/botops') {
+      return { line1: 'Conversational Lifecycle', line2: 'Management (BotOps)' };
+    }
+    if (basePath === '/agentops') {
+      return { line1: 'Agent Lifecycle', line2: 'Management (AgentOps)' };
+    }
+    if (basePath === '/promptops') {
+      return { line1: 'Prompt Management &', line2: 'Release Pipeline' };
+    }
+    if (basePath === '/ragops') {
+      return { line1: 'RAG Evaluation &', line2: 'Test Set Builder' };
+    }
+    if (basePath === '/dtops') {
+      return { line1: 'Digital Twin Ops', line2: '(DTOps)' };
+    }
     return { line1: 'AI Updates &', line2: 'Insights Center' };
   };
 

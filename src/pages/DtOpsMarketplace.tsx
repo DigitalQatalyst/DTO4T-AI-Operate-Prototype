@@ -22,13 +22,13 @@ const DtOpsMarketplace = () => {
   const sortBy = searchParams.get('sort') || 'recent';
 
   const searchPlaceholders: Record<string, string> = {
-    'model-training': 'Search training tools... e.g., distributed, automl',
-    'model-versioning': 'Search versioning... e.g., lineage, control',
-    'model-deployment': 'Search deployment... e.g., cicd, serving',
-    'model-monitoring': 'Search monitoring... e.g., drift, performance'
+    'twin-development': 'Search development... e.g., creation, modeling',
+    'twin-synchronization': 'Search sync... e.g., real-time, data',
+    'twin-simulation': 'Search simulation... e.g., scenarios, prediction',
+    'twin-monitoring': 'Search monitoring... e.g., health, quality'
   };
 
-  const autoRefreshTabs = ['model-monitoring'];
+  const autoRefreshTabs = ['twin-monitoring'];
 
   useEffect(() => {
     let items = [...mockItems];
