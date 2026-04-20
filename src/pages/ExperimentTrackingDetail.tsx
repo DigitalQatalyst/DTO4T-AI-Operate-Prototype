@@ -15,18 +15,30 @@ const ExperimentTrackingDetail = () => {
   const [showFullContent, setShowFullContent] = useState(false);
   
   useEffect(() => {
+    // Check if user is logged in AND has unlocked content in this session
     const user = localStorage.getItem('currentUser');
-    if (user) {
+    const hasUnlockedContent = sessionStorage.getItem(`unlocked_${id}`);
+    
+    // ONLY unlock if BOTH conditions are true
+    if (user && hasUnlockedContent === 'true') {
       setIsLoggedIn(true);
       setShowFullContent(true);
+    } else {
+      setShowFullContent(false);
+      setIsLoggedIn(false);
     }
-  }, []);
+  }, [id]);
 
   const handleViewContent = () => {
-    if (!isLoggedIn) {
+    // Check if user is logged in
+    const user = localStorage.getItem('currentUser');
+    if (!user) {
       setShowLoginModal(true);
     } else {
+      setIsLoggedIn(true);
       setShowFullContent(true);
+      // Mark this content as unlocked in this session
+      sessionStorage.setItem(`unlocked_${id}`, 'true');
     }
   };
 
@@ -34,6 +46,8 @@ const ExperimentTrackingDetail = () => {
     setIsLoggedIn(true);
     setShowFullContent(true);
     setShowLoginModal(false);
+    // Mark this content as unlocked in this session
+    sessionStorage.setItem(`unlocked_${id}`, 'true');
   };
   
   const item = mockItems.find(i => i.id === id);

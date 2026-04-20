@@ -13,20 +13,36 @@ const AIOpsFrameworkDetail = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showFullContent, setShowFullContent] = useState(false);
+  const [isChecking, setIsChecking] = useState(true); // Add loading state
   
   useEffect(() => {
+    // Check if user is logged in AND has unlocked content in this session
     const user = localStorage.getItem('currentUser');
-    if (user) {
+    const hasUnlockedContent = sessionStorage.getItem(`unlocked_${id}`);
+    
+    // ONLY unlock if BOTH conditions are true
+    if (user && hasUnlockedContent === 'true') {
       setIsLoggedIn(true);
       setShowFullContent(true);
+    } else {
+      setShowFullContent(false);
+      setIsLoggedIn(false);
     }
-  }, []);
+    
+    setIsChecking(false);
+  }, [id]);
 
   const handleViewContent = () => {
-    if (!isLoggedIn) {
+    // Check if user is logged in
+    const user = localStorage.getItem('currentUser');
+    
+    if (!user) {
       setShowLoginModal(true);
     } else {
+      setIsLoggedIn(true);
       setShowFullContent(true);
+      // Mark this content as unlocked in this session
+      sessionStorage.setItem(`unlocked_${id}`, 'true');
     }
   };
 
@@ -34,6 +50,8 @@ const AIOpsFrameworkDetail = () => {
     setIsLoggedIn(true);
     setShowFullContent(true);
     setShowLoginModal(false);
+    // Mark this content as unlocked in this session
+    sessionStorage.setItem(`unlocked_${id}`, 'true');
   };
   
   const item = mockItems.find(i => i.id === id);
