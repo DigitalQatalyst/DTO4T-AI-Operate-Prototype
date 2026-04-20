@@ -1,5 +1,5 @@
 import { MarketplaceItem } from '@/types/marketplace';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface ContentCardProps {
   item: MarketplaceItem;
@@ -14,13 +14,41 @@ const typeConfig: Record<string, { label: string; dot: string }> = {
   dco_brief: { label: 'DCO Brief',               dot: 'bg-teal-500' },
   use_case:  { label: 'Use Case',                dot: 'bg-indigo-500' },
   industry:  { label: 'Industry Analysis',       dot: 'bg-yellow-500' },
+  self_service:   { label: 'Self-Service',       dot: 'bg-purple-500' },
+  orchestration:  { label: 'Orchestration',      dot: 'bg-blue-500' },
+  monitoring:     { label: 'Monitoring',         dot: 'bg-green-500' },
+  value_tracking: { label: 'Value Tracking',     dot: 'bg-teal-500' },
+  incident:       { label: 'Incident Response',  dot: 'bg-red-500' },
+  audit:          { label: 'Audit & Compliance', dot: 'bg-orange-500' },
+  finops:         { label: 'FinOps',             dot: 'bg-yellow-500' },
+  prompt_library: { label: 'Prompt Library',     dot: 'bg-indigo-500' },
 };
 
 const ContentCard = ({ item }: ContentCardProps) => {
+  const location = useLocation();
   const cfg = typeConfig[item.type] || { label: item.type, dot: 'bg-gray-400' };
+
+  // Determine marketplace from current URL
+  const getMarketplaceInfo = () => {
+    const path = location.pathname;
+    if (path.includes('/discern')) return { marketplace: 'discern', title: 'AI Updates &\nInsights Center' };
+    if (path.includes('/risk-regulatory')) return { marketplace: 'risk-regulatory', title: 'Risk & Regulatory\nAlerts' };
+    if (path.includes('/learning')) return { marketplace: 'learning', title: 'AI Learning\nCenter' };
+    if (path.includes('/knowledge')) return { marketplace: 'knowledge', title: 'AI Knowledge\nCenter' };
+    if (path.includes('/glossary')) return { marketplace: 'glossary', title: 'AI\nGlossary' };
+    if (path.includes('/community')) return { marketplace: 'community', title: 'AI Community &\nOffice Hours' };
+    if (path.includes('/drive')) return { marketplace: 'drive', title: 'Drive\nMarketplace' };
+    if (path.includes('/design')) return { marketplace: 'design', title: 'AI Design\nLibrary' };
+    if (path.includes('/aiops-framework')) return { marketplace: 'aiops-framework', title: 'AIOps Framework\nLibrary' };
+    return { marketplace: 'discern', title: 'Marketplace' };
+  };
+
+  const { marketplace, title } = getMarketplaceInfo();
 
   const formatDate = (d: string) =>
     new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+  const titleLines = title.split('\n');
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
@@ -37,8 +65,9 @@ const ContentCard = ({ item }: ContentCardProps) => {
         </div>
         {/* centre text */}
         <div className="text-center text-white px-6 z-10">
-          <p className="text-lg font-bold leading-snug">AI Updates &</p>
-          <p className="text-lg font-bold leading-snug">Insights Center</p>
+          {titleLines.map((line, i) => (
+            <p key={i} className="text-lg font-bold leading-snug">{line}</p>
+          ))}
         </div>
         {/* decorative circles */}
         <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-white/5" />
@@ -65,7 +94,7 @@ const ContentCard = ({ item }: ContentCardProps) => {
           <span>{item.source}</span>
         </div>
 
-        <Link to={`/discern/${item.id}`} className="w-full">
+        <Link to={`/${marketplace}/${item.id}`} className="w-full">
           <button className="w-full py-2.5 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-medium rounded-md transition-colors">
             View Details
           </button>

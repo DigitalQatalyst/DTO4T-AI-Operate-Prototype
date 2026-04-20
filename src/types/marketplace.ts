@@ -1,13 +1,14 @@
 export interface MarketplaceItem {
   id: string;
-  type: 'update' | 'release' | 'regulatory' | 'risk' | 'insight' | 'dco_brief' | 'use_case' | 'industry';
+  type: 'update' | 'release' | 'regulatory' | 'risk' | 'insight' | 'dco_brief' | 'use_case' | 'industry' | 
+        'self_service' | 'orchestration' | 'monitoring' | 'value_tracking' | 'incident' | 'audit' | 'finops' | 'prompt_library';
   title: string;
   summary: string;
   contentUrl: string;
   publishedAt: string;
   ownerTeam: string;
   source: 'Internal' | 'External';
-  status: 'Approved' | 'Archived';
+  status: 'Approved' | 'Archived' | 'Live';
   tags: string[];
   topic: string[];
   audience: string[];

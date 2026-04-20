@@ -49,9 +49,65 @@ const ClassBlock = ({ cls }: { cls: MarketplaceClass }) => (
               {p.cta}
               <ArrowRight className="h-3 w-3" />
             </Link>
+          ) : p.name === "AI Risk & Regulatory Alerts" ? (
+            <Link 
+              to="/risk-regulatory"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.name === "AI Learning Center" ? (
+            <Link 
+              to="/learning"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.name === "AI Knowledge Center" ? (
+            <Link 
+              to="/knowledge"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.name === "AI Glossary" ? (
+            <Link 
+              to="/glossary"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.name === "AI Community & Office Hours" ? (
+            <Link 
+              to="/community"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
           ) : p.name === "AIOps Framework Library" ? (
             <Link 
               to="/aiops-framework"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.cta === "Explore Designs Marketplace" ? (
+            <Link 
+              to="/design"
+              className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
+            >
+              {p.cta}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ) : p.cta === "Explore Drive Marketplace" ? (
+            <Link 
+              to="/drive"
               className="mt-4 inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary/5"
             >
               {p.cta}
