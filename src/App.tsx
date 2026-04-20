@@ -38,7 +38,7 @@ import DriveDetail from "./pages/DriveDetail";
 import DesignMarketplace from "./pages/DesignMarketplace";
 import DesignDetail from "./pages/DesignDetail";
 import Login from "./pages/Login";
-import Workspace from "./pages/Workspace";
+import WorkspaceApp from "./pages/WorkspaceApp";
 
 const queryClient = new QueryClient();
 
@@ -83,7 +83,7 @@ const App = () => (
           <Route path="/design" element={<DesignMarketplace />} />
           <Route path="/design/:id" element={<DesignDetail />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/workspace" element={<Workspace />} />
+          <Route path="/workspace/*" element={<WorkspaceApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
