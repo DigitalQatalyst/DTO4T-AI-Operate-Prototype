@@ -7,6 +7,7 @@ import FilterSidebar from '@/components/discern/FilterSidebar';
 import SearchBar from '@/components/discern/SearchBar';
 import CardGrid from '@/components/discern/CardGrid';
 import Breadcrumb from '@/components/discern/Breadcrumb';
+import SortDropdown from '@/components/discern/SortDropdown';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import { SlidersHorizontal } from 'lucide-react';
@@ -130,6 +131,14 @@ const DiscernMarketplace = () => {
                   Available Items ({filteredItems.length})
                 </span>
                 <div className="flex items-center gap-3">
+                  <SortDropdown
+                    value={sortBy}
+                    onChange={(v) => {
+                      const p = new URLSearchParams(searchParams);
+                      v ? p.set('sort', v) : p.delete('sort');
+                      setSearchParams(p);
+                    }}
+                  />
                   <button
                     onClick={() => setIsFilterOpen(true)}
                     className="lg:hidden flex items-center gap-1.5 text-sm border border-gray-300 rounded px-3 py-1.5 hover:bg-gray-50"

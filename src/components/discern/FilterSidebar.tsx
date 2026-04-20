@@ -11,6 +11,7 @@ interface FilterSidebarProps {
 const globalFilters: Record<string, string[]> = {
   Topic:           ['LLM', 'RAG', 'Agents', 'Agentic', 'Governance', 'Security', 'Adoption', 'Tools'],
   'Role/Audience': ['Employee', 'Manager', 'Leader', 'Developer', 'Risk'],
+  Source:          ['Internal', 'External'],
   Date:            ['Last 7 days', 'Last 30 days', 'Last 90 days', 'This year'],
 };
 

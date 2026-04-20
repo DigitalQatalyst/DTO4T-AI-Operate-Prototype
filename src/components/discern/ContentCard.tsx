@@ -1,4 +1,5 @@
 import { MarketplaceItem } from '@/types/marketplace';
+import { Link } from 'react-router-dom';
 
 interface ContentCardProps {
   item: MarketplaceItem;
@@ -64,9 +65,11 @@ const ContentCard = ({ item }: ContentCardProps) => {
           <span>{item.source}</span>
         </div>
 
-        <button className="w-full py-2.5 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-medium rounded-md transition-colors">
-          View Details
-        </button>
+        <Link to={`/discern/${item.id}`} className="w-full">
+          <button className="w-full py-2.5 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-medium rounded-md transition-colors">
+            View Details
+          </button>
+        </Link>
       </div>
     </div>
   );
