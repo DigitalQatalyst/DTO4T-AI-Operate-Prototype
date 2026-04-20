@@ -3,9 +3,10 @@ import ContentCard from './ContentCard';
 
 interface CardGridProps {
   items: MarketplaceItem[];
+  basePath?: string; // e.g., '/discern' or '/aiops-framework'
 }
 
-const CardGrid = ({ items }: CardGridProps) => {
+const CardGrid = ({ items, basePath }: CardGridProps) => {
   if (items.length === 0) {
     return (
       <div className="text-center py-12">
@@ -17,7 +18,7 @@ const CardGrid = ({ items }: CardGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {items.map((item) => (
-        <ContentCard key={item.id} item={item} />
+        <ContentCard key={item.id} item={item} basePath={basePath} />
       ))}
     </div>
   );

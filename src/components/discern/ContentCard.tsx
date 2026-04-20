@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface ContentCardProps {
   item: MarketplaceItem;
+  basePath?: string; // e.g., '/discern' or '/aiops-framework'
 }
 
 const typeConfig: Record<string, { label: string; dot: string }> = {
@@ -16,7 +17,7 @@ const typeConfig: Record<string, { label: string; dot: string }> = {
   industry:  { label: 'Industry Analysis',       dot: 'bg-yellow-500' },
 };
 
-const ContentCard = ({ item }: ContentCardProps) => {
+const ContentCard = ({ item, basePath = '/discern' }: ContentCardProps) => {
   const cfg = typeConfig[item.type] || { label: item.type, dot: 'bg-gray-400' };
 
   const formatDate = (d: string) =>
@@ -65,7 +66,7 @@ const ContentCard = ({ item }: ContentCardProps) => {
           <span>{item.source}</span>
         </div>
 
-        <Link to={`/discern/${item.id}`} className="w-full">
+        <Link to={`${basePath}/${item.id}`} className="w-full">
           <button className="w-full py-2.5 bg-[#0f1f5c] hover:bg-[#0a1640] text-white text-sm font-medium rounded-md transition-colors">
             View Details
           </button>

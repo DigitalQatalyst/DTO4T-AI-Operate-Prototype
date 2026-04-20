@@ -151,7 +151,7 @@ const AIOpsFrameworkMarketplace = () => {
                 </div>
               </div>
 
-              <CardGrid items={filteredItems} />
+              <CardGrid items={filteredItems} basePath="/aiops-framework" />
             </div>
           </div>
         </div>
