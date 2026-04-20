@@ -9,6 +9,10 @@ import DiscernMarketplace from "./pages/DiscernMarketplace";
 import DiscernDetail from "./pages/DiscernDetail";
 import AIOpsFrameworkMarketplace from "./pages/AIOpsFrameworkMarketplace";
 import AIOpsFrameworkDetail from "./pages/AIOpsFrameworkDetail";
+import ExperimentTrackingMarketplace from "./pages/ExperimentTrackingMarketplace";
+import ExperimentTrackingDetail from "./pages/ExperimentTrackingDetail";
+import MLOpsMarketplace from "./pages/MLOpsMarketplace";
+import MLOpsDetail from "./pages/MLOpsDetail";
 import Login from "./pages/Login";
 import Workspace from "./pages/Workspace";
 
@@ -26,6 +30,10 @@ const App = () => (
           <Route path="/discern/:id" element={<DiscernDetail />} />
           <Route path="/aiops-framework" element={<AIOpsFrameworkMarketplace />} />
           <Route path="/aiops-framework/:id" element={<AIOpsFrameworkDetail />} />
+          <Route path="/experiment-tracking" element={<ExperimentTrackingMarketplace />} />
+          <Route path="/experiment-tracking/:id" element={<ExperimentTrackingDetail />} />
+          <Route path="/mlops" element={<MLOpsMarketplace />} />
+          <Route path="/mlops/:id" element={<MLOpsDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/workspace" element={<Workspace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

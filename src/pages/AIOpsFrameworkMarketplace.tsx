@@ -69,15 +69,15 @@ const AIOpsFrameworkMarketplace = () => {
         {/* Breadcrumb */}
         <div className="bg-gray-50 border-b border-gray-100">
           <div className={`${px} py-2.5`}>
-            <Breadcrumb pageName="AIOps Framework Library" />
+            <Breadcrumb pageName="AIOps Build Library" section="Deploys" />
           </div>
         </div>
 
         {/* Page title + subtitle + tabs */}
         <div className={`${px} pt-5 pb-0`}>
-          <h1 className="text-2xl font-bold text-gray-900">AIOps Framework Library</h1>
+          <h1 className="text-2xl font-bold text-gray-900">AIOps Build Library</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Define the rules that make AI governable at enterprise scale. Governance models, lifecycle standards, accountability frameworks, and responsible AI policies.
+            Turn AI assets into governed, reusable, enterprise-grade capability. Versioned prompts, agents, workflows, and evaluation templates for rapid deployment.
           </p>
           <div className="mt-4">
             <TabNavigation

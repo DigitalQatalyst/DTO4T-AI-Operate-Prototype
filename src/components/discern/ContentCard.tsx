@@ -23,6 +23,22 @@ const ContentCard = ({ item, basePath = '/discern' }: ContentCardProps) => {
   const formatDate = (d: string) =>
     new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
+  // Determine the card header text based on basePath
+  const getHeaderText = () => {
+    if (basePath === '/aiops-framework') {
+      return { line1: 'AIOps Build', line2: 'Library' };
+    }
+    if (basePath === '/experiment-tracking') {
+      return { line1: 'Experiment Tracking &', line2: 'Model Registry' };
+    }
+    if (basePath === '/mlops') {
+      return { line1: 'Model Lifecycle', line2: 'Management (MLOps)' };
+    }
+    return { line1: 'AI Updates &', line2: 'Insights Center' };
+  };
+
+  const headerText = getHeaderText();
+
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col">
       {/* Image / header block */}
@@ -38,8 +54,8 @@ const ContentCard = ({ item, basePath = '/discern' }: ContentCardProps) => {
         </div>
         {/* centre text */}
         <div className="text-center text-white px-6 z-10">
-          <p className="text-lg font-bold leading-snug">AI Updates &</p>
-          <p className="text-lg font-bold leading-snug">Insights Center</p>
+          <p className="text-lg font-bold leading-snug">{headerText.line1}</p>
+          <p className="text-lg font-bold leading-snug">{headerText.line2}</p>
         </div>
         {/* decorative circles */}
         <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-white/5" />
