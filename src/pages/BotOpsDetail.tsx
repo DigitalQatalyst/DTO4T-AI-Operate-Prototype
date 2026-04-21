@@ -2,53 +2,13 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { mockItems } from '@/data/botOpsMarketplace';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import LoginModal from '@/components/LoginModal';
-import { ChevronRight, Home, Clock, Users, Target, Award, BookOpen, CheckCircle2, ArrowLeft, Lock } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { ChevronRight, Home, Clock, Users, Target, Award, BookOpen, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
 
 const BotOpsDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showFullContent, setShowFullContent] = useState(false);
-  
-  useEffect(() => {
-    // Check if user is logged in AND has unlocked content in this session
-    const user = localStorage.getItem('currentUser');
-    const hasUnlockedContent = sessionStorage.getItem(`unlocked_${id}`);
-    
-    // ONLY unlock if BOTH conditions are true
-    if (user && hasUnlockedContent === 'true') {
-      setIsLoggedIn(true);
-      setShowFullContent(true);
-    } else {
-      setShowFullContent(false);
-      setIsLoggedIn(false);
-    }
-  }, [id]);
-
-  const handleViewContent = () => {
-    // Check if user is logged in
-    const user = localStorage.getItem('currentUser');
-    if (!user) {
-      setShowLoginModal(true);
-    } else {
-      setIsLoggedIn(true);
-      setShowFullContent(true);
-      // Mark this content as unlocked in this session
-      sessionStorage.setItem(`unlocked_${id}`, 'true');
-    }
-  };
-
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-    setShowFullContent(true);
-    setShowLoginModal(false);
-    // Mark this content as unlocked in this session
-    sessionStorage.setItem(`unlocked_${id}`, 'true');
-  };
   
   const item = mockItems.find(i => i.id === id);
 
@@ -182,12 +142,11 @@ const BotOpsDetail = () => {
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        disabled={!showFullContent}
                         className={`px-6 py-3 text-sm font-medium capitalize border-b-2 transition-colors ${
                           activeTab === tab
                             ? 'border-[#0f1f5c] text-[#0f1f5c]'
                             : 'border-transparent text-gray-500 hover:text-gray-700'
-                        } ${!showFullContent ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        }`}
                       >
                         {tab}
                       </button>
@@ -196,27 +155,7 @@ const BotOpsDetail = () => {
                 </div>
 
                 <div className="p-8">
-                  {!showFullContent ? (
-                    // Locked Content Preview
-                    <div className="text-center py-12">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-                        <Lock className="h-8 w-8 text-gray-400" />
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">Content Locked</h3>
-                      <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                        Login to access the full tool documentation, implementation guides, and integration examples.
-                      </p>
-                      <button
-                        onClick={handleViewContent}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#0f1f5c] hover:bg-[#0a1640] text-white font-semibold rounded-lg transition-colors"
-                      >
-                        <Lock className="h-4 w-4" />
-                        Login to View Full Content
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      {activeTab === 'overview' && (
+                  {activeTab === 'overview' && (
                         <div className="space-y-6">
                           <div>
                             <h2 className="text-xl font-bold text-gray-900 mb-4">Overview</h2>
@@ -364,8 +303,6 @@ const BotOpsDetail = () => {
                           </div>
                         </div>
                       )}
-                    </>
-                  )}
                 </div>
               </div>
             </div>
@@ -424,21 +361,9 @@ const BotOpsDetail = () => {
 
               {/* Actions */}
               <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-3">
-                <button 
-                  onClick={handleViewContent}
-                  className="w-full py-3 bg-[#0f1f5c] hover:bg-[#0a1640] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
-                >
-                  {showFullContent ? (
-                    <>
-                      <CheckCircle2 className="h-4 w-4" />
-                      Content Unlocked
-                    </>
-                  ) : (
-                    <>
-                      <Lock className="h-4 w-4" />
-                      Login to Access
-                    </>
-                  )}
+                <button className="w-full py-3 bg-[#0f1f5c] hover:bg-[#0a1640] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" />
+                  View Documentation
                 </button>
                 <button className="w-full py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
                   Download Guide
@@ -487,13 +412,6 @@ const BotOpsDetail = () => {
           </div>
         </div>
       </div>
-      
-      {/* Login Modal */}
-      <LoginModal 
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        onLogin={handleLoginSuccess}
-      />
       
       <Footer />
     </>
