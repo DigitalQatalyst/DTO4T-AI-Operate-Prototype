@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
+import { useNavigate, Routes, Route } from 'react-router-dom';
 import WorkspaceLayout from '@/components/workspace/WorkspaceLayout';
 import WorkspaceHub from '@/pages/workspace/WorkspaceHub';
 import AIOpportunityWorkflow from '@/pages/workspace/AIOpportunityWorkflow';
@@ -26,6 +26,15 @@ interface User {
   name: string;
 }
 
+const roleOptions: { value: UserRole; label: string }[] = [
+  { value: 'employee', label: 'Business User / Employee' },
+  { value: 'manager', label: 'Manager / Team Lead' },
+  { value: 'owner', label: 'Service Owner / Business Owner' },
+  { value: 'specialist', label: 'Specialist Team' },
+  { value: 'admin', label: 'Platform Admin / Governance' },
+  { value: 'executive', label: 'Leadership / Executive' },
+];
+
 export default function WorkspaceApp() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
@@ -41,13 +50,20 @@ export default function WorkspaceApp() {
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
-    navigate('/login');
+    navigate('/');
+  };
+
+  const handleRoleSwitch = (newRole: UserRole) => {
+    if (!user) return;
+    const updated = { ...user, role: newRole };
+    localStorage.setItem('currentUser', JSON.stringify(updated));
+    setUser(updated);
   };
 
   if (!user) return null;
 
   return (
-    <WorkspaceLayout user={user} onLogout={handleLogout}>
+    <WorkspaceLayout user={user} onLogout={handleLogout} onRoleSwitch={handleRoleSwitch}>
       <Routes>
         <Route index element={<WorkspaceHub user={user} />} />
         <Route path="opportunity" element={<AIOpportunityWorkflow />} />

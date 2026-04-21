@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen, Sparkles, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SectionBadge from "./SectionBadge";
 
 const float = (delay: number, y: number, x: number) => ({
@@ -12,6 +13,7 @@ const float = (delay: number, y: number, x: number) => ({
 const HeroSection = () => {
   const [promptValue, setPromptValue] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const navigate = useNavigate();
 
   const promptChips = [
     "Explain LLM vs RAG",
@@ -198,20 +200,19 @@ const HeroSection = () => {
 
           {/* CTAs */}
           <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="#learning"
+            <button
+              onClick={() => navigate('/discern')}
               className="inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-semibold text-primary transition hover:bg-white/90 shadow-lg"
             >
               <BookOpen className="h-5 w-5" />
               Learn to work with AI today
-            </a>
-            <a
-              href="#marketplace"
-              onClick={scrollToMarketplace}
+            </button>
+            <button
+              onClick={() => navigate('/discern')}
               className="inline-flex items-center gap-2 rounded-2xl border-2 border-white/30 bg-transparent px-8 py-4 text-base font-semibold text-white transition hover:bg-white/10 hover:border-white/50"
             >
               Explore AI Marketplaces
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>
