@@ -45,6 +45,7 @@ import BlueprintMarketplace from "./pages/BlueprintMarketplace";
 import BlueprintDetail from "./pages/BlueprintDetail";
 import UseCaseMarketplace from "./pages/UseCaseMarketplace";
 import UseCaseDetail from "./pages/UseCaseDetail";
+import DeploysMarketplace from "./pages/DeploysMarketplace";
 import Login from "./pages/Login";
 import WorkspaceApp from "./pages/WorkspaceApp";
 
@@ -98,6 +99,7 @@ const App = () => (
           <Route path="/blueprint/:id" element={<BlueprintDetail />} />
           <Route path="/usecase" element={<UseCaseMarketplace />} />
           <Route path="/usecase/:id" element={<UseCaseDetail />} />
+          <Route path="/deploys" element={<DeploysMarketplace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/workspace/*" element={<WorkspaceApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
