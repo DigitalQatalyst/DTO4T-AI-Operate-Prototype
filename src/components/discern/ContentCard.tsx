@@ -40,6 +40,8 @@ const ContentCard = ({ item, basePath }: ContentCardProps) => {
     if (path.includes('/community')) return { marketplace: 'community', title: 'AI Community &\nOffice Hours' };
     if (path.includes('/drive')) return { marketplace: 'drive', title: 'Drive\nMarketplace' };
     if (path.includes('/design')) return { marketplace: 'design', title: 'AI Design\nLibrary' };
+    if (path.includes('/blueprint')) return { marketplace: 'blueprint', title: 'AIOps Blueprint\nLibrary' };
+    if (path.includes('/usecase')) return { marketplace: 'usecase', title: 'AI Use Case\nIntake & Scoring' };
     if (path.includes('/aiops-framework')) return { marketplace: 'aiops-framework', title: 'AIOps Framework\nLibrary' };
     if (path.includes('/experiment-tracking')) return { marketplace: 'experiment-tracking', title: 'Experiment Tracking &\nModel Registry' };
     if (path.includes('/mlops')) return { marketplace: 'mlops', title: 'Model Lifecycle\nManagement (MLOps)' };

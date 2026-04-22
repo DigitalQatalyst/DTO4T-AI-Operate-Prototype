@@ -27,7 +27,7 @@ const Breadcrumb = ({ pageName, section }: BreadcrumbProps) => {
       <ChevronRight className="h-3.5 w-3.5" />
       <Link to="/" className="hover:text-gray-900">Resources</Link>
       <ChevronRight className="h-3.5 w-3.5" />
-      <Link to="/" className="hover:text-gray-900">DIA AI Hub</Link>
+      <Link to="/" className="hover:text-gray-900">DIA.AI</Link>
       <ChevronRight className="h-3.5 w-3.5" />
       <Link to={parentSection.link} className="hover:text-gray-900">{parentSection.name}</Link>
       <ChevronRight className="h-3.5 w-3.5" />

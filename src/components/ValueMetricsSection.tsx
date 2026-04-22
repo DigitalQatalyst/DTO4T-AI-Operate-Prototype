@@ -1,107 +1,67 @@
 import { motion } from "framer-motion";
-import { TrendingUp, Activity, ShieldCheck, ArrowRight } from "lucide-react";
-import SectionBadge from "./SectionBadge";
 
 const metrics = [
   { 
-    icon: TrendingUp, 
-    label: "Adoption & Engagement Rates", 
-    value: "Active users, copilot utilisation, agent invocation frequency, and role-based penetration across the enterprise." 
+    value: "80%", 
+    label: "of prioritised AI opportunities captured and progressed through DIA.AI" 
   },
   { 
-    icon: Activity, 
-    label: "Decision-Cycle Compression", 
-    value: "Reduction in time-to-insight, approval latency, and end-to-end workflow execution duration." 
+    value: "100%", 
+    label: "of in-scope AI initiatives visible and lifecycle-managed on the platform" 
   },
   { 
-    icon: ShieldCheck, 
-    label: "Quality & Output Uplift", 
-    value: "Improvements in accuracy, consistency, compliance adherence, and deliverable quality benchmarks." 
+    value: "90%", 
+    label: "of AI requests following defined governance and approval paths" 
   },
   { 
-    icon: TrendingUp, 
-    label: "Cost & Efficiency Optimisation", 
-    value: "Operational savings, automation impact, and productivity gains relative to baseline performance." 
+    value: "75%", 
+    label: "of priority stakeholder groups actively using DIA.AI" 
   },
   { 
-    icon: ShieldCheck, 
-    label: "Risk & Control Reduction", 
-    value: "Decrease in compliance breaches, anomaly rates, governance incidents, and model drift exposure." 
+    value: "50%", 
+    label: "reduction in fragmented AI coordination methods" 
   },
   { 
-    icon: Activity, 
-    label: "Cognitive Capacity Expansion", 
-    value: "Increase in analytical throughput, scenario simulations, strategic options generated, and cross-domain insight synthesis." 
-  },
-  { 
-    icon: TrendingUp, 
-    label: "AI Portfolio ROI", 
-    value: "Value realisation versus investment across use cases, functions, and transformation initiatives." 
+    value: "100%", 
+    label: "of priority AI use cases with defined value measures and tracking" 
   },
 ];
 
 const ValueMetricsSection = () => (
-  <section id="metrics" className="py-16" style={{ backgroundColor: '#f0f6ff' }}>
-    <div className="mx-auto max-w-5xl px-6 text-center">
-      <SectionBadge label="Value" />
-      <motion.h2
+  <section id="metrics" className="bg-navy-deep py-20">
+    <div className="mx-auto max-w-7xl px-6">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mt-4 text-3xl font-bold text-foreground sm:text-4xl"
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
       >
-        Measuring Cognitive Impact & Enterprise Value
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-        className="mx-auto mt-4 max-w-2xl text-muted-foreground"
-      >
-        Track adoption, decision-cycle compression, quality uplift, efficiency
-        gains, risk reduction, and portfolio ROI.
-      </motion.p>
-
-      <div className="mt-12 overflow-x-auto overflow-y-hidden scrollbar-hide">
-        <div className="flex gap-6 min-w-max pl-6 pr-12">
-          {metrics.map((m, i) => (
-            <motion.div
-              key={m.label}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl bg-white border border-border/60 p-8 text-left transition-all hover:-translate-y-1 hover:shadow-lg flex-shrink-0 flex flex-col"
-              style={{ width: '420px', minHeight: '280px' }}
-            >
-              <div className="gradient-hero mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
-                <m.icon className="h-5 w-5 text-white" />
-              </div>
-              <h3 className="mb-3 font-bold text-foreground">{m.label}</h3>
-              <p className="text-sm text-muted-foreground flex-grow">{m.value}</p>
-              <button className="mt-4 w-full rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-primary transition hover:bg-gray-50 hover:border-primary/30">
-                Learn More
-              </button>
-            </motion.div>
-          ))}
+        <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
+          <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
+            PLATFORM OUTCOMES
+          </span>
         </div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-12"
-      >
-        <a
-          href="#"
-          className="gradient-hero inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
-        >
-          View Enterprise AI Value Dashboard
-          <ArrowRight className="h-4 w-4" />
-        </a>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          Measurable AI Impact Across the Enterprise
+        </h2>
       </motion.div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {metrics.map((m, i) => (
+          <motion.div
+            key={m.label}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            className="text-center"
+          >
+            <div className="text-5xl font-bold text-accent mb-4">{m.value}</div>
+            <p className="text-sm text-white/70 leading-relaxed">{m.label}</p>
+          </motion.div>
+        ))}
+      </div>
     </div>
   </section>
 );

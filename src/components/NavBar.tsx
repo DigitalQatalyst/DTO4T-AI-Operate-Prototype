@@ -82,13 +82,12 @@ const NavBar = () => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full text-white transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}
-      style={{ background: "linear-gradient(135deg, rgb(251, 85, 53) 0%, rgb(26, 46, 110) 50%, rgb(3, 15, 53) 100%)" }}
+      className={`fixed top-0 z-50 w-full text-white transition-all duration-300 bg-navy-deep border-b ${scrolled ? "shadow-md border-white/10" : "border-white/5"}`}
     >
       <div className="flex w-full items-center">
         {/* Logo */}
         <a className="py-2 px-4 flex items-center transition-all duration-300 h-16" href="/">
-          <span className="text-lg font-bold text-white">DIA AI Hub</span>
+          <span className="text-lg font-bold text-white">DIA.AI</span>
         </a>
 
         {/* Main Nav */}
@@ -110,7 +109,7 @@ const NavBar = () => {
               {exploreOpen && (
                 <div className="absolute left-0 top-full mt-2 w-[360px] rounded-xl border border-white/20 bg-white shadow-2xl overflow-hidden z-50">
                   <div className="p-4 border-b border-gray-200">
-                    <h3 className="text-lg font-bold text-gray-900">Explore DIA AI Hub</h3>
+                    <h3 className="text-lg font-bold text-gray-900">Explore DIA.AI</h3>
                     <p className="text-xs text-gray-600 mt-1">Discover AI capabilities, learning resources, and governed solutions for enterprise collaboration.</p>
                   </div>
                   <div className="max-h-[400px] overflow-y-auto">
@@ -255,8 +254,7 @@ const NavBar = () => {
       {/* Mobile menu */}
       {open && (
         <div
-          className="border-t border-white/10 px-6 py-4 md:hidden"
-          style={{ background: "linear-gradient(135deg, rgb(251, 85, 53) 0%, rgb(26, 46, 110) 50%, rgb(3, 15, 53) 100%)" }}
+          className="border-t border-white/10 px-6 py-4 md:hidden bg-navy-deep"
         >
           <div>
             <button

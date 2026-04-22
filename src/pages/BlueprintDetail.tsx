@@ -1,12 +1,12 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { mockItems } from '@/data/designMarketplace';
+import { mockItems } from '@/data/blueprintMarketplace';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
 import LoginModal from '@/components/LoginModal';
 import { ChevronRight, Home, Clock, Users, Target, Award, CheckCircle2, ArrowLeft, Lock } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-const DesignDetail = () => {
+const BlueprintDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
@@ -45,8 +45,8 @@ const DesignDetail = () => {
         <div className="min-h-screen bg-white pt-24 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-2xl font-bold text-gray-900">Content Not Found</h1>
-            <Link to="/design" className="text-blue-600 hover:underline mt-4 inline-block">
-              ← Back to Design Library
+            <Link to="/blueprint" className="text-blue-600 hover:underline mt-4 inline-block">
+              ← Back to Blueprint Library
             </Link>
           </div>
         </div>
@@ -56,7 +56,7 @@ const DesignDetail = () => {
   }
 
   const typeLabels: Record<string, string> = {
-    insight: 'Design Resource',
+    insight: 'Architecture Blueprint',
   };
 
   return (
@@ -71,9 +71,9 @@ const DesignDetail = () => {
               <ChevronRight className="h-3.5 w-3.5" />
               <Link to="/" className="hover:text-gray-900">Resources</Link>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link to="/" className="hover:text-gray-900">DIA.AI</Link>
+              <Link to="/" className="hover:text-gray-900">DIA AI Hub</Link>
               <ChevronRight className="h-3.5 w-3.5" />
-              <Link to="/design" className="hover:text-gray-900">Design</Link>
+              <Link to="/blueprint" className="hover:text-gray-900">Design</Link>
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="text-gray-900">{typeLabels[item.type]}</span>
             </div>
@@ -82,11 +82,11 @@ const DesignDetail = () => {
 
         <div className="max-w-7xl mx-auto px-16 pt-6">
           <button 
-            onClick={() => navigate('/design')}
+            onClick={() => navigate('/blueprint')}
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Design Library
+            Back to Blueprint Library
           </button>
         </div>
 
@@ -95,7 +95,7 @@ const DesignDetail = () => {
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-white rounded-lg border border-gray-200 p-8">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="inline-block px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full">
+                  <span className="inline-block px-3 py-1 bg-cyan-50 text-cyan-700 text-xs font-semibold rounded-full">
                     {typeLabels[item.type]}
                   </span>
                   <span className="text-sm text-gray-500">
@@ -144,7 +144,7 @@ const DesignDetail = () => {
               <div className="bg-white rounded-lg border border-gray-200">
                 <div className="border-b border-gray-200">
                   <div className="flex gap-0">
-                    {['overview', 'details', 'usage'].map(tab => (
+                    {['overview', 'architecture', 'implementation'].map(tab => (
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
@@ -169,7 +169,7 @@ const DesignDetail = () => {
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2">Content Locked</h3>
                       <p className="text-gray-600 mb-6 max-w-md mx-auto">
-                        Login to access the full design resources and documentation.
+                        Login to access the full blueprint documentation.
                       </p>
                       <button
                         onClick={handleViewContent}
@@ -210,25 +210,25 @@ const DesignDetail = () => {
                         </div>
                       )}
 
-                      {activeTab === 'details' && (
+                      {activeTab === 'architecture' && (
                         <div className="space-y-6">
                           <div>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">Detailed Information</h2>
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">Architecture Details</h2>
                             <p className="text-gray-700 leading-relaxed mb-4">
-                              Comprehensive design specifications and implementation details.
+                              Comprehensive architecture diagrams and component specifications.
                             </p>
                           </div>
                         </div>
                       )}
 
-                      {activeTab === 'usage' && (
+                      {activeTab === 'implementation' && (
                         <div className="space-y-6">
                           <div>
-                            <h2 className="text-xl font-bold text-gray-900 mb-4">Usage Guidelines</h2>
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">Implementation Guide</h2>
                             <div className="space-y-2">
                               {item.audience.map(aud => (
                                 <div key={aud} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                  <Users className="h-5 w-5 text-indigo-600" />
+                                  <Users className="h-5 w-5 text-cyan-600" />
                                   <span className="font-medium text-gray-900">{aud}</span>
                                 </div>
                               ))}
@@ -263,19 +263,19 @@ const DesignDetail = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg border border-indigo-200 p-6">
+              <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg border border-cyan-200 p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Award className="h-5 w-5 text-indigo-600" />
+                  <Award className="h-5 w-5 text-cyan-600" />
                   <h3 className="font-semibold text-gray-900">Quick Stats</h3>
                 </div>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-700">Downloads</span>
-                    <span className="font-semibold text-gray-900">1,523</span>
+                    <span className="text-gray-700">Implementations</span>
+                    <span className="font-semibold text-gray-900">234</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-700">Rating</span>
-                    <span className="font-semibold text-gray-900">4.9/5.0</span>
+                    <span className="font-semibold text-gray-900">4.7/5.0</span>
                   </div>
                 </div>
               </div>
@@ -298,7 +298,7 @@ const DesignDetail = () => {
                   )}
                 </button>
                 <button className="w-full py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
-                  Download Assets
+                  Download Blueprint
                 </button>
                 <button className="w-full py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
                   Share with Team
@@ -309,7 +309,7 @@ const DesignDetail = () => {
                 <h3 className="font-semibold text-gray-900 mb-4">Related Topics</h3>
                 <div className="flex flex-wrap gap-2">
                   {item.topic.map(topic => (
-                    <span key={topic} className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-medium rounded-full">
+                    <span key={topic} className="px-3 py-1 bg-cyan-50 text-cyan-700 text-xs font-medium rounded-full">
                       {topic}
                     </span>
                   ))}
@@ -319,12 +319,12 @@ const DesignDetail = () => {
           </div>
 
           <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Resources</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Blueprints</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {mockItems.filter(i => i.id !== id).slice(0, 3).map(relatedItem => (
                 <Link
                   key={relatedItem.id}
-                  to={`/design/${relatedItem.id}`}
+                  to={`/blueprint/${relatedItem.id}`}
                   className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow"
                 >
                   <span className="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded mb-3">
@@ -354,4 +354,4 @@ const DesignDetail = () => {
   );
 };
 
-export default DesignDetail;
+export default BlueprintDetail;

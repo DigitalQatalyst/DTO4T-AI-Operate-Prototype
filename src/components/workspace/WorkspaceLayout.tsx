@@ -96,7 +96,7 @@ export default function WorkspaceLayout({ children, user, onLogout, onRoleSwitch
         </button>
         {!collapsed && (
           <button onClick={() => navigate('/')} className="text-left hover:opacity-80 transition-opacity">
-            <div className="text-sm font-bold text-gray-900">DIA AI Hub</div>
+            <div className="text-sm font-bold text-gray-900">DIA.AI</div>
             <div className="text-xs text-gray-500">DigitalQatalyst</div>
           </button>
         )}

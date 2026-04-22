@@ -2,17 +2,17 @@ import { ExternalLink, BookOpen, FileText, Brain, Palette, MessageSquare, Share2
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-[hsl(228,100%,14%)] via-[hsl(224,56%,18%)] to-[hsl(228,100%,20%)] py-16">
+    <footer className="relative overflow-hidden bg-navy-deep border-t border-white/10 py-16">
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Left Column - Brand */}
           <div>
-            <h3 className="text-xl font-bold text-white">DIA AI Hub</h3>
+            <h3 className="text-xl font-bold text-white">DIA.AI</h3>
             <p className="mt-4 text-sm text-white/60 leading-relaxed">
-              The Cognitive Core
+              Digital Intelligence & AI Platform
             </p>
             <p className="mt-2 text-sm text-white/50 leading-relaxed">
-              Stay updated with the latest AI insights, governed copilots, agents, and innovations for DCO-Grade Man + Machine Collaboration.
+              The enterprise AI operating platform for governed, scalable, and value-driven AI adoption.
             </p>
           </div>
 
@@ -118,7 +118,7 @@ const Footer = () => {
         {/* Bottom Copyright */}
         <div className="mt-12 border-t border-white/10 pt-8">
           <p className="text-xs text-white/40">
-            © 2026 DIA AI Hub. All rights reserved.
+            © 2026 DigitalQatalyst. All rights reserved.
           </p>
         </div>
       </div>

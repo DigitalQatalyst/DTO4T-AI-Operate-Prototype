@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import DiscernCategoryPage from "./pages/DiscernCategoryPage";
+import DesignCategoryPage from "./pages/DesignCategoryPage";
+import DeployCategoryPage from "./pages/DeployCategoryPage";
+import DriveCategoryPage from "./pages/DriveCategoryPage";
 import DiscernMarketplace from "./pages/DiscernMarketplace";
 import DiscernDetail from "./pages/DiscernDetail";
 import AIOpsFrameworkMarketplace from "./pages/AIOpsFrameworkMarketplace";
@@ -37,6 +41,10 @@ import DriveMarketplace from "./pages/DriveMarketplace";
 import DriveDetail from "./pages/DriveDetail";
 import DesignMarketplace from "./pages/DesignMarketplace";
 import DesignDetail from "./pages/DesignDetail";
+import BlueprintMarketplace from "./pages/BlueprintMarketplace";
+import BlueprintDetail from "./pages/BlueprintDetail";
+import UseCaseMarketplace from "./pages/UseCaseMarketplace";
+import UseCaseDetail from "./pages/UseCaseDetail";
 import Login from "./pages/Login";
 import WorkspaceApp from "./pages/WorkspaceApp";
 
@@ -50,6 +58,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/discern-category" element={<DiscernCategoryPage />} />
+          <Route path="/design-category" element={<DesignCategoryPage />} />
+          <Route path="/deploy-category" element={<DeployCategoryPage />} />
+          <Route path="/drive-category" element={<DriveCategoryPage />} />
           <Route path="/discern" element={<DiscernMarketplace />} />
           <Route path="/discern/:id" element={<DiscernDetail />} />
           <Route path="/aiops-framework" element={<AIOpsFrameworkMarketplace />} />
@@ -82,6 +94,10 @@ const App = () => (
           <Route path="/drive/:id" element={<DriveDetail />} />
           <Route path="/design" element={<DesignMarketplace />} />
           <Route path="/design/:id" element={<DesignDetail />} />
+          <Route path="/blueprint" element={<BlueprintMarketplace />} />
+          <Route path="/blueprint/:id" element={<BlueprintDetail />} />
+          <Route path="/usecase" element={<UseCaseMarketplace />} />
+          <Route path="/usecase/:id" element={<UseCaseDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/workspace/*" element={<WorkspaceApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

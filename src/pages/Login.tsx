@@ -54,7 +54,7 @@ const Login = () => {
           {/* Left Column - Login Form */}
           <div className="bg-white rounded-2xl shadow-2xl p-8 lg:p-12">
             <div className="mb-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to DIA AI Hub</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to DIA.AI</h1>
               <p className="text-gray-600">Sign in to access your personalized workspace</p>
             </div>
 
