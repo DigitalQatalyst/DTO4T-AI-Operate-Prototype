@@ -24,7 +24,7 @@ const useCases = [
 ];
 
 const UseCaseSection = () => (
-  <section id="usecases" className="bg-section-light py-20">
+  <section id="usecases" className="py-20" style={{ backgroundColor: '#0d2a5e' }}>
     <div className="mx-auto max-w-7xl px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -33,12 +33,12 @@ const UseCaseSection = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
-          <span className="text-xs font-semibold text-accent uppercase tracking-wide">
+        <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
+          <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
             HIGH-IMPACT AI USE CASES
           </span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
           What DIA.AI Enables Across the Enterprise
         </h2>
       </motion.div>
@@ -51,15 +51,15 @@ const UseCaseSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="bg-white rounded-lg border border-gray-200 p-6 hover:border-accent hover:shadow-lg transition-all"
+            className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 hover:border-[#3B6EF8] hover:shadow-lg transition-all"
           >
-            <div className="inline-block px-2 py-1 rounded bg-accent/10 mb-3">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wide">
+            <div className="inline-block px-2 py-1 rounded bg-[#3B6EF8]/20 mb-3">
+              <span className="text-xs font-semibold text-[#3B6EF8] uppercase tracking-wide">
                 {uc.function}
               </span>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-3">{uc.title}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{uc.impact}</p>
+            <h3 className="text-lg font-bold text-white mb-3">{uc.title}</h3>
+            <p className="text-sm text-white/70 leading-relaxed">{uc.impact}</p>
           </motion.div>
         ))}
       </div>

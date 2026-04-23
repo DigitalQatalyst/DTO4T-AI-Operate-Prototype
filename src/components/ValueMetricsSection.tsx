@@ -28,7 +28,7 @@ const metrics = [
 ];
 
 const ValueMetricsSection = () => (
-  <section id="metrics" className="bg-navy-deep py-20">
+  <section id="metrics" className="py-20 bg-white">
     <div className="mx-auto max-w-7xl px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -37,12 +37,12 @@ const ValueMetricsSection = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
-          <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
+        <div className="inline-block px-3 py-1 rounded-full bg-[#0d2a5e]/10 border border-[#0d2a5e]/20 mb-4">
+          <span className="text-xs font-semibold text-[#0d2a5e]/80 uppercase tracking-wide">
             PLATFORM OUTCOMES
           </span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+        <h2 className="text-3xl sm:text-4xl font-bold text-[#0d2a5e] mb-6">
           Measurable AI Impact Across the Enterprise
         </h2>
       </motion.div>
@@ -57,8 +57,8 @@ const ValueMetricsSection = () => (
             transition={{ delay: i * 0.1, duration: 0.5 }}
             className="text-center"
           >
-            <div className="text-5xl font-bold text-accent mb-4">{m.value}</div>
-            <p className="text-sm text-white/70 leading-relaxed">{m.label}</p>
+            <div className="text-5xl font-bold text-[#3B6EF8] mb-4">{m.value}</div>
+            <p className="text-sm text-gray-600 leading-relaxed">{m.label}</p>
           </motion.div>
         ))}
       </div>

@@ -8,8 +8,8 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="bg-navy-deep relative flex items-center justify-center overflow-hidden pt-32 pb-20"
-      style={{ minHeight: '70vh' }}
+      className="relative flex items-center justify-center overflow-hidden pt-32 pb-20"
+      style={{ minHeight: '70vh', backgroundColor: '#0d2a5e' }}
     >
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center flex flex-col justify-center">
         <motion.div

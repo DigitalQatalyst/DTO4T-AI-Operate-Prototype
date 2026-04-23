@@ -115,6 +115,38 @@
     color: #2D6BFF;
   }
 
+  .bg-discern {
+    background-color: #FFFFFF;
+  }
+
+  .text-discern {
+    color: #FFFFFF;
+  }
+
+  .bg-design {
+    background-color: #FFFFFF;
+  }
+
+  .text-design {
+    color: #FFFFFF;
+  }
+
+  .bg-deploy {
+    background-color: #FFFFFF;
+  }
+
+  .text-deploy {
+    color: #FFFFFF;
+  }
+
+  .bg-drive {
+    background-color: #FFFFFF;
+  }
+
+  .text-drive {
+    color: #FFFFFF;
+  }
+
   .border-subtle {
     border-color: rgba(255, 255, 255, 0.1);
   }

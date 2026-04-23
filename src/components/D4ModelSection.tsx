@@ -9,6 +9,7 @@ const D4ModelSection = () => {
     {
       icon: Search,
       name: "Discern",
+      color: "#FFFFFF",
       description: "Understand needs, uncover opportunities, and identify relevant AI services and pathways",
       marketplaces: [
         {
@@ -40,6 +41,7 @@ const D4ModelSection = () => {
     {
       icon: Pencil,
       name: "Design",
+      color: "#FFFFFF",
       description: "Shape the right request, workflow, service model, or solution direction",
       marketplaces: [
         {
@@ -79,6 +81,7 @@ const D4ModelSection = () => {
     {
       icon: Rocket,
       name: "Deploy",
+      color: "#FFFFFF",
       description: "Execute, fulfil, implement, and operationalise AI into the business",
       marketplaces: [
         {
@@ -118,6 +121,7 @@ const D4ModelSection = () => {
     {
       icon: TrendingUp,
       name: "Drive",
+      color: "#FFFFFF",
       description: "Govern, monitor, optimise, and realise measurable business value",
       marketplaces: [
         {
@@ -173,7 +177,7 @@ const D4ModelSection = () => {
   ];
 
   return (
-    <section id="d4-model" className="bg-navy-deep py-20">
+    <section id="d4-model" className="py-20" style={{ backgroundColor: '#0d2a5e' }}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -262,8 +266,8 @@ const D4ModelSection = () => {
                 transition={{ duration: 0.6 }}
                 className="flex items-center gap-4 mb-8"
               >
-                <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
-                  <StageIcon className="h-6 w-6 text-accent" />
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-white/10">
+                  <StageIcon className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white">{stage.name}</h3>
@@ -282,15 +286,15 @@ const D4ModelSection = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 hover:bg-white/10 hover:border-accent/30 transition-all group"
+                      className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 hover:bg-white/10 hover:border-[#3B6EF8]/50 transition-all group"
                     >
                       {/* Icon */}
-                      <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
-                        <MarketIcon className="h-5 w-5 text-accent" />
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-white/10">
+                        <MarketIcon className="h-5 w-5 text-white" />
                       </div>
 
                       {/* Tag */}
-                      <span className="inline-block px-2 py-1 bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-wider rounded mb-3">
+                      <span className="inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded mb-3 bg-white/10 text-white">
                         {marketplace.tag}
                       </span>
 
@@ -312,7 +316,7 @@ const D4ModelSection = () => {
                       {/* CTA */}
                       <Link
                         to={marketplace.link}
-                        className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors group-hover:gap-3"
+                        className="inline-flex items-center gap-2 text-sm text-blue-500 hover:text-[#3B6EF8] transition-colors group-hover:gap-3"
                       >
                         Explore Marketplace
                         <ArrowRight className="h-4 w-4" />

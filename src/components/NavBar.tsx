@@ -256,7 +256,8 @@ const NavBar = () => {
         {/* Mobile menu */}
         {open && (
           <div
-            className="border-t border-white/10 px-6 py-4 md:hidden bg-navy-deep"
+            className="border-t border-white/10 px-6 py-4 md:hidden"
+            style={{ backgroundColor: '#0d2a5e' }}
           >
             <div>
               <button

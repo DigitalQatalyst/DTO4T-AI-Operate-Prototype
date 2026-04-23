@@ -58,7 +58,7 @@ const DriveCategoryPage = () => {
   return (
     <>
       <NavBar />
-      <div className="min-h-screen bg-[#0A0F1E] text-white">
+      <div className="min-h-screen text-white" style={{ backgroundColor: '#0d2a5e' }}>
         {/* Breadcrumb */}
         <div className="border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4">
@@ -74,7 +74,7 @@ const DriveCategoryPage = () => {
         {/* Page Header */}
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="mb-8">
-            <span className="inline-block px-3 py-1 bg-[#3B6EF8]/20 text-[#3B6EF8] text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+            <span className="inline-block px-3 py-1 bg-drive/20 text-drive text-xs font-bold uppercase tracking-wider rounded-full mb-4">
               MARKETPLACE
             </span>
             <h1 className="text-4xl font-bold text-white mb-4">
@@ -92,15 +92,15 @@ const DriveCategoryPage = () => {
               return (
                 <div
                   key={index}
-                  className="bg-[#111827] border border-white/15 rounded-xl p-6 flex flex-col hover:border-[#3B6EF8]/50 transition-all duration-300"
+                  className="bg-[#111827] border border-white/15 rounded-xl p-6 flex flex-col hover:border-drive/50 transition-all duration-300"
                 >
                   {/* Icon */}
-                  <div className="w-12 h-12 bg-[#3B6EF8] rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-drive rounded-lg flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-white" />
                   </div>
 
                   {/* Category Tag */}
-                  <span className="inline-block px-2 py-1 bg-[#3B6EF8] text-white text-[10px] font-bold uppercase tracking-wider rounded mb-3 self-start">
+                  <span className="inline-block px-2 py-1 bg-drive text-white text-[10px] font-bold uppercase tracking-wider rounded mb-3 self-start">
                     {marketplace.tag}
                   </span>
 
@@ -122,7 +122,7 @@ const DriveCategoryPage = () => {
                   {/* CTA Button */}
                   <Link
                     to={marketplace.link}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#0A0F1E] transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#0d2a5e] transition-all duration-300"
                   >
                     Explore Marketplace
                     <ArrowRight className="h-4 w-4" />
