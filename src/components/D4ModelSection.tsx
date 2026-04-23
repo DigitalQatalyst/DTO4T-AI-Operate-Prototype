@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Search, Pencil, Rocket, TrendingUp, ArrowRight, BookOpen, GraduationCap, Library, Shield, Layers, Lightbulb, FileText, Package, GitBranch, MessageSquare, Network, Copy, Grid3x3, ShoppingCart, FileCode, Workflow, Activity } from "lucide-react";
+import { Search, Pencil, Rocket, TrendingUp, ArrowRight, BookOpen, GraduationCap, Library, Shield, Layers, Lightbulb, FileText, Package, GitBranch, MessageSquare, Network, Grid3x3, ShoppingCart, FileCode, Workflow, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const D4ModelSection = () => {
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const stages = [
     {
       icon: Search,
@@ -171,7 +173,7 @@ const D4ModelSection = () => {
   ];
 
   return (
-    <section className="bg-navy-deep py-20">
+    <section id="d4-model" className="bg-navy-deep py-20">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -188,10 +190,67 @@ const D4ModelSection = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
             One Platform. One Journey. Four Stages.
           </h2>
+          
+          {/* 4D Filter Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <button
+              onClick={() => setActiveFilter("all")}
+              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition shadow-md ${
+                activeFilter === "all"
+                  ? "bg-white text-navy-deep"
+                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setActiveFilter("discern")}
+              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
+                activeFilter === "discern"
+                  ? "bg-white text-navy-deep shadow-md"
+                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+              }`}
+            >
+              Discern
+            </button>
+            <button
+              onClick={() => setActiveFilter("design")}
+              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
+                activeFilter === "design"
+                  ? "bg-white text-navy-deep shadow-md"
+                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+              }`}
+            >
+              Design
+            </button>
+            <button
+              onClick={() => setActiveFilter("deploy")}
+              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
+                activeFilter === "deploy"
+                  ? "bg-white text-navy-deep shadow-md"
+                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+              }`}
+            >
+              Deploy
+            </button>
+            <button
+              onClick={() => setActiveFilter("drive")}
+              className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
+                activeFilter === "drive"
+                  ? "bg-white text-navy-deep shadow-md"
+                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+              }`}
+            >
+              Drive
+            </button>
+          </div>
         </motion.div>
 
         {/* Stages with Marketplaces */}
-        {stages.map((stage, stageIndex) => {
+        {/* Stages with Marketplaces */}
+        {stages
+          .filter(stage => activeFilter === "all" || stage.name.toLowerCase() === activeFilter)
+          .map((stage, stageIndex) => {
           const StageIcon = stage.icon;
           return (
             <div key={stage.name} className="mb-16">

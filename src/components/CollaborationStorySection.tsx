@@ -1,58 +1,101 @@
 import { motion } from "framer-motion";
-import { Users, Briefcase, Settings, Code, Shield, BarChart3 } from "lucide-react";
+import { Users, Briefcase, Settings, Code, Shield, TrendingUp, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CollaborationStorySection = () => {
+  const navigate = useNavigate();
+
   const roles = [
-    { icon: Users, label: "Business User" },
-    { icon: Briefcase, label: "Manager" },
-    { icon: Settings, label: "Service Owner" },
-    { icon: Code, label: "Specialist Team" },
-    { icon: Shield, label: "Platform Admin" },
-    { icon: BarChart3, label: "Executive" },
+    {
+      icon: Users,
+      title: "Business User / Employee",
+      description: "Discover AI tools, submit requests, and track your outcomes",
+      path: "/login"
+    },
+    {
+      icon: Briefcase,
+      title: "Manager / Team Lead",
+      description: "Oversee team AI activity, approve requests, and drive adoption",
+      path: "/login"
+    },
+    {
+      icon: Settings,
+      title: "Service Owner / Business Owner",
+      description: "Manage AI services, fulfilment workflows, and performance",
+      path: "/login"
+    },
+    {
+      icon: Code,
+      title: "Specialist Team (AI / Data / Tech)",
+      description: "Design, build, and deploy AI solutions at scale",
+      path: "/login"
+    },
+    {
+      icon: Shield,
+      title: "Platform Admin / Governance",
+      description: "Configure the platform, manage access, and enforce policy",
+      path: "/login"
+    },
+    {
+      icon: TrendingUp,
+      title: "Leadership / Executive",
+      description: "Monitor enterprise AI demand, governance, and value",
+      path: "/login"
+    },
   ];
 
   return (
-    <section className="bg-section-light py-20">
+    <section className="bg-gray-50 py-20">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
-            <span className="text-xs font-semibold text-accent uppercase tracking-wide">
-              BUILT FOR YOUR PEOPLE
+          <div className="inline-block px-3 py-1 rounded-full bg-blue-100 border border-blue-200 mb-4">
+            <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
+              WHERE WOULD YOU LIKE TO START?
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            AI That Works With Your Organisation, Not Around It
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            DIA.AI is Built for Every Stakeholder in Your AI Journey
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            DIA.AI is designed for every stakeholder in the enterprise AI journey. 
-            Whether you are a business user discovering AI possibilities, a specialist 
-            team deploying solutions, or a leader governing outcomes — DIA.AI gives you 
-            the right tools, visibility, and control for your role.
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {roles.map((role, index) => {
             const Icon = role.icon;
             return (
               <motion.div
-                key={role.label}
+                key={role.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center"
+                className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-all"
               >
-                <div className="w-16 h-16 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center mb-3 hover:border-accent hover:shadow-lg transition-all">
-                  <Icon className="h-7 w-7 text-gray-700" />
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-gray-900 mb-2">
+                      {role.title}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {role.description}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm font-medium text-gray-700">{role.label}</p>
+                <button
+                  onClick={() => navigate(role.path)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  Get Started
+                  <ArrowRight className="h-4 w-4" />
+                </button>
               </motion.div>
             );
           })}

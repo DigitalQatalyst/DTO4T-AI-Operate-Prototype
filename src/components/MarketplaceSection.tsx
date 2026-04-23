@@ -244,6 +244,7 @@ const MarketplaceSection = () => {
             <button
               key={f.id}
               onClick={() => setActive(f.id)}
+              data-filter={f.id}
               className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                 active === f.id
                   ? "gradient-hero border-transparent text-white"

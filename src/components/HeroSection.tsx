@@ -8,8 +8,8 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="bg-navy-deep relative flex items-center justify-center overflow-hidden py-20"
-      style={{ minHeight: '60vh' }}
+      className="bg-navy-deep relative flex items-center justify-center overflow-hidden pt-32 pb-20"
+      style={{ minHeight: '70vh' }}
     >
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center flex flex-col justify-center">
         <motion.div
@@ -49,7 +49,12 @@ const HeroSection = () => {
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <button
-            onClick={() => navigate('/discern')}
+            onClick={() => {
+              const d4Section = document.getElementById('d4-model');
+              if (d4Section) {
+                d4Section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
             className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3.5 text-base font-semibold text-white transition hover:bg-accent/90 shadow-lg"
           >
             <BookOpen className="h-5 w-5" />
