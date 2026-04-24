@@ -2,7 +2,7 @@ import { ExternalLink, BookOpen, FileText, Brain, Palette, MessageSquare, Share2
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 py-16" style={{ backgroundColor: '#0d2a5e' }}>
+    <footer className="relative overflow-hidden border-t border-white/10 py-12" style={{ backgroundColor: '#0d2a5e' }}>
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Left Column - Brand */}

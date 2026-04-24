@@ -5,7 +5,7 @@ const ClosingSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 bg-white">
       <div className="mx-auto max-w-4xl px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

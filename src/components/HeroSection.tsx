@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import AIChatInterface from "./AIChatInterface";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -42,10 +43,13 @@ const HeroSection = () => {
           DIA.AI brings AI discovery, design, deployment, governance, and value realisation into one connected platform — so your organisation can adopt AI with clarity, control, and measurable impact.
         </motion.p>
 
+        {/* AI Chat Interface */}
+        <AIChatInterface />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <button

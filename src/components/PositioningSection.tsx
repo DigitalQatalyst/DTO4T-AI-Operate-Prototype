@@ -3,7 +3,7 @@ import { Network, Zap } from "lucide-react";
 
 const PositioningSection = () => {
   return (
-    <section className="bg-section-light py-20">
+    <section className="bg-section-light py-12">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

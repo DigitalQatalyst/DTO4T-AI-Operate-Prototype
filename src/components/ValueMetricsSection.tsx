@@ -28,7 +28,7 @@ const metrics = [
 ];
 
 const ValueMetricsSection = () => (
-  <section id="metrics" className="py-20 bg-white">
+  <section id="metrics" className="py-12 bg-white">
     <div className="mx-auto max-w-7xl px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

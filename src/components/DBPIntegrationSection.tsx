@@ -12,7 +12,7 @@ const DBPIntegrationSection = () => {
   ];
 
   return (
-    <section className="py-20" style={{ backgroundColor: '#0d2a5e' }}>
+    <section className="py-12" style={{ backgroundColor: '#0d2a5e' }}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
