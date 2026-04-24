@@ -1,14 +1,36 @@
 import { motion } from "framer-motion";
-import { Network, Database, Cloud, Lock, Zap, GitBranch } from "lucide-react";
+import { Monitor, Wrench, Shield, BarChart3 } from "lucide-react";
 
 const DBPIntegrationSection = () => {
-  const platforms = [
-    { icon: Database, label: "Data Platform" },
-    { icon: Cloud, label: "Cloud Services" },
-    { icon: Lock, label: "Security & Identity" },
-    { icon: Zap, label: "DIA.AI" },
-    { icon: GitBranch, label: "Integration Hub" },
-    { icon: Network, label: "Business Apps" },
+  const integrations = [
+    {
+      icon: Monitor,
+      platform: "EXPERIENCE PLATFORM",
+      title: "DXP Integration",
+      description: "AI-driven personalisation and conversational interfaces.",
+      link: "Explore DXP Integration"
+    },
+    {
+      icon: Wrench,
+      platform: "DIGITAL WORKSPACE",
+      title: "DWS Integration",
+      description: "Role-based copilots and workflow augmentation.",
+      link: "Explore DWS Integration"
+    },
+    {
+      icon: Shield,
+      platform: "SECURE DEVOPS",
+      title: "SDO Integration",
+      description: "Secure DevOps pipelines and release governance.",
+      link: "Explore SDO Integration"
+    },
+    {
+      icon: BarChart3,
+      platform: "ANALYTICS HUB",
+      title: "Analytics Integration",
+      description: "DIA Analytics Hub for cognitive intelligence.",
+      link: "Explore Analytics Integration"
+    }
   ];
 
   return (
@@ -19,81 +41,62 @@ const DBPIntegrationSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
             <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
-              PART OF THE DIGITAL BUSINESS PLATFORM
+              INTEGRATION
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            DIA.AI is One Platform in a Connected Digital Ecosystem
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            DBP Master Architecture
           </h2>
           <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
-            DIA.AI operates as a specialised platform within the broader Digital Business
-            Platform (DBP) landscape — connecting AI discovery, design, deployment, and
-            governance across the enterprise operating model.
+            Connecting experience, work, and analytics through AI.
           </p>
         </motion.div>
 
-        {/* Platform Ecosystem Diagram */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {platforms.map((platform, index) => {
-              const Icon = platform.icon;
-              const isDIAAI = platform.label === "DIA.AI";
+        {/* Integration Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {integrations.map((integration, index) => {
+            const Icon = integration.icon;
 
-              return (
-                <motion.div
-                  key={platform.label}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className={`relative rounded-lg p-6 flex flex-col items-center text-center transition-all ${isDIAAI
-                      ? "bg-[#3B6EF8]/20 border-2 border-[#3B6EF8] shadow-lg"
-                      : "bg-white/10 border border-white/20 hover:border-white/30"
-                    }`}
-                >
-                  <div
-                    className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 ${isDIAAI
-                        ? "bg-[#3B6EF8] text-white"
-                        : "bg-white/10 text-white/70"
-                      }`}
-                  >
-                    <Icon className="h-7 w-7" />
-                  </div>
-                  <p
-                    className={`text-sm font-semibold ${isDIAAI ? "text-[#3B6EF8]" : "text-white/80"
-                      }`}
-                  >
-                    {platform.label}
-                  </p>
-                  {isDIAAI && (
-                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#3B6EF8] flex items-center justify-center">
-                      <Zap className="h-3 w-3 text-white" />
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
+            return (
+              <motion.div
+                key={integration.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all"
+              >
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center mb-4 mx-auto">
+                  <Icon className="h-8 w-8 text-white/70" />
+                </div>
 
-          {/* Connection Lines Visualization */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-8 text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20">
-              <Network className="h-4 w-4 text-[#3B6EF8]" />
-              <span className="text-sm text-white/70">
-                Seamlessly integrated across the enterprise
-              </span>
-            </div>
-          </motion.div>
+                {/* Platform Label */}
+                <p className="text-xs font-semibold text-white/50 uppercase tracking-wide text-center mb-2">
+                  {integration.platform}
+                </p>
+
+                {/* Title */}
+                <h3 className="text-lg font-bold text-white text-center mb-3">
+                  {integration.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-white/60 text-center mb-4 leading-relaxed">
+                  {integration.description}
+                </p>
+
+                {/* Link Button */}
+                <button className="w-full px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white text-sm font-medium transition-all">
+                  {integration.link}
+                </button>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
