@@ -43,3 +43,4 @@ const ClosingSection = () => {
 };
 
 export default ClosingSection;
+

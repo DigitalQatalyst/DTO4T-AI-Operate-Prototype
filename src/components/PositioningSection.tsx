@@ -10,7 +10,7 @@ const PositioningSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
             <span className="text-xs font-semibold text-accent uppercase tracking-wide">
@@ -21,9 +21,9 @@ const PositioningSection = () => {
             AI Adoption is Fragmented. DIA.AI Fixes That.
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Most organisations run AI across disconnected teams, tools, and processes. 
-            Requests go untracked. Governance is inconsistent. Value is hard to measure. 
-            DIA.AI is the enterprise AI operating platform that connects every stage of 
+            Most organisations run AI across disconnected teams, tools, and processes.
+            Requests go untracked. Governance is inconsistent. Value is hard to measure.
+            DIA.AI is the enterprise AI operating platform that connects every stage of
             the AI journey — from identifying opportunities to governing outcomes.
           </p>
         </motion.div>
@@ -38,28 +38,18 @@ const PositioningSection = () => {
             className="bg-white rounded-lg border border-gray-200 p-8"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center">
-                <Network className="h-5 w-5 text-red-600" />
+              <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                <Network className="h-5 w-5 text-accent" />
               </div>
               <h3 className="text-xl font-bold text-gray-900">Fragmented</h3>
             </div>
             <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-red-400 mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Disconnected teams and tools</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-red-400 mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Untracked requests and initiatives</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-red-400 mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Inconsistent governance</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-red-400 mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Unmeasured value and ROI</p>
-              </div>
+              {["Disconnected teams and tools", "Untracked requests and initiatives", "Inconsistent governance", "Unmeasured value and ROI"].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-accent/60 mt-2 flex-shrink-0" />
+                  <p className="text-sm text-gray-600">{item}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -78,22 +68,12 @@ const PositioningSection = () => {
               <h3 className="text-xl font-bold text-gray-900">Connected</h3>
             </div>
             <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Unified platform and workflows</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Full visibility and tracking</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Governed and compliant</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                <p className="text-sm text-gray-600">Measurable outcomes and value</p>
-              </div>
+              {["Unified platform and workflows", "Full visibility and tracking", "Governed and compliant", "Measurable outcomes and value"].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
+                  <p className="text-sm text-gray-600">{item}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -103,3 +83,4 @@ const PositioningSection = () => {
 };
 
 export default PositioningSection;
+

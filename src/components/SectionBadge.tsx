@@ -27,3 +27,4 @@ const SectionBadge = ({ label, variant = "light" }: SectionBadgeProps) => {
 };
 
 export default SectionBadge;
+

@@ -29,3 +29,4 @@ const ComingSoonCard = ({ icon: Icon, title, description, audience }: ComingSoon
 );
 
 export default ComingSoonCard;
+

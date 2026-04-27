@@ -24,7 +24,7 @@ const useCases = [
 ];
 
 const UseCaseSection = () => (
-  <section id="usecases" className="py-12 bg-white">
+  <section id="usecases" className="py-12 bg-[#e8eaf0]">
     <div className="mx-auto max-w-7xl px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -68,3 +68,4 @@ const UseCaseSection = () => (
 );
 
 export default UseCaseSection;
+

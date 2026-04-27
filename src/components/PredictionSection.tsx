@@ -83,3 +83,4 @@ const PredictionSection = () => {
 };
 
 export default PredictionSection;
+

@@ -6,42 +6,12 @@ const CollaborationStorySection = () => {
   const navigate = useNavigate();
 
   const roles = [
-    {
-      icon: Users,
-      title: "Business User / Employee",
-      description: "Discover AI tools, submit requests, and track your outcomes",
-      path: "/login"
-    },
-    {
-      icon: Briefcase,
-      title: "Manager / Team Lead",
-      description: "Oversee team AI activity, approve requests, and drive adoption",
-      path: "/login"
-    },
-    {
-      icon: Settings,
-      title: "Service Owner / Business Owner",
-      description: "Manage AI services, fulfilment workflows, and performance",
-      path: "/login"
-    },
-    {
-      icon: Code,
-      title: "Specialist Team (AI / Data / Tech)",
-      description: "Design, build, and deploy AI solutions at scale",
-      path: "/login"
-    },
-    {
-      icon: Shield,
-      title: "Platform Admin / Governance",
-      description: "Configure the platform, manage access, and enforce policy",
-      path: "/login"
-    },
-    {
-      icon: TrendingUp,
-      title: "Leadership / Executive",
-      description: "Monitor enterprise AI demand, governance, and value",
-      path: "/login"
-    },
+    { icon: Users, title: "Business User / Employee", description: "Discover AI tools, submit requests, and track your outcomes", path: "/login" },
+    { icon: Briefcase, title: "Manager / Team Lead", description: "Oversee team AI activity, approve requests, and drive adoption", path: "/login" },
+    { icon: Settings, title: "Service Owner / Business Owner", description: "Manage AI services, fulfilment workflows, and performance", path: "/login" },
+    { icon: Code, title: "Specialist Team (AI / Data / Tech)", description: "Design, build, and deploy AI solutions at scale", path: "/login" },
+    { icon: Shield, title: "Platform Admin / Governance", description: "Configure the platform, manage access, and enforce policy", path: "/login" },
+    { icon: TrendingUp, title: "Leadership / Executive", description: "Monitor enterprise AI demand, governance, and value", path: "/login" },
   ];
 
   return (
@@ -54,8 +24,8 @@ const CollaborationStorySection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-block px-3 py-1 rounded-full bg-blue-100 border border-blue-200 mb-4">
-            <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
+          <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
+            <span className="text-xs font-semibold text-accent uppercase tracking-wide">
               WHERE WOULD YOU LIKE TO START?
             </span>
           </div>
@@ -77,16 +47,12 @@ const CollaborationStorySection = () => {
                 className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-all"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <Icon className="h-6 w-6 text-blue-600" />
+                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-6 w-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-gray-900 mb-2">
-                      {role.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      {role.description}
-                    </p>
+                    <h3 className="text-base font-bold text-gray-900 mb-2">{role.title}</h3>
+                    <p className="text-sm text-gray-600">{role.description}</p>
                   </div>
                 </div>
                 <button
@@ -106,3 +72,4 @@ const CollaborationStorySection = () => {
 };
 
 export default CollaborationStorySection;
+

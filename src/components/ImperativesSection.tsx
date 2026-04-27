@@ -75,7 +75,7 @@ const ImperativesSection = () => (
             className="group relative overflow-hidden rounded-2xl bg-white border border-border/60 p-6 text-left transition-all hover:shadow-lg hover:-translate-y-1"
           >
             {/* Number badge in top-right corner */}
-            <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-all group-hover:bg-orange-500">
+            <div className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-muted transition-all group-hover:bg-accent">
               <span className="text-sm font-bold text-muted-foreground group-hover:text-white transition-all">{imperative.number}</span>
             </div>
             
@@ -111,3 +111,4 @@ const ImperativesSection = () => (
 );
 
 export default ImperativesSection;
+

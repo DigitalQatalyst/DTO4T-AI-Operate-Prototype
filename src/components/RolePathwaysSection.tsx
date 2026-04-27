@@ -6,47 +6,23 @@ const RolePathwaysSection = () => {
   const navigate = useNavigate();
 
   const roleCards = [
-    {
-      icon: Users,
-      title: "Business User / Employee",
-      description: "Discover AI tools, submit requests, and track your outcomes",
-    },
-    {
-      icon: Briefcase,
-      title: "Manager / Team Lead",
-      description: "Oversee team AI activity, approve requests, and drive adoption",
-    },
-    {
-      icon: Settings,
-      title: "Service Owner / Business Owner",
-      description: "Manage AI services, fulfilment workflows, and performance",
-    },
-    {
-      icon: Code,
-      title: "Specialist Team (AI / Data / Tech)",
-      description: "Design, build, and deploy AI solutions at scale",
-    },
-    {
-      icon: Shield,
-      title: "Platform Admin / Governance",
-      description: "Configure the platform, manage access, and enforce policy",
-    },
-    {
-      icon: BarChart3,
-      title: "Leadership / Executive",
-      description: "Monitor enterprise AI demand, governance, and value",
-    },
+    { icon: Users, title: "Business User / Employee", description: "Discover AI tools, submit requests, and track your outcomes" },
+    { icon: Briefcase, title: "Manager / Team Lead", description: "Oversee team AI activity, approve requests, and drive adoption" },
+    { icon: Settings, title: "Service Owner / Business Owner", description: "Manage AI services, fulfilment workflows, and performance" },
+    { icon: Code, title: "Specialist Team (AI / Data / Tech)", description: "Design, build, and deploy AI solutions at scale" },
+    { icon: Shield, title: "Platform Admin / Governance", description: "Configure the platform, manage access, and enforce policy" },
+    { icon: BarChart3, title: "Leadership / Executive", description: "Monitor enterprise AI demand, governance, and value" },
   ];
 
   return (
-    <section className="bg-white py-12">
+    <section className="bg-[#e8eaf0] py-12">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
             <span className="text-xs font-semibold text-accent uppercase tracking-wide">
@@ -76,9 +52,7 @@ const RolePathwaysSection = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 mb-2">{role.title}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {role.description}
-                    </p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{role.description}</p>
                   </div>
                 </div>
                 <button
@@ -98,3 +72,4 @@ const RolePathwaysSection = () => {
 };
 
 export default RolePathwaysSection;
+
