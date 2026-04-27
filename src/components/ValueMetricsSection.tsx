@@ -1,29 +1,29 @@
 import { motion } from "framer-motion";
 
 const metrics = [
-  { 
-    value: "80%", 
-    label: "of prioritised AI opportunities captured and progressed through DIA.AI" 
+  {
+    value: "80%",
+    label: "of prioritised AI opportunities captured and progressed through DIA.AI"
   },
-  { 
-    value: "100%", 
-    label: "of in-scope AI initiatives visible and lifecycle-managed on the platform" 
+  {
+    value: "100%",
+    label: "of in-scope AI initiatives visible and lifecycle-managed on the platform"
   },
-  { 
-    value: "90%", 
-    label: "of AI requests following defined governance and approval paths" 
+  {
+    value: "90%",
+    label: "of AI requests following defined governance and approval paths"
   },
-  { 
-    value: "75%", 
-    label: "of priority stakeholder groups actively using DIA.AI" 
+  {
+    value: "75%",
+    label: "of priority stakeholder groups actively using DIA.AI"
   },
-  { 
-    value: "50%", 
-    label: "reduction in fragmented AI coordination methods" 
+  {
+    value: "50%",
+    label: "reduction in fragmented AI coordination methods"
   },
-  { 
-    value: "100%", 
-    label: "of priority AI use cases with defined value measures and tracking" 
+  {
+    value: "100%",
+    label: "of priority AI use cases with defined value measures and tracking"
   },
 ];
 
@@ -47,7 +47,7 @@ const ValueMetricsSection = () => (
         </h2>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {metrics.map((m, i) => (
           <motion.div
             key={m.label}
@@ -55,9 +55,9 @@ const ValueMetricsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="text-center"
+            className="bg-white rounded-xl border border-gray-300 p-6 text-center hover:border-accent hover:shadow-sm transition-all"
           >
-            <div className="text-5xl font-bold text-[#3B6EF8] mb-4">{m.value}</div>
+            <div className="text-4xl font-bold text-accent mb-3">{m.value}</div>
             <p className="text-sm text-gray-600 leading-relaxed">{m.label}</p>
           </motion.div>
         ))}

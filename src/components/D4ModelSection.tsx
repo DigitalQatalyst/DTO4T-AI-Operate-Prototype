@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
-import { Search, Pencil, Rocket, TrendingUp, ArrowRight, BookOpen, GraduationCap, Library, Shield, Layers, Lightbulb, FileText, Package, GitBranch, MessageSquare, Network, Grid3x3, ShoppingCart, FileCode, Workflow, Activity } from "lucide-react";
+import { Search, Pencil, Rocket, TrendingUp, ArrowRight, BookOpen, GraduationCap, Library, Shield, Layers, Lightbulb, FileText, Package, GitBranch, MessageSquare, Network, Grid3x3, ShoppingCart, FileCode, Workflow, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const D4ModelSection = () => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const scroll = (stageName: string, direction: "left" | "right") => {
+    const el = scrollRefs.current[stageName];
+    if (el) el.scrollBy({ left: direction === "left" ? -320 : 320, behavior: "smooth" });
+  };
   const stages = [
     {
       icon: Search,
@@ -275,64 +281,79 @@ const D4ModelSection = () => {
                 </div>
               </motion.div>
 
-              {/* Marketplace Cards */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {stage.marketplaces.map((marketplace, index) => {
-                  const MarketIcon = marketplace.icon;
-                  return (
-                    <motion.div
-                      key={marketplace.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 hover:bg-white/10 hover:border-[#3B6EF8]/50 transition-all group"
-                    >
-                      {/* Icon */}
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-accent/10">
-                        <MarketIcon className="h-5 w-5 text-accent" />
-                      </div>
+              {/* Marketplace Cards - Horizontal Scroll */}
+              <div className="relative">
+                {/* Arrow Buttons */}
+                <button
+                  onClick={() => scroll(stage.name, "left")}
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm hover:border-accent hover:text-accent transition-all"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => scroll(stage.name, "right")}
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm hover:border-accent hover:text-accent transition-all"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
 
-                      {/* Tag */}
-                      <span className="inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded mb-3 bg-accent/10 text-accent">
-                        {marketplace.tag}
-                      </span>
-
-                      {/* Title */}
-                      <h4 className="text-lg font-bold text-gray-900 mb-2">
-                        {marketplace.title}
-                      </h4>
-
-                      {/* Subtitle */}
-                      <p className="text-xs text-gray-500 mb-3">
-                        {marketplace.subtitle}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                        {marketplace.description}
-                      </p>
-
-                      {/* CTA */}
-                      <Link
-                        to={marketplace.link}
-                        className="inline-flex items-center gap-2 text-sm text-blue-500 hover:text-[#3B6EF8] transition-colors group-hover:gap-3"
+                <div
+                  ref={(el) => { scrollRefs.current[stage.name] = el; }}
+                  className="flex gap-4 overflow-x-auto scroll-smooth pb-2"
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
+                  {stage.marketplaces.map((marketplace, index) => {
+                    const MarketIcon = marketplace.icon;
+                    return (
+                      <motion.div
+                        key={marketplace.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        className="bg-white rounded-lg border border-gray-200 p-4 hover:border-accent hover:shadow-md transition-all group flex-shrink-0 w-56"
                       >
-                        Explore Marketplace
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </motion.div>
-                  );
-                })}
+                        {/* Icon */}
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 bg-accent">
+                          <MarketIcon className="h-4 w-4 text-white" />
+                        </div>
+
+                        {/* Tag */}
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full mb-2 bg-gray-100 text-gray-600 border border-gray-200">
+                          {marketplace.tag}
+                        </span>
+
+                        {/* Title */}
+                        <h4 className="text-sm font-bold text-gray-900 mb-1">
+                          {marketplace.title}
+                        </h4>
+
+                        {/* Subtitle */}
+                        <p className="text-xs text-accent font-medium mb-2">
+                          {marketplace.subtitle}
+                        </p>
+
+                        {/* Description */}
+                        <p className="text-xs text-gray-600 mb-3 line-clamp-3">
+                          {marketplace.description}
+                        </p>
+
+                        {/* CTA */}
+                        <Link
+                          to={marketplace.link}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs text-gray-700 hover:border-accent hover:text-accent transition-all group-hover:gap-2"
+                        >
+                          Explore Marketplace
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
 
-              {/* Divider between stages */}
               {stageIndex < stages.length - 1 && (
-                <div className="mt-12 flex items-center justify-center gap-2 text-white/20">
-                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-white/10" />
-                  <ArrowRight className="h-4 w-4" />
-                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 via-white/10 to-transparent" />
-                </div>
+                <div className="mt-10 h-px bg-gray-200" />
               )}
             </div>
           );

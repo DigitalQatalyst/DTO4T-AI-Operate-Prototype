@@ -51,14 +51,12 @@ const UseCaseSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="bg-gray-50 rounded-lg border border-gray-200 p-6 hover:border-accent hover:shadow-lg transition-all"
+            className="bg-white rounded-xl border border-gray-200 p-6 hover:border-accent hover:shadow-md transition-all"
           >
-            <div className="inline-block px-2 py-1 rounded bg-accent/10 mb-3">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wide">
-                {uc.function}
-              </span>
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-3">{uc.title}</h3>
+            <span className="inline-block px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-xs font-semibold text-accent uppercase tracking-wide mb-4">
+              {uc.function}
+            </span>
+            <h3 className="text-base font-bold text-gray-900 mb-2">{uc.title}</h3>
             <p className="text-sm text-gray-600 leading-relaxed">{uc.impact}</p>
           </motion.div>
         ))}
