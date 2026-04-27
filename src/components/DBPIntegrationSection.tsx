@@ -34,7 +34,7 @@ const DBPIntegrationSection = () => {
   ];
 
   return (
-    <section className="py-12" style={{ backgroundColor: '#0d2a5e' }}>
+    <section className="py-12 bg-white">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,15 +43,15 @@ const DBPIntegrationSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
-            <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
+          <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
+            <span className="text-xs font-semibold text-accent uppercase tracking-wide">
               INTEGRATION
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             DBP Master Architecture
           </h2>
-          <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Connecting experience, work, and analytics through AI.
           </p>
         </motion.div>
@@ -68,30 +68,30 @@ const DBPIntegrationSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all"
+                className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-gray-300 transition-all"
               >
                 {/* Icon */}
-                <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center mb-4 mx-auto">
-                  <Icon className="h-8 w-8 text-white/70" />
+                <div className="w-16 h-16 rounded-xl bg-gray-100 flex items-center justify-center mb-4 mx-auto">
+                  <Icon className="h-8 w-8 text-gray-600" />
                 </div>
 
                 {/* Platform Label */}
-                <p className="text-xs font-semibold text-white/50 uppercase tracking-wide text-center mb-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide text-center mb-2">
                   {integration.platform}
                 </p>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold text-white text-center mb-3">
+                <h3 className="text-lg font-bold text-gray-900 text-center mb-3">
                   {integration.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-white/60 text-center mb-4 leading-relaxed">
+                <p className="text-sm text-gray-600 text-center mb-4 leading-relaxed">
                   {integration.description}
                 </p>
 
                 {/* Link Button */}
-                <button className="w-full px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white text-sm font-medium transition-all">
+                <button className="w-full px-4 py-2 rounded-lg bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium transition-all">
                   {integration.link}
                 </button>
               </motion.div>

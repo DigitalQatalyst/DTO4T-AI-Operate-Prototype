@@ -39,7 +39,7 @@ const RolePathwaysSection = () => {
   ];
 
   return (
-    <section className="bg-section-muted py-12">
+    <section className="bg-white py-12">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

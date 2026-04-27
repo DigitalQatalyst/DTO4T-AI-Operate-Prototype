@@ -177,7 +177,7 @@ const D4ModelSection = () => {
   ];
 
   return (
-    <section id="d4-model" className="py-12" style={{ backgroundColor: '#0d2a5e' }}>
+    <section id="d4-model" className="py-12 bg-white">
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -186,12 +186,12 @@ const D4ModelSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-4">
-            <span className="text-xs font-semibold text-white/80 uppercase tracking-wide">
+          <div className="inline-block px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-4">
+            <span className="text-xs font-semibold text-accent uppercase tracking-wide">
               THE D4 MODEL
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
             One Platform. One Journey. Four Stages.
           </h2>
           
@@ -201,8 +201,8 @@ const D4ModelSection = () => {
               onClick={() => setActiveFilter("all")}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm transition shadow-md ${
                 activeFilter === "all"
-                  ? "bg-white text-navy-deep"
-                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+                  ? "bg-accent text-white"
+                  : "border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
             >
               All
@@ -211,8 +211,8 @@ const D4ModelSection = () => {
               onClick={() => setActiveFilter("discern")}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === "discern"
-                  ? "bg-white text-navy-deep shadow-md"
-                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+                  ? "bg-accent text-white shadow-md"
+                  : "border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
             >
               Discern
@@ -221,8 +221,8 @@ const D4ModelSection = () => {
               onClick={() => setActiveFilter("design")}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === "design"
-                  ? "bg-white text-navy-deep shadow-md"
-                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+                  ? "bg-accent text-white shadow-md"
+                  : "border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
             >
               Design
@@ -231,8 +231,8 @@ const D4ModelSection = () => {
               onClick={() => setActiveFilter("deploy")}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === "deploy"
-                  ? "bg-white text-navy-deep shadow-md"
-                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+                  ? "bg-accent text-white shadow-md"
+                  : "border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
             >
               Deploy
@@ -241,8 +241,8 @@ const D4ModelSection = () => {
               onClick={() => setActiveFilter("drive")}
               className={`px-6 py-2.5 rounded-full font-semibold text-sm transition ${
                 activeFilter === "drive"
-                  ? "bg-white text-navy-deep shadow-md"
-                  : "border-2 border-white/30 bg-transparent text-white hover:bg-white/10 hover:border-white/50"
+                  ? "bg-accent text-white shadow-md"
+                  : "border-2 border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
             >
               Drive
@@ -266,12 +266,12 @@ const D4ModelSection = () => {
                 transition={{ duration: 0.6 }}
                 className="flex items-center gap-4 mb-8"
               >
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-white/10">
-                  <StageIcon className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-accent/10">
+                  <StageIcon className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white">{stage.name}</h3>
-                  <p className="text-sm text-white/60">{stage.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900">{stage.name}</h3>
+                  <p className="text-sm text-gray-600">{stage.description}</p>
                 </div>
               </motion.div>
 
@@ -289,27 +289,27 @@ const D4ModelSection = () => {
                       className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-6 hover:bg-white/10 hover:border-[#3B6EF8]/50 transition-all group"
                     >
                       {/* Icon */}
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-white/10">
-                        <MarketIcon className="h-5 w-5 text-white" />
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-accent/10">
+                        <MarketIcon className="h-5 w-5 text-accent" />
                       </div>
 
                       {/* Tag */}
-                      <span className="inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded mb-3 bg-white/10 text-white">
+                      <span className="inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded mb-3 bg-accent/10 text-accent">
                         {marketplace.tag}
                       </span>
 
                       {/* Title */}
-                      <h4 className="text-lg font-bold text-white mb-2">
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">
                         {marketplace.title}
                       </h4>
 
                       {/* Subtitle */}
-                      <p className="text-xs text-white/50 mb-3">
+                      <p className="text-xs text-gray-500 mb-3">
                         {marketplace.subtitle}
                       </p>
 
                       {/* Description */}
-                      <p className="text-sm text-white/60 mb-4 line-clamp-2">
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                         {marketplace.description}
                       </p>
 
