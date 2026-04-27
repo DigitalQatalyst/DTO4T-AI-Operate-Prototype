@@ -299,7 +299,7 @@ const D4ModelSection = () => {
 
                 <div
                   ref={(el) => { scrollRefs.current[stage.name] = el; }}
-                  className="flex gap-4 overflow-x-auto scroll-smooth pb-2"
+                  className="flex gap-5 overflow-x-auto scroll-smooth pb-2"
                   style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   {stage.marketplaces.map((marketplace, index) => {
@@ -311,15 +311,16 @@ const D4ModelSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
-                        className="bg-white rounded-lg border border-gray-200 p-4 hover:border-accent hover:shadow-md transition-all group flex-shrink-0 w-56"
+                        className="bg-white rounded-lg border border-gray-200 hover:border-accent hover:shadow-md transition-all group flex-shrink-0 flex flex-col"
+                        style={{ width: "260px", minHeight: "230px", padding: "20px", borderRadius: "8px" }}
                       >
                         {/* Icon */}
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 bg-accent">
-                          <MarketIcon className="h-4 w-4 text-white" />
+                        <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-3 bg-accent" style={{ flexShrink: 0 }}>
+                          <MarketIcon className="h-5 w-5 text-white" />
                         </div>
 
                         {/* Tag */}
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full mb-2 bg-gray-100 text-gray-600 border border-gray-200">
+                        <span className="inline-block w-fit px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded mb-2 bg-white text-accent border border-accent/20">
                           {marketplace.tag}
                         </span>
 
@@ -334,18 +335,20 @@ const D4ModelSection = () => {
                         </p>
 
                         {/* Description */}
-                        <p className="text-xs text-gray-600 mb-3 line-clamp-3">
+                        <p className="text-xs text-gray-600 line-clamp-3 flex-1">
                           {marketplace.description}
                         </p>
 
-                        {/* CTA */}
-                        <Link
-                          to={marketplace.link}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 text-xs text-gray-700 hover:border-accent hover:text-accent transition-all group-hover:gap-2"
-                        >
-                          Explore Marketplace
-                          <ArrowRight className="h-3 w-3" />
-                        </Link>
+                        {/* CTA — pinned to bottom */}
+                        <div className="mt-auto pt-3">
+                          <Link
+                            to={marketplace.link}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs text-accent font-medium hover:border-accent transition-all group-hover:gap-2"
+                          >
+                            Explore Marketplace
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        </div>
                       </motion.div>
                     );
                   })}
